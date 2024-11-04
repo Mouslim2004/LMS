@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({extended: false}))//This line tells the app to us
 app.use(bodyParser.json())//This line tells the app to use the body-parser middleware to handle JSON data.
 //If a client sends {"name": "John", "age": 30}, you can access req.body.name and req.body.age.
 
-app.get('/', (req,res) => {
+app.get('/', (req,res) => {//this express instance will allow us to display the homepage file when we are in this route '/'.
   res.render('home')
 })
 
