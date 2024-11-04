@@ -32,6 +32,9 @@ app.use(bodyParser.json())//This line tells the app to use the body-parser middl
 app.get('/', (req,res) => {//this express instance will allow us to display the homepage file when we are in this route '/'.
   res.render('home')
 })
+app.get('/userSignup', (req,res) => {
+  res.render('userSignup')
+})
 
 const PORT = process.env.PORT || 5000
 
