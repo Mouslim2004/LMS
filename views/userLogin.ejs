@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login Page</title>
+  <link rel="stylesheet" href="/style/login.css">
+</head>
+<body>
+  <!-- This is the header -->
+   <%- include('header') %>
+  <!-- This is the main page -->
+   <section id="userLogin">
+      <div class="main-form">
+        <form action="/userLogin" method="post">
+           <h1>Login</h1>
+           <div class="info">Log in with the credentials you received </div>
+           <input type="email" name="email" id="email" placeholder="Enter email"> <br>
+           <input type="password" name="password" id="password" placeholder="Enter password"> <br>
+           <div class="btn-sbt">
+            <input type="submit" value="Login">
+         </div>
+         <div>Don't have an account ? <a href="/userSignup">Signup</a></div>
+        </form>
+      </div>
+   </section>
+</body>
+</html>

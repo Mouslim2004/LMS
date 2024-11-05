@@ -35,7 +35,9 @@ app.get('/', (req,res) => {//this express instance will allow us to display the 
 app.get('/userSignup', (req,res) => {
   res.render('userSignup')
 })
-
+app.get('/userLogin', (req,res) => {
+  res.render('userLogin')
+})
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
