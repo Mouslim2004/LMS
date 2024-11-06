@@ -41,6 +41,9 @@ app.get('/userLogin', (req,res) => {
 app.get('/adminLogin', (req,res) => {
   res.render('adminLogin')
 })
+app.get('/userDash', (req,res) => {
+  res.render('userDash')
+})
 
 const PORT = process.env.PORT || 5000
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="/style/userDash.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+   
+</head>
+<body>
+  <!-- This is the header section -->
+   <%- include('headeDash') %>
+  <!-- This is the main section -->
+  <section id="userDash">
+    <div class="user-title">USER DASHBOARD</div>
+    <div class="user-content">
+       <div class="link-cube">
+          <a href="/userBooks" class="cube" style="background: #247291; color: white;">
+             <div class="icon"><i class="fa-solid fa-book-open"></i></div>
+             <div class="description">Books</div>
+          </a>
+          <a href="/userIssued" class="cube" style="background: #f8da5b; color: white;">
+            <div class="icon"><i class="fa-solid fa-bookmark"></i></div>
+            <div class="description">Issued Books</div>
+         </a>
+         <a href="/userChange" class="cube" style="background: #dc2f2f; color: white;">
+          <div class="icon"><i class="fa-solid fa-lock"></i></div>
+          <div class="description">Change Password</div>
+       </a>
+          
+       </div>
+       <div class="book-presentation">
+          <div class="next-book">Available Soon</div>
+          <div class="book-content">
+             <div class="carouselle owl-carousel">
+               <div class="card">
+                   <div class="book-coming"><img src="/icon/landscape.png" alt=""></div>
+                   <div class="title-book">Into the wild</div>
+               </div>
+               <div class="card ">
+                  <div class="book-coming"><img src="/icon/heart.png" alt=""></div>
+                  <div class="title-book">Romeo & Juliet</div>
+              </div>
+              <div class="card">
+                  <div class="book-coming"><img src="/icon/ai.png" alt=""></div>
+                  <div class="title-book">I Robot</div>
+              </div>
+              <div class="card">
+                <div class="book-coming"><img src="/icon/search.png" alt=""></div>
+                <div class="title-book">Sherlock Holmes</div>
+              </div>
+              <div class="card">
+                <div class="book-coming"><img src="/icon/brain.png" alt=""></div>
+                <div class="title-book">48 Laws Of Power</div>
+              </div>
+              <div class="card">
+                <div class="book-coming"><img src="/icon/spider.png" alt=""></div>
+                <div class="title-book">Spider Man</div>
+              </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </section>
+  <script >
+    $(".carouselle").owlCarousel({
+         margin: 20,
+         loop: true,
+         autoplay: true,
+         autoplayTimeout: 2000,
+         autoplayHoverPause: true,
+         responsive: {
+           0:{
+             items:1,
+             nav: false
+           },
+           600:{
+             items:2,
+             nav: false
+           },
+           1000:{
+             items:3,
+             nav: false
+           }
+         }
+       });
+ </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  /* background: rgb(171, 202, 247); */
+}
+section{
+  height: calc(100vh - 130px);
+}
+.user-title{
+  padding: 15px;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 5px;
+}
+.user-content{
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+}
+.link-cube{
+  height: 40%;
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  column-gap: 50px;
+  align-items: center;
+  justify-content: center;
+}
+.cube{
+  display: flex;
+  flex-direction: column;
+  height: 120px;
+  justify-content: space-around;
+  padding: 10px;
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+.cube:hover{
+  height: 125px;
+  width: 205px;
+  transition: all 0.3s ease-out;
+}
+a {
+  text-decoration: none;
+  padding: 10px;
+}
+.cube .icon i{
+  font-size: 45px;
+}
+.book-presentation{
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.book-content{
+  width: 80%;
+  min-height: 320px;
+  margin-left: 50px;
+}
+.carouselle{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+}
+.carouselle .card{
+  width: 320px;
+  height: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+  flex-direction: column;
+  cursor: pointer;
+  background: white;
+  transition: all 0.3s ease-out;
+  border: 1px solid lightgray;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+}
+.carouselle .card:hover{
+  width: 325px;
+  height: 205px;
+  transition: all 0.3s ease-in;
+ }
+ .owl-dots{
+  text-align: center;
+  margin-top: 40px;
+  margin-right: 35px;
+}
+.owl-dot{
+  height: 15px;
+  width: 45px;
+  margin: 0 5px;
+  outline: none;
+  border-radius: 14px;
+  border: 2px solid green!important;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+.owl-dot.active,
+.owl-dot:hover{
+  background: green!important;
+}
+.book-coming img{
+  height: 100px;
+  width: 100px;
+}
+.next-book{
+  font-weight: 500;
+}
