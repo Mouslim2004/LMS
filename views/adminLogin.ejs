@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login Page</title>
+  <link rel="stylesheet" href="/style/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+</head>
+<body>
+   <!-- This is the header -->
+    <%- include('header') %>
+  <!-- This is the main section -->
+  <section id="adminLogin">
+     <div class="main-form">
+       <form action="/adminLogin" method="post">
+          <div class="admin-title">ADMIN LOGIN</div>
+          <div class="icon"><i class="fa-regular fa-user"></i></div>
+          <input type="email" name="email" id="email" placeholder="Email"> <br>
+          <input type="password" name="password" id="password" placeholder="Password">
+          <div class="link-forget"><a href="/forget">Forget password ? </a></div>
+          <div class="btn-sbt">
+             <button type="submit">LOGIN</button>
+          </div>
+       </form>
+     </div>
+  </section>
+</body>
+</html>

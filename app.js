@@ -38,6 +38,10 @@ app.get('/userSignup', (req,res) => {
 app.get('/userLogin', (req,res) => {
   res.render('userLogin')
 })
+app.get('/adminLogin', (req,res) => {
+  res.render('adminLogin')
+})
+
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
