@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Change Password Page</title>
+  <link rel="stylesheet" href="/style/userChange.css">
+</head>
+<body>
+  <!-- This is the header -->
+  <%- include('headeDash') %>
+  <!-- This is the main section page -->
+  <section id="userChange">
+     <div class="change-title">CHANGE PASSWORD</div>
+     <div class="main-form">
+       <form action="">
+          <div class="change-title-form">Change Password</div>
+          <input type="email" name="email" id="email" placeholder="Enter your email"> <br>
+          <input type="password" name="password" id="password" placeholder="New Password"> <br>
+          <input type="password" name="Confpassword" id="Confpassword" placeholder="Confirm Password">
+          <div class="change-btn">
+             <button type="submit" value="Confirm">Confirm</button>
+          </div>
+       </form>
+     </div>
+  </section>
+</body>
+</html>
