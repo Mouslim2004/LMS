@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+section{
+  height: calc(100vh - 130px);
+  position: relative;
+}
+.issued-title{
+  padding: 15px;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 10px;
+}

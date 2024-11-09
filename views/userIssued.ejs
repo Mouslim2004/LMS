@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issued Books</title>
+  <link rel="stylesheet" href="/style/userIssued.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/js/bootstrap.bundle.min.js">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+  <!-- this is the header -->
+    <%- include('headBoot') %>
+  <!-- This is the main section -->
+  <section id="issuedBooks">
+    <div class="issued-title">ISSUED BOOKS</div>
+    <div class="table-responsive">
+      <table class="table table-bordered" >
+        <thead>
+          <tr>
+            <th>Book ID</th>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Issued Date</th>
+            <th>Due Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Anna</td>
+            <td>Pitt</td>
+            <td>35</td>
+            <td>New York</td>
+            <td><button type="button" class="btn btn-outline-success open-modal" data-title="Are you sure you want to return this book" data-content="Outlander">Return</button> </td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Anna</td>
+            <td>Pitt</td>
+            <td>35</td>
+            <td>New York</td>
+            <td><button type="button" class="btn btn-outline-success open-modal" data-title="Modal 2" data-content="Content for Modal 2">Return</button> </td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Anna</td>
+            <td>Pitt</td>
+            <td>35</td>
+            <td>New York</td>
+            <td><button type="button" class="btn btn-outline-success open-modal" data-title="Modal 3" data-content="Content for Modal 3">Return</button> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Single modal template -->
+    <div class="modal fade" id="dynamicModal" tabindex="-1" aria-labelledby="dynamicModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="dynamicModalTitle"></h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body" id="dynamicModalContent"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+<script>
+  $(document).ready(function() {
+  $('.open-modal').on('click', function() {
+    // Retrieve the data attributes for title and content
+    var title = $(this).data('title');
+    var content = $(this).data('content');
+    
+    // Set the modal title and content
+    $('#dynamicModalTitle').text(title);
+    $('#dynamicModalContent').html('Outlander<br>ID');
+    
+    // Show the modal
+    $('#dynamicModal').modal('show');
+  });
+});
+</script>
+</body>
+</html>

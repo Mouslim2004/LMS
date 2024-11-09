@@ -24,11 +24,16 @@ const userChange = (req,res) => {
   res.render('userChange')
 }
 
+const userIssued = (req,res) => {
+  res.render('userIssued')
+}
+
 module.exports = {
   index,
   userSignup,
   userLogin,
   adminLogin,
   userDash,
-  userChange
+  userChange,
+  userIssued
 }
