@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dash</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/style/adminDash.css">
+</head>
+<body>
+<!-- This is the header -->
+ <%- include('headAdmin') %>
+<!-- This is the main section  -->
+
+<section id="adminDash">
+  <div class="admin-title">ADMIN DASHBOARD</div>
+  <div class="main-section">
+      <a class="cube" href="/adminBooks">
+        <div class="icon" ><i class="fa-solid fa-book-open" style="color: #385170;"></i></div>
+        <div class="number" style="color: #385170;">0</div>
+        <div class="info" style="color: #385170;">Books</div>
+      </a>
+     <a class="cube" href="/adminIssued">
+      <div class="icon"><i class="fa-solid fa-bars" style="color: silver;"></i></div>
+      <div class="number" style="color: silver;">0</div>
+      <div class="info" style="color: silver;">Issue Books</div>
+     </a>
+    <a class="cube" href=".adminReturn">
+      <div class="icon"><i class="fa-solid fa-recycle" style="color: #facf5a;"></i></div>
+      <div class="number" style="color: #facf5a;">0</div>
+      <div class="info" style="color: #facf5a;">Not return Books</div>
+    </a>
+    <a class="cube" href="/adminStudents">
+      <div class="icon"><i class="fa-solid fa-users" style="color: green"></i></div>
+      <div class="number" style="color: green">0</div>
+      <div class="info" style="color: green">Students</div>
+    </a>
+    <a class="cube" href="/adminAuthor">
+        <div class="icon"><i class="fa-solid fa-user-pen" style="color: brown;"></i></div>
+        <div class="number" style="color: brown;">0</div>
+        <div class="info" style="color: brown;">Authors</div>
+    </a>
+   
+    <a class="cube" href="/adminCategory">
+      <div class="icon"><i class="fa-solid fa-file-zipper" style="color: burlywood;"></i></div>
+      <div class="number" style="color: burlywood;">0</div>
+      <div class="info" style="color: burlywood;">Categories</div>
+    </a>
+  </div>
+</section>
+</body>
+</html>

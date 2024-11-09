@@ -28,6 +28,10 @@ const userIssued = (req,res) => {
   res.render('userIssued')
 }
 
+const adminDash = (req,res) => {
+  res.render('adminDash')
+}
+
 module.exports = {
   index,
   userSignup,
@@ -35,5 +39,6 @@ module.exports = {
   adminLogin,
   userDash,
   userChange,
-  userIssued
+  userIssued,
+  adminDash
 }

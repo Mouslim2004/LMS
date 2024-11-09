@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  /* background: rgb(171, 202, 247); */
+}
+.title{
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+.title .book-icon{
+  font-size: 30px;
+  margin-right: 15px;
+}
+.title .name-project{
+  font-size: 20px;
+}
+.navbar{
+  height: 50px;
+  background: rgb(247, 247, 247);
+  border-bottom: 3px solid rgb(116, 114, 189);
+}
+.navbar ul {
+  display: flex;
+  justify-content: right;
+  height: 100%;
+  align-items: center;
+}
+.navbar ul li {
+  margin-right: 40px;
+  list-style: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+li a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+li a:hover{
+  color: rgb(116, 114, 189);
+}
+.title .log-out{
+  display: flex;
+  justify-content: right;
+  width: 70%;
+}
+.log-out a{
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background: darkred;
+  transition: all 0.3s ease-in;
+}
+.log-out a:hover{
+  color: darkred;
+  background: white;
+  border: 1px solid darkred;
+  transition: all 0.3s ease-out;
+}

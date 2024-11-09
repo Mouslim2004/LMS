@@ -9,5 +9,6 @@ router.get('/adminLogin', LibraryController.adminLogin)
 router.get('/userDash', LibraryController.userDash)
 router.get('/userChange', LibraryController.userChange)
 router.get('/userIssued', LibraryController.userIssued)
+router.get('/adminDash', LibraryController.adminDash)
 
 module.exports = router
