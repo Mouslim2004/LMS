@@ -41,3 +41,19 @@ td a:hover{
   border: 1px solid green;
   transition: all 0.3s ease-out;
 }
+.modal-footer button{
+  color: white;
+  padding: 5px 10px;
+  background: darkred;
+  border-radius: 3px;
+  border: none;
+  transition: all 0.3s ease-in;
+}
+.modal-footer button:hover{
+  color: darkred;
+  padding: 5px 10px;
+  background: white;
+  border-radius: 3px;
+  border: 1px solid darkred;
+  transition: all 0.3s ease-out;
+}

@@ -34,7 +34,7 @@
     <td>Germany</td>
     <td>Alfreds Futterkiste</td>
     <td>Maria Anders</td>
-    <td><a href="#ex1" rel="modal:open">Return</a></td>
+    <td><a href="#ex1" rel="modal:open" class="open-modal" data-title="Modal 1" data-content="Content for Modal 1">Return</a></td>
   </tr>
   <tr>
     <td>Centro comercial Moctezuma</td>
@@ -42,7 +42,7 @@
     <td>Mexico</td>
     <td>Alfreds Futterkiste</td>
     <td>Maria Anders</td>
-    <td><a href="#ex1" rel="modal:open">Return</a></td>
+    <td><a href="#ex1" rel="modal:open" class="open-modal" data-title="Modal 2" data-content="Content for Modal 2">Return</a></td>
   </tr>
 </table>
     <!-- <div class="table-responsive">
@@ -91,12 +91,10 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="dynamicModalTitle"></h5>
-            <a href="#" rel="modal:close">Close</a>
-            <!-- <button class="btn-close" data-bs-dismiss="modal"></button> -->
           </div>
           <div class="modal-body" id="dynamicModalContent"></div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit">Confirm</button>
           </div>
         </div>
       </div>
