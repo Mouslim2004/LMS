@@ -5,17 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Issued Books</title>
   <link rel="stylesheet" href="/style/userIssued.css">
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/js/bootstrap.bundle.min.js">
+  <!-- <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/js/bootstrap.bundle.min.js"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- jQuery Modal -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 <body>
   <!-- this is the header -->
-    <%- include('headBoot') %>
+    <%- include('headeDash') %>
   <!-- This is the main section -->
   <section id="issuedBooks">
     <div class="issued-title">ISSUED BOOKS</div>
-    <div class="table-responsive">
+    
+<table>
+  <tr>
+    <th>Book ID</th>
+    <th>Book Title</th>
+    <th>Author</th>
+    <th>Issue Date</th>
+    <th>Due Date</th>
+    <th>Action</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td><a href="#ex1" rel="modal:open">Return</a></td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td><a href="#ex1" rel="modal:open">Return</a></td>
+  </tr>
+</table>
+    <!-- <div class="table-responsive">
       <table class="table table-bordered" >
         <thead>
           <tr>
@@ -34,7 +64,7 @@
             <td>Pitt</td>
             <td>35</td>
             <td>New York</td>
-            <td><button type="button" class="btn btn-outline-success open-modal" data-title="Are you sure you want to return this book" data-content="Outlander">Return</button> </td>
+            <td><p><a href="#ex1" rel="modal:open" class="open-modal" data-title="Modal 2" data-content="Content for Modal 2">Open Modal</a></p> </td>
           </tr>
           <tr>
             <td>1</td>
@@ -54,14 +84,15 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
     <!-- Single modal template -->
-    <div class="modal fade" id="dynamicModal" tabindex="-1" aria-labelledby="dynamicModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ex1" tabindex="-1" aria-labelledby="dynamicModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="dynamicModalTitle"></h5>
-            <button class="btn-close" data-bs-dismiss="modal"></button>
+            <a href="#" rel="modal:close">Close</a>
+            <!-- <button class="btn-close" data-bs-dismiss="modal"></button> -->
           </div>
           <div class="modal-body" id="dynamicModalContent"></div>
           <div class="modal-footer">

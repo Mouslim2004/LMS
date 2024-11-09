@@ -13,3 +13,31 @@ section{
   border-bottom: 1px solid lightgray;
   margin-bottom: 10px;
 }
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+/* tr:nth-child(even) {
+  background-color: #dddddd;
+} */
+td a{
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: white;
+  background: green;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+td a:hover{
+  background: white;
+  color: green;
+  border: 1px solid green;
+  transition: all 0.3s ease-out;
+}
