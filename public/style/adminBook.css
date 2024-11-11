@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  /* background: rgb(171, 202, 247); */
+}
+header{
+  display: flex;
+  justify-content: space-between;
+  padding: 6px;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid lightgray;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo img{
+  height: 30px;
+  width: 30px;
+}
+.logo span{
+  font-size: 25px;
+  color: slateblue;
+}
+.back-btn a{
+  color: white;
+  background: slateblue;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in;
+  text-decoration: none;
+}
+.back-btn a:hover{
+  color: slateblue;
+  background: white;
+  border: 1px solid slateblue;
+  transition: all 0.3s ease-out;
+}
+.search-bar{
+  width: 20%;
+  padding: 5px;
+  position: relative;
+}
+.search-bar input{
+  width: 90%;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  outline: none;
+}
+.search-bar span{
+  position: absolute;
+  bottom: 6px;
+  right: 20px;
+  border: 1px solid lightgray;
+  padding: 4px 10px;
+  border-radius: 5px;
+  background: rgb(247, 245, 245);
+}
+#adminBook{
+  /* height: calc(100vh - 100px); */
+  overflow: auto;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.book-inventory{
+  display: flex;
+  border: 1px solid silver;
+  width: 50%;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.subheader{
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+}
+.subheader-flex{
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+.subheader-flex .inventory{
+  font-size: 20px;
+  font-weight: 500;
+}
+.subheader-flex .display-modal button{
+  padding: 5px 15px;
+  background: black;
+  color: white;
+  border-radius: 3px ;
+  border: none;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+.subheader-flex .display-modal button:hover{
+  background: white;
+  color: black;
+  border: 1px solid black;
+  transition: all 0.3s ease-out;
+}
+.book-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.book-details .book-title{
+  font-size: 20px;
+  font-weight: 500;
+}
+.book-action{
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
+}
+.book-update{
+  padding: 0 5px;
+  border-radius: 3px;
+  background: green;
+  color: white;
+}
+.book-delete{
+  padding: 0 5px;
+  border-radius: 3px;
+  background: red;
+  color: white;
+}
+.book-details .issue-detail{
+  background: black;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  width: 45%;
+  text-align: center;
+}

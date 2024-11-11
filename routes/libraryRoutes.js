@@ -11,5 +11,6 @@ router.get('/userChange', LibraryController.userChange)
 router.get('/userIssued', LibraryController.userIssued)
 router.get('/adminDash', LibraryController.adminDash)
 router.get('/userBooks', LibraryController.userBook)
+router.get('/adminBooks', LibraryController.adminBook)
 
 module.exports = router

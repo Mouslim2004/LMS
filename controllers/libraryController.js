@@ -36,6 +36,10 @@ const userBook = (req,res) => {
   res.render('userBook')
 }
 
+const adminBook = (req,res) => {
+  res.render('adminBook')
+}
+
 module.exports = {
   index,
   userSignup,
@@ -45,5 +49,6 @@ module.exports = {
   userChange,
   userIssued,
   adminDash,
-  userBook
+  userBook,
+  adminBook
 }
