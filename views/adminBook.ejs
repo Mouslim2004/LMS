@@ -6,54 +6,83 @@
   <title>Admin Book page</title>
   <link rel="stylesheet" href="/style/adminBook.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- jQuery Modal -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 </head>
 <body>
   <!-- This is the header section -->
   <header>
     <div class="logo"><span>B</span><img src="/images/book-eyes.png"><span>K</span></div>
-    <form class="search-bar"><input type="text" id="search-bar" placeholder="Search"><span><i class="fa-solid fa-magnifying-glass"></i></span></form>
     <div class="back-btn"><a href="/adminDash">BACK</a></div>
   </header>
-  <div class="subheader">
-    <div class="subheader-flex">
-      <div class="inventory">Book Inventory</div>
-      <div class="display-modal"><button>Add Book <i class="fa-solid fa-plus"></i></button></div> 
-    </div>
-  </div>
+  
   <section id="adminBook">
-    <div class="book-inventory">
-      <div class="book-details">
-         <div class="book-title">Batman : Dark Knight</div>
-         <div class="book-ID">ID : <strong>2356pklg</strong></div>
-         <div class="book-author">Author : <strong>Huge Jackman</strong></div>
-         <div class="book-category">Category : <strong>Fiction</strong></div>
-         <div class="issue-detail">Not Issued</div>
-         <div class="book-action">
-          <div class="book-update"><i class="fa-solid fa-pen-to-square"></i></div>
-          <div class="book-delete"><i class="fa-solid fa-trash"></i></div>
+    <div class="book-form">
+       <div class="detail-title">Book Details</div>
+       <div class="detail-image"><img src="/images/books.png" alt=""></div>
+       <form action="" enctype="multipart/form-data">
+         <div class="input-file"><input type="file"></div>
+         <div class="book-id-name">
+           <input type="text" placeholder="Book Id" id="bookid"> 
+           <input type="text" placeholder="Book name" id="name"> 
          </div>
-      </div>
-      <div class="book-image">
-        <img src="/books/batman.jpeg" alt="">
-      </div>  
-  </div>
-
-  <div class="book-inventory">
-    <div class="book-details">
-       <div class="book-title">Batman : Dark Knight</div>
-       <div class="book-ID">ID : <strong>2356pklg</strong></div>
-       <div class="book-author">Author : <strong>Huge Jackman</strong></div>
-       <div class="book-category">Category : <strong>Fiction</strong></div>
-       <div class="issue-detail">Not Issued</div>
-       <div class="book-action">
-        <div class="book-update"><i class="fa-solid fa-pen-to-square"></i></div>
-        <div class="book-delete"><i class="fa-solid fa-trash"></i></div>
-       </div>
+         <div class="book-author-genre">
+            <input type="text" placeholder="Author name" id="author"> 
+            <select name="" id="category" aria-placeholder="Fantasy">
+              <option value="Techology">Technology</option>
+              <option value="Fiction">Fiction</option>
+              <option value="Science">Science</option>
+              <option value="Fantasy">Fantasy</option>
+              <option value="Religion">Religion</option>
+            </select>
+        </div>
+        <div class="book-date-name">
+           <input type="text" placeholder="dd-mm-yyyy" id="publishDate">
+           <input type="text" placeholder="Publish name" id="publishName">
+        </div>
+        <div class="book-description">
+           <textarea name="description" id="description" placeholder="Book description"></textarea>
+        </div>
+        <div class="book-button">
+            <input type="submit" value="Add" id="add-submit">
+            <input type="submit" value="Edit" id="edit-submit">
+            <input type="submit" value="Delete" id="delete-submit">
+        </div>
+       </form>
     </div>
-    <div class="book-image">
-      <img src="/books/batman.jpeg" alt="">
-    </div>  
-</div>
-  </section>
+    <div class="book-left">
+      <div class="subheader-flex">
+        <div class="inventory">Book Inventory</div>
+        <form class="search-bar"><input type="text" id="search-bar" placeholder="Search"><span><i class="fa-solid fa-magnifying-glass"></i></span></form> 
+      </div>
+        <div class="book-inventory">
+          <div class="book-details">
+            <div class="book-title">Batman : Dark Knight</div>
+            <div class="book-ID">ID : <strong>2356pklg</strong></div>
+            <div class="book-author">Author : <strong>Huge Jackman</strong></div>
+            <div class="book-category">Category : <strong>Fiction</strong></div>
+            <div class="issue-detail">Not Issued</div>
+          </div>
+          <div class="book-image">
+            <img src="/books/batman.jpeg" alt="">
+          </div>  
+        </div>
+        <div class="book-inventory">
+          <div class="book-details">
+            <div class="book-title">Batman : Dark Knight</div>
+            <div class="book-ID">ID : <strong>2356pklg</strong></div>
+            <div class="book-author">Author : <strong>Huge Jackman</strong></div>
+            <div class="book-category">Category : <strong>Fiction</strong></div>
+            <div class="issue-detail">Not Issued</div>
+          </div>
+          <div class="book-image">
+            <img src="/books/batman.jpeg" alt="">
+          </div>  
+      </div>
+  </div>
+ </section>
 </body>
 </html>
