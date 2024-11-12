@@ -140,7 +140,7 @@ form{
 }
 form input[type="file"]{
   border: 1px solid lightgray;
-  width: 82%;
+  width: 40%;
   padding: 5px;
   border-radius: 3px;
   margin: 5px 0;
@@ -240,15 +240,18 @@ form input[type="file"]{
   border-bottom-left-radius: 0;
   background: rgb(247, 245, 245);
 }
-/* .search-bar {
-  border: 1px solid black;
-  width: 50%;
-  position: relative;
+.book-grid{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
 }
-.search-bar span{
-  position: absolute;
-  right: 13px;
+.input-file #pseudo{
+  width: 40%;
+  padding: 5px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  outline: none;
+  margin: 8px 0;
 }
-.search-bar span i {
-  border: 0;
-} */
