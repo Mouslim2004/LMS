@@ -50,11 +50,10 @@ header{
 section{
   margin-top: 60px;
   padding: 10px;
-  min-height: 400px;
+  min-height: 650px;
   position: fixed;
   right: 0;
   left: 0;
-  border: 1px solid brown;
 }
 .title{
   font-size: 30px ;
@@ -125,4 +124,7 @@ form input{
   outline: none;
   border: 1px solid #dddddd;
   margin-bottom: 10px;
+}
+.wrap-student{
+  height: 420px;
 }
