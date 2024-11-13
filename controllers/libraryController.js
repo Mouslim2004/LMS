@@ -1,3 +1,4 @@
+const { render } = require("ejs")
 
 
 const index = (req,res) => {
@@ -44,6 +45,10 @@ const previewBook  = (req,res) => {
   res.render('previewBook')
 }
 
+const regStudent = (req,res) => {
+  res.render('regStudent')
+}
+
 module.exports = {
   index,
   userSignup,
@@ -55,5 +60,6 @@ module.exports = {
   adminDash,
   userBook,
   adminBook,
-  previewBook
+  previewBook,
+  regStudent
 }
