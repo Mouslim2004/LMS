@@ -247,11 +247,27 @@ form input[type="file"]{
   align-items: center;
   overflow: auto;
 }
-.input-file #pseudo{
-  width: 40%;
+.pseudo-book #pseudo,
+#available{
+  width: 41%;
   padding: 5px;
   border: 1px solid lightgray;
   border-radius: 3px;
   outline: none;
-  margin: 8px 0;
+}
+.input-file{
+  display: flex;
+  justify-content: center;
+  width: 85%;
+  margin-left: 57px;
+}
+.input-file div{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 100%;
+  
+}
+div input[type="file"]{
+  width: 95%;
 }

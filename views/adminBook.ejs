@@ -25,12 +25,19 @@
        <div class="detail-image"><img src="/images/books.png" alt=""></div>
        <form action="" enctype="multipart/form-data">
          <div class="input-file">
-          <input type="file">
-          <input type="text" placeholder="Pseudo" id="pseudo">
+          <div>
+            <label for="img-book">Upload Book Img</label>
+            <input type="file">
+          </div>
+          <div>
+            <label for="pdf-book">Upload Book PDF</label>
+            <input type="file">
+          </div>
+          
         </div>
          <div class="book-id-name">
            <input type="text" placeholder="Book Id" id="bookid"> 
-           <input type="text" placeholder="Book name" id="name"> 
+           <input type="text" placeholder="Book Title" id="name"> 
          </div>
          <div class="book-author-genre">
             <input type="text" placeholder="Author name" id="author"> 
@@ -43,8 +50,15 @@
             </select>
         </div>
         <div class="book-date-name">
-           <input type="text" placeholder="dd-mm-yyyy" id="publishDate">
-           <input type="text" placeholder="Publish name" id="publishName">
+           <input type="date"  id="publishDate">
+           <input type="text" placeholder="Publisher" id="publishName">
+        </div>
+        <div class="pseudo-book">
+          <input type="text" placeholder="Pseudo" id="pseudo">
+          <select name="available" id="available">
+            <option value="available">Available</option>
+            <option value="not-available">Not Available</option>
+          </select>
         </div>
         <div class="book-description">
            <textarea name="description" id="description" placeholder="Book description"></textarea>
