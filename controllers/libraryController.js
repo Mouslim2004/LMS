@@ -49,6 +49,10 @@ const regStudent = (req,res) => {
   res.render('regStudent')
 }
 
+const userRule = (req,res) => {
+  res.render('userRule')
+}
+
 module.exports = {
   index,
   userSignup,
@@ -61,5 +65,6 @@ module.exports = {
   userBook,
   adminBook,
   previewBook,
-  regStudent
+  regStudent,
+  userRule
 }
