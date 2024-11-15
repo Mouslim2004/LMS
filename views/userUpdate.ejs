@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIDEBAR HEADER</title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/style/sidebar.css">
+  <link rel="stylesheet" href="/style/userUpdate.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="project">
+      <span class="book-icon"><i class="fa-solid fa-book"></i></span>
+      <span class="name-project">E-Library</span>
+    </div>
+    <div class="right-header">
+      <div><i class="fa-regular fa-bell"></i><span class="notif">0</span></div>
+      <img src="/images/boy.png" alt="">
+      <div class="username">Mouslim Ombadi</div>
+    </div>
+  </header>
+  <main>
+    <div class="sidebar">
+      <div class="sidebar-profile">
+        <img src="/images/boy.png" alt="">
+        <div class="username">Mouslim Ombadi</div>
+      </div>
+      <div class="navbar">
+         <ul>
+           <li><a href="/userDash"><i class="fa-solid fa-house"></i>Dashboard</a></li>
+           <li><a href="/userIssued"><i class="fa-solid fa-folder-open"></i>Issue Books</a></li>
+           <li><a href="/userBooks"><i class="fa-solid fa-book-bookmark"></i>Books</a></li>
+           <li><a href="/userUpdate"><i class="fa-solid fa-pen-to-square"></i></i>Update Details</a></li>
+           <li><a href="/userChange"><i class="fa-solid fa-lock"></i>Change Password </a></li>
+           <li><a href="/userRule"><i class="fa-solid fa-person-chalkboard"></i>Rules</a></li>
+           <li><a href="/"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+         </ul>
+      </div>
+    </div>
+    <section>
+       <div class="main-form">
+         <div class="update-profile">
+           <img src="/images/boy.png" alt="">
+         </div>
+         <div class="update-form">
+            <form action="" id="updateForm">
+               <label for="">Full Name</label>
+               <input type="text" placeholder="Full name">
+               <label for="">Email</label>
+               <input type="text" placeholder="Email">
+               <label for="">Phone</label>
+               <input type="text" placeholder="Phone">
+               <label for="">Address</label>
+               <input type="text" placeholder="Address">
+               <label for="">CNE</label>
+               <input type="text" placeholder="CNE">
+
+               <div class="sbt-btn">
+                 <input type="submit" value="Update">
+               </div>
+            </form>
+         </div>
+       </div>
+    </section>
+  </main>
+  
+</body>
+</html>

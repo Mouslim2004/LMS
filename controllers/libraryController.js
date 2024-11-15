@@ -57,6 +57,10 @@ const sidebar = (req,res) => {
   res.render('sidebar-header')
 }
 
+const updateDetail = (req,res) => {
+  res.render('userUpdate')
+}
+
 module.exports = {
   index,
   userSignup,
@@ -71,5 +75,6 @@ module.exports = {
   previewBook,
   regStudent,
   userRule,
-  sidebar
+  sidebar,
+  updateDetail
 }
