@@ -3,83 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Book Page</title>
+  <title>SIDEBAR HEADER</title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/style/sidebar.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/style/userBook.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
 </head>
 <body>
-  <!-- This is the header section -->
   <header>
-    <div class="logo"><span>B</span><img src="/images/book-eyes.png"><span>K</span></div>
-    <div class="back-btn"><a href="/userDash">BACK</a></div>
+    <div class="project">
+      <span class="book-icon"><i class="fa-solid fa-book"></i></span>
+      <span class="name-project">E-Library</span>
+    </div>
+    <div class="right-header">
+      <div><i class="fa-regular fa-bell"></i><span class="notif">0</span></div>
+      <img src="/images/boy.png" alt="">
+      <div class="username">Mouslim Ombadi</div>
+    </div>
   </header>
-   
-   <section id="userBook">
-      <div class="left-section">
-         <form action="">
-           <label for="writer">Writer</label> <br>
-           <input type="text" placeholder="Eman Saber" id="writer"> <br>
-           <label for="Year">Year</label> <br>
-           <input type="text" placeholder="2024" id="year"> <br>
-           <label for="Category">Categories</label> <br>
-           <select name="" id="category" aria-placeholder="Fantasy">
-             <option value="Techology">Technology</option>
-             <option value="Fiction">Fiction</option>
-             <option value="Science">Science</option>
-             <option value="Fantasy">Fantasy</option>
-             <option value="Religion">Religion</option>
-           </select> <br>
-           <div class="sbt-btn">
-              <input type="submit" value="Search" id="search">
-           </div>
-         </form>
+  <main>
+    <div class="sidebar">
+      <div class="sidebar-profile">
+        <img src="/images/boy.png" alt="">
+        <div class="username">Mouslim Ombadi</div>
       </div>
-      <div class="right-section">
-        <div class="grid-book">
-           <a href="/previewBook" class="book">
-             <img src="/books/batman.jpeg" alt="">
-             <div class="book-name">Batman</div>
-             <div class="book-author">Alice Oceman</div>
-             <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
-             <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-           </a>
-           <a href="/previewBook" class="book">
-            <img src="/books/law.jpeg" alt="">
-            <div class="book-name">Batman</div>
-            <div class="book-author">Alice Oceman</div>
-            <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
-            <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-           </a>
-          <a href="/previewBook" class="book">
-            <img src="/books/fault-stairs.jpeg" alt="">
-            <div class="book-name">Batman</div>
-            <div class="book-author">Alice Oceman</div>
-            <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
-            <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-          </a>
-          <a href="/previewBook" class="book">
-            <img src="/books/house.jpeg" alt="">
-            <div class="book-name">Batman</div>
-            <div class="book-author">Alice Oceman</div>
-            <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
-            <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-          </a>
-          <a href="/previewBook" class="book">
-            <img src="/books/sherlock.jpg" alt="">
-            <div class="book-name">Batman</div>
-            <div class="book-author">Alice Oceman</div>
-            <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
-            <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-          </a>
-          <a href="/previewBook" class="book">
-            <img src="/books/stephen.jpeg" alt="">
-            <div class="book-name">Batman</div>
-            <div class="book-author">Alice Oceman</div>
-            <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
-            <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-          </a>
-        </div>
+      <div class="navbar">
+         <ul>
+           <li><a href="/userDash"><i class="fa-solid fa-house"></i>Dashboard</a></li>
+           <li><a href="/userIssued"><i class="fa-solid fa-folder-open"></i>Issue Books</a></li>
+           <li><a href="/userBooks"><i class="fa-solid fa-book-bookmark"></i>Books</a></li>
+           <li><a href="/userUpdate"><i class="fa-solid fa-pen-to-square"></i></i>Update Details</a></li>
+           <li><a href="/userChange"><i class="fa-solid fa-lock"></i>Change Password </a></li>
+           <li><a href="/userRule"><i class="fa-solid fa-person-chalkboard"></i>Rules</a></li>
+           <li><a href="/"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+         </ul>
       </div>
-   </section>
+    </div>
+    
+<section id="userBook">
+  <div class="left-section">
+     <form action="">
+       <label for="writer">Writer</label> <br>
+       <input type="text" placeholder="Eman Saber" id="writer"> <br>
+       <label for="Year">Year</label> <br>
+       <input type="text" placeholder="2024" id="year"> <br>
+       <label for="Category">Categories</label> <br>
+       <select name="" id="category" aria-placeholder="Fantasy">
+         <option value="Techology">Technology</option>
+         <option value="Fiction">Fiction</option>
+         <option value="Science">Science</option>
+         <option value="Fantasy">Fantasy</option>
+         <option value="Religion">Religion</option>
+       </select> <br>
+       <div class="sbt-btn">
+          <input type="submit" value="Search" id="search">
+       </div>
+     </form>
+  </div>
+  <div class="right-section">
+    <div class="grid-book">
+       <a href="/previewBook" class="book">
+         <img src="/books/batman.jpeg" alt="">
+         <div class="book-name">Batman</div>
+         <div class="book-author">Alice Oceman</div>
+         <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+         <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
+       </a>
+       <a href="/previewBook" class="book">
+        <img src="/books/law.jpeg" alt="">
+        <div class="book-name">Batman</div>
+        <div class="book-author">Alice Oceman</div>
+        <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+        <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
+       </a>
+      <a href="/previewBook" class="book">
+        <img src="/books/fault-stairs.jpeg" alt="">
+        <div class="book-name">Batman</div>
+        <div class="book-author">Alice Oceman</div>
+        <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+        <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
+      </a>
+      <a href="/previewBook" class="book">
+        <img src="/books/house.jpeg" alt="">
+        <div class="book-name">Batman</div>
+        <div class="book-author">Alice Oceman</div>
+        <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+        <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
+      </a>
+      <a href="/previewBook" class="book">
+        <img src="/books/sherlock.jpg" alt="">
+        <div class="book-name">Batman</div>
+        <div class="book-author">Alice Oceman</div>
+        <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+        <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
+      </a>
+      <a href="/previewBook" class="book">
+        <img src="/books/stephen.jpeg" alt="">
+        <div class="book-name">Batman</div>
+        <div class="book-author">Alice Oceman</div>
+        <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+        <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
+      </a>
+    </div>
+  </div>
+</section>
+  </main>
+  
 </body>
 </html>

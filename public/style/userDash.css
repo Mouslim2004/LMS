@@ -6,7 +6,7 @@
   /* background: rgb(171, 202, 247); */
 }
 section{
-  height: calc(100vh - 130px);
+  height: calc(100vh - 90px);
 }
 .user-title{
   padding: 15px;

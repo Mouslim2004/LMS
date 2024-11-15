@@ -59,10 +59,11 @@ section{
   flex-direction: column;
   padding: 15px;
   border: 1px solid slategray;
-  width: 15%;
+  width: 30%;
   align-items: center;
   border-radius: 5px;
   margin-right: 15px;
+  height: 65%;
 }
 .issued-form div img{
   border-radius: 3px;
@@ -101,7 +102,6 @@ form input{
 } */
 .previewheader{
   border: 1px solid lightgray;
-  padding: 5px;
   border-radius: 5px;
   box-shadow: 0 3px 3px rgba(0,0,0,0.2);
   margin-bottom: 10px;
@@ -144,7 +144,7 @@ form input{
   display: flex;
   justify-content: center;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 .publish,
 .editor,

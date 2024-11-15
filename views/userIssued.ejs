@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Issued Books</title>
+  <title>SIDEBAR HEADER</title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/style/sidebar.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" /> 
   <link rel="stylesheet" href="/style/userIssued.css">
   <!-- <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/js/bootstrap.bundle.min.js"> -->
@@ -13,9 +16,37 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 <body>
-  <!-- this is the header -->
-    <%- include('headeDash') %>
-  <!-- This is the main section -->
+  <header>
+    <div class="project">
+      <span class="book-icon"><i class="fa-solid fa-book"></i></span>
+      <span class="name-project">E-Library</span>
+    </div>
+    <div class="right-header">
+      <div><i class="fa-regular fa-bell"></i><span class="notif">0</span></div>
+      <img src="/images/boy.png" alt="">
+      <div class="username">Mouslim Ombadi</div>
+    </div>
+  </header>
+  <main>
+    <div class="sidebar">
+      <div class="sidebar-profile">
+        <img src="/images/boy.png" alt="">
+        <div class="username">Mouslim Ombadi</div>
+      </div>
+      <div class="navbar">
+         <ul>
+           <li><a href="/userDash"><i class="fa-solid fa-house"></i>Dashboard</a></li>
+           <li><a href="/userIssued"><i class="fa-solid fa-folder-open"></i>Issue Books</a></li>
+           <li><a href="/userBooks"><i class="fa-solid fa-book-bookmark"></i>Books</a></li>
+           <li><a href="/userUpdate"><i class="fa-solid fa-pen-to-square"></i></i>Update Details</a></li>
+           <li><a href="/userChange"><i class="fa-solid fa-lock"></i>Change Password </a></li>
+           <li><a href="/userRule"><i class="fa-solid fa-person-chalkboard"></i>Rules</a></li>
+           <li><a href="/"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+         </ul>
+      </div>
+    </div>
+    
+ <!-- This is the main section -->
   <section id="issuedBooks">
     <div class="issued-title">ISSUED BOOKS</div>
         
@@ -99,7 +130,8 @@
         </div>
       </div>
     </div>
- 
+  </main>
+  
 <script>
   $(document).ready(function() {
   $('.open-modal').on('click', function() {
