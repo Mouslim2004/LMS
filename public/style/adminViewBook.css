@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  /* background: rgb(171, 202, 247); */
+}
+#adminViewBook{
+  height: calc(100vh - 130px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.book-left{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+  position: relative;
+  margin-top: 15px;
+}
+.book-inventory{
+  display: flex;
+  border: 1px solid silver;
+  width: 90%;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  
+}
+.book-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.book-details .book-title{
+  font-size: 20px;
+  font-weight: 500;
+}
+/* .book-details .issue-detail{
+  background: black;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  width: 45%;
+  text-align: center; 
+} */
+.subheader-flex{
+  display: flex;
+  justify-content: space-between;
+  width: 82%;
+  padding: 2px;
+  align-items: center;
+}
+.subheader-flex .inventory{
+  font-size:20px ;
+  font-weight: 500;
+}
+.search-bar{
+  width: 50%;
+  padding: 5px;
+  position: relative;
+}
+.search-bar input{
+  width: 90%;
+  padding: 7px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  outline: none;
+  position: relative;
+}
+/* .search-bar span{
+  position: absolute;
+  bottom: 16px;
+  right: 13px;
+  border: 1px solid lightgray;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background: rgb(247, 245, 245);
+} */
+.book-grid{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 600px 600px;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  overflow: auto;
+  margin-left: 80px;
+}
+.admin-title{
+  padding: 15px;
+  border-bottom: 1px solid lightgray;
+  text-align: left;
+  width: 100%;
+  padding-left: 30px;
+}
+.book-btn{
+  display: flex;
+  width: 350px;
+  text-align: center;
+}
+/* .book-btn .issue-detail{
+  width: 30%;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 3px;
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+} */
+.book-btn div button{
+    padding: 5px 12px;
+    border-radius: 3px;
+    border: none;
+}
+.book-btn .issue-book button{
+  background: slateblue;
+  color: white;
+  font-weight:500 ;
+  font-size: 15px;
+  margin-left: 7px;
+}
+.book-btn .issue-update button{
+  background: green;
+  color: white;
+  font-weight:500 ;
+  font-size: 15px;
+  margin-left: 7px;
+}
+.book-btn .issue-delete button{
+  background: darkred;
+  color: white;
+  font-weight:500 ;
+  font-size: 15px;
+  margin-left: 7px;
+}
+.book-btn .issue-detail{
+  background: black;
+  color: white;
+  font-weight:500 ;
+  font-size: 15px;
+}

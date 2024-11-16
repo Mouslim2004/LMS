@@ -3,15 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dash</title>
+  <title>SIDEBAR HEADER</title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/style/sidebar.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/style/adminDash.css">
 </head>
 <body>
-<!-- This is the header -->
- <%- include('headAdmin') %>
-<!-- This is the main section  -->
-
+  <header>
+    <div class="project">
+      <span class="book-icon"><i class="fa-solid fa-book"></i></span>
+      <span class="name-project">E-Library</span>
+    </div>
+    <div class="right-header">
+      <div><i class="fa-regular fa-bell"></i><span class="notif">0</span></div>
+      <img src="/images/boy.png" alt="">
+      <div class="username">Mouslim Ombadi</div>
+    </div>
+  </header>
+  <main>
+    
+    <div class="sidebar">
+      <div class="sidebar-profile">
+        <img src="/images/boy.png" alt="">
+        <div class="username">Mouslim Ombadi</div>
+      </div>
+      <div class="navbar">
+         <ul>
+           <li><a href="/adminDash"><i class="fa-solid fa-house"></i>Dashboard</a></li>
+           <li><a href="/adminCategory"><i class="fa-solid fa-folder-open"></i>Category</a></li>
+           <li><a href="/adminAuthor"><i class="fa-solid fa-book-bookmark"></i>Author</a></li>
+           <li><a href="/adminIssued"><i class="fa-solid fa-pen-to-square"></i></i>Issued Books</a></li>
+           <li><a href="/adminBooks"><i class="fa-solid fa-lock"></i>View Books</a></li>
+           <li><a href="/adminAddBooks"><i class="fa-solid fa-lock"></i>Add Books</a></li>
+           <li><a href="/regStudent"><i class="fa-solid fa-person-chalkboard"></i>Students</a></li>
+           <li><a href="/adminChange"><i class="fa-solid fa-lock"></i>Change Password</a></li>
+           <li><a href="/"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+         </ul>
+      </div>
+    </div>
+    
 <section id="adminDash">
   <div class="admin-title">ADMIN DASHBOARD</div>
   <div class="main-section">
@@ -48,5 +80,7 @@
     </a>
   </div>
 </section>
+  </main>
+  
 </body>
 </html>

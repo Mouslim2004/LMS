@@ -56,7 +56,7 @@ header{
   margin-top: 10px;
 }
 main{
-  border: 2px solid slateblue;
+  /* border: 2px solid slateblue; */
   height: calc(100vh - 5px);
   display: flex;
 }
@@ -65,17 +65,22 @@ main{
   width: 18%;
   padding-top: 55px;
   box-shadow:3px 0 3px -3px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  bottom: 0;
+  top: 0;
 }
 section{
-  
+  margin-left: 280px;
   width: 82%;
   padding-top: 55px;
+  position: relative;
 }
 .sidebar-profile{
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 15px;
+  position: relative;
 }
 .sidebar-profile img{
   height: 50px;

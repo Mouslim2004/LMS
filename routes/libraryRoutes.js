@@ -17,5 +17,6 @@ router.get('/regStudent',LibraryController.regStudent)
 router.get('/userRule', LibraryController.userRule)
 router.get('/sidebar', LibraryController.sidebar)
 router.get('/userUpdate', LibraryController.updateDetail)
+router.get('/adminAddBooks', LibraryController.viewBook)
 
 module.exports = router

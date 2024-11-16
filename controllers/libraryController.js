@@ -61,6 +61,9 @@ const updateDetail = (req,res) => {
   res.render('userUpdate')
 }
 
+const viewBook = (req,res) => {
+  res.render('adminViewBook')
+}
 module.exports = {
   index,
   userSignup,
@@ -76,5 +79,6 @@ module.exports = {
   regStudent,
   userRule,
   sidebar,
-  updateDetail
+  updateDetail,
+  viewBook
 }
