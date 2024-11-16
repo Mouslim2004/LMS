@@ -112,6 +112,7 @@ form input{
 .previewheader ul li{
   margin-left: 25px;
   list-style: none;
+  background: white;
 }
 .previewheader ul li a {
   text-decoration: none;

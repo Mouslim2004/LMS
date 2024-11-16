@@ -46,7 +46,7 @@ header{
   background: red;
   padding: 1px 8px;
   border-radius: 50%;
-  bottom: 15px;
+  bottom: 14px;
   left: 35px;
   color: wheat;
   font-weight: 500;
@@ -62,18 +62,20 @@ main{
 }
 .sidebar{
   border: 1px solid lightgray;
-  width: 18%;
+  width: 4%;
   padding-top: 55px;
   box-shadow:3px 0 3px -3px rgba(0, 0, 0, 0.3);
   position: fixed;
   bottom: 0;
   top: 0;
+  transition: width 0.3s ease-in-out;
 }
 section{
-  margin-left: 280px;
-  width: 82%;
+  margin-left: 70px;
+  width: 100%;
   padding-top: 55px;
   position: relative;
+  transition: margin-left 0.3s ease-in-out;
 }
 .sidebar-profile{
   display: flex;
@@ -103,7 +105,36 @@ ul li{
 ul li a {
   text-decoration: none;
   color: silver;
+  text-align: center;
 }
 ul li a i{
   margin-right: 20px;
+  font-size: 20px;
+}
+.sidebar-profile .username{
+  display: none;
+  transition: display 0.3s ease-in-out;
+}
+ul li a span{
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.sidebar:hover{
+  width: 18%;
+}
+.sidebar:hover + section{
+  width: 82%;
+  margin-left: 280px;
+}
+.sidebar:hover .sidebar-profile .username{
+  display: inline;
+}
+.sidebar:hover ul li a span{
+  opacity: 1;
+}
+ul li:hover{
+  background: rgb(238, 238, 238);
+  color: white;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
 }
