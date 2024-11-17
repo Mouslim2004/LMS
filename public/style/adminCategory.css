@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+section{
+  height: calc(100vh - 70px);
+  position: relative;
+}
+.admin-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 10px;
+}
+.category-btn button{
+  padding: 5px 7px;
+  background: slateblue;
+  color: white;
+  font-weight: 500;
+  border-radius: 3px;
+  border: none;
+}
+.main-category{
+  height: 85%;
+  padding: 5px;
+}
+.category-searchbar{
+  border: 1px solid lightgray;
+  padding: 5px;
+  background: rgb(240, 238, 238);
+  margin-bottom: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.category-searchbar input{
+  padding: 5px;
+  width: 25%;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+  outline: none;
+}
+.category-list{
+  height: 90%;
+}
+table{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+tr td button{
+  padding: 5px 12px;
+  font-size: 15px;
+  margin-right: 5px;
+  background: blue;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  font-weight: 500;
+}
+tr td span{
+  border: 1px solid lightgray;
+  padding: 5px 9px;
+  text-align: center;
+  background-color: rgb(240, 238, 238);
+  border-radius: 3px;
+}

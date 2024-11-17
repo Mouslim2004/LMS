@@ -18,5 +18,6 @@ router.get('/userRule', LibraryController.userRule)
 router.get('/sidebar', LibraryController.sidebar)
 router.get('/userUpdate', LibraryController.updateDetail)
 router.get('/adminViewBook', LibraryController.viewBook)
+router.get('/adminCategory', LibraryController.adminCategory)
 
 module.exports = router

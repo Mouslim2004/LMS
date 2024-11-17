@@ -64,6 +64,10 @@ const updateDetail = (req,res) => {
 const viewBook = (req,res) => {
   res.render('adminViewBook')
 }
+
+const adminCategory = (req,res) => {
+  res.render('adminCategory')
+}
 module.exports = {
   index,
   userSignup,
@@ -80,5 +84,6 @@ module.exports = {
   userRule,
   sidebar,
   updateDetail,
-  viewBook
+  viewBook,
+  adminCategory
 }
