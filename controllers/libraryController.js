@@ -68,6 +68,10 @@ const viewBook = (req,res) => {
 const adminCategory = (req,res) => {
   res.render('adminCategory')
 }
+
+const adminAuthor = (req,res) => {
+  res.render('adminAuthor')
+}
 module.exports = {
   index,
   userSignup,
@@ -85,5 +89,6 @@ module.exports = {
   sidebar,
   updateDetail,
   viewBook,
-  adminCategory
+  adminCategory,
+  adminAuthor
 }

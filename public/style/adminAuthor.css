@@ -24,6 +24,11 @@ section{
   font-weight: 500;
   border-radius: 3px;
   border: none;
+  display: flex;
+  align-items: center;
+}
+.category-btn button i{
+  margin-right: 5px;
 }
 .main-category{
   height: 85%;
@@ -67,24 +72,13 @@ tr td button{
   color: white;
   font-weight: 500;
 }
-tr td span{
-  border: 1px solid lightgray;
-  padding: 5px 9px;
-  text-align: center;
-  background-color: rgb(240, 238, 238);
-  border-radius: 3px;
-}
-.active{
-  border-radius: 3px;
-  background: green;
-  font-weight: 500;
-  color: white;
-  border: none;
-}
-.inactive{
-  border-radius: 3px;
+tr td .btn-delete{
+  padding: 5px 12px;
+  font-size: 15px;
+  margin-right: 5px;
   background: red;
-  font-weight: 500;
-  color: white;
+  border-radius: 3px;
   border: none;
-} 
+  color: white;
+  font-weight: 500;
+}

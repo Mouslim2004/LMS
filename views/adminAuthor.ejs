@@ -6,7 +6,7 @@
   <title>SIDEBAR HEADER</title>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/style/sidebar.css">
-  <link rel="stylesheet" href="/style/adminCategory.css">
+  <link rel="stylesheet" href="/style/adminAuthor.css">
   <!-- <link rel="stylesheet" href="/js/bootstrap.bundle.min.js"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <!-- jQuery Modal -->
@@ -49,9 +49,9 @@
     
 <section id="adminDash">
   <div class="admin-title">
-     <div class="category-title">ADMIN CATEGORY</div>
+     <div class="category-title">ADMIN AUTHOR</div>
      <div class="category-btn">
-       <button class="btn">New Category</button>
+       <button class="btn"><i class="fa-solid fa-plus"></i> New Author</button>
      </div>
   </div>
   <div class="main-category">
@@ -64,37 +64,33 @@
              <th>#</th>
              <th>Name</th>
              <th>Creation Date</th>
-             <th>Status</th>
              <th>Action</th>
            </tr>
            <tr>
              <td>1</td>
-             <td>Romantic</td>
+             <td>Jules Pierre</td>
              <td>2024-11-11</td>
-             <td><span class="status">Active</span></td>
              <td>
               <button>Edit</button>
-              <span><i class="fa-solid fa-trash"></i></span>
+              <button class="btn-delete">Delete</button>
             </td>
            </tr>
            <tr>
             <td>1</td>
-            <td>Romantic</td>
+            <td>Artur Rimbaud</td>
             <td>2024-11-11</td>
-            <td><span class="status">Active</span></td>
             <td>
              <button>Edit</button>
-             <span><i class="fa-solid fa-trash"></i></span>
+             <button class="btn-delete">Delete</button>
            </td>
           </tr>
           <tr>
             <td>1</td>
-            <td>Romantic</td>
+            <td>Jean Charles</td>
             <td>2024-11-11</td>
-            <td><span class="status">Inactive</span></td>
             <td>
              <button>Edit</button>
-             <span><i class="fa-solid fa-trash"></i></span>
+             <button class="btn-delete">Delete</button>
            </td>
           </tr>
          </table>
@@ -103,16 +99,5 @@
   
 </section>
   </main>
-  <script>
-     $(document).ready(() => {
-      $('.status').each(function () {
-        if ($(this).text().trim() === 'Active') {
-          $(this).addClass('active');
-        } else if ($(this).text().trim() === 'Inactive') {
-          $(this).addClass('inactive');
-        }
-      });
-     });
-  </script>
 </body>
 </html>
