@@ -76,6 +76,10 @@ const adminAuthor = (req,res) => {
 const adminIssue = (req,res) => {
   res.render('adminIssue')
 }
+
+const userRequest = (req,res) => {
+  res.render('userRequest')
+}
 module.exports = {
   index,
   userSignup,
@@ -95,5 +99,6 @@ module.exports = {
   viewBook,
   adminCategory,
   adminAuthor,
-  adminIssue
+  adminIssue,
+  userRequest
 }

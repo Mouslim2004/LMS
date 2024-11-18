@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  /* background: rgb(171, 202, 247); */
+}
+section{
+  height: calc(100vh - 90px);
+}
+.request-title{
+  padding: 15px;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 5px;
+}
+.main-request{
+  height: 90%;
+}
+.main-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+.note-input{
+  display: flex;
+  margin: 10px 0;
+}
+.note-input textarea{
+  padding: 5px;
+  outline: none;
+  border-radius: 3;
+  border: 1px solid lightgray;
+}
+.title-input{
+  display: flex;
+}
+.title-input label{
+  margin-right: 20px;
+}
+.note-input label{
+  margin-right: 55px;
+}
+.title-input input{
+  width: 69%;
+  outline: none;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+}
+form{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+.sbt-request{
+  display: flex;
+  width: 82%;
+  justify-content: flex-end;
+}
+.sbt-request input{
+  padding: 9px 20px;
+  background: blue;
+  color: white;
+  font-weight: 500;
+  border-radius: 3px;
+  border: none;
+}
+.view-request{
+  height: 340px;
+  margin-top: 60px;
+}
+table{
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th{
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+/* tr:nth-child(even){background: lightgray} */
