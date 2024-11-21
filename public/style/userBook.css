@@ -69,7 +69,7 @@ section{
   justify-content: center;
   height: 60%;
 }
-#writer, #year, #category{
+#title, #year, #category{
   padding: 6px;
   border: 1px solid lightgray;
   border-radius: 3px;
@@ -100,7 +100,7 @@ section{
 }
 .right-section .grid-book{
   display: grid;
-  grid-template-columns: 160px 160px 160px 160px;
+  grid-template-columns: 160px 160px 160px 160px 160px;
   column-gap: 10px;
   row-gap: 20px;
   justify-content: space-around;
@@ -148,4 +148,7 @@ section{
 }
 a .book-name{
   color: black;
+}
+label[for="Category"]{
+  padding: 10px;
 }

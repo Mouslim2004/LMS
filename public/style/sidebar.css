@@ -98,9 +98,9 @@ ul{
   height: 80%;
 }
 ul li{
-  padding: 15px 15px 15px;
+  padding: 15px 15px;
   position: relative;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 ul li a {
   text-decoration: none;
@@ -109,7 +109,7 @@ ul li a {
 }
 ul li a i{
   margin-right: 20px;
-  font-size: 20px;
+  font-size: 15px;
 }
 .sidebar-profile .username{
   display: none;
