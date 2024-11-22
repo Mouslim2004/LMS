@@ -21,6 +21,7 @@
   flex: 1;
   position: relative;
   margin-top: 15px;
+  /* margin-left: 50px; */
 }
 .book-inventory{
   display: flex;
@@ -53,21 +54,24 @@
 .subheader-flex{
   display: flex;
   justify-content: space-between;
-  width: 82%;
+  width: 100%;
   padding: 2px;
   align-items: center;
+  margin-right: 150px;
 }
 .subheader-flex .inventory{
   font-size:20px ;
   font-weight: 500;
+  margin-left: 10%;
 }
 .search-bar{
   width: 50%;
   padding: 5px;
   position: relative;
+  margin-right: 10px;
 }
 .search-bar input{
-  width: 90%;
+  width: 75%;
   padding: 7px;
   border-radius: 5px;
   border: 1px solid lightgray;
@@ -92,7 +96,7 @@
   /* flex-direction: column; */
   /* align-items: center; */
   overflow: auto;
-  margin-left: 80px;
+  margin-left: 100px;
 }
 .admin-title{
   padding: 15px;
