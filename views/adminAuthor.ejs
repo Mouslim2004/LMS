@@ -9,9 +9,6 @@
   <link rel="stylesheet" href="/style/adminAuthor.css">
   <!-- <link rel="stylesheet" href="/js/bootstrap.bundle.min.js"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <!-- jQuery Modal -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 <body>
   <header>
@@ -71,7 +68,7 @@
              <td>Jules Pierre</td>
              <td>2024-11-11</td>
              <td>
-              <button>Edit</button>
+              <button class="btn btn-open">Edit</button>
               <button class="btn-delete">Delete</button>
             </td>
            </tr>
@@ -80,7 +77,7 @@
             <td>Artur Rimbaud</td>
             <td>2024-11-11</td>
             <td>
-             <button>Edit</button>
+             <button class="btn btn-open">Edit</button>
              <button class="btn-delete">Delete</button>
            </td>
           </tr>
@@ -89,7 +86,7 @@
             <td>Jean Charles</td>
             <td>2024-11-11</td>
             <td>
-             <button>Edit</button>
+             <button class="btn btn-open">Edit</button>
              <button class="btn-delete">Delete</button>
            </td>
           </tr>
@@ -97,7 +94,82 @@
      </div>
   </div>
   
+
+   <!-- This is the update form modal -->
+   <div class="modal hidden">
+    <div class="flex">
+       <h2>Update Author</h2>
+       <button class="btn-close">&times;</button>
+    </div>
+    <form action="">
+      <input type="text" placeholder="ID">
+      <input type="text" placeholder="New Author">
+      <input type="date">
+      <input type="submit" value="Update">
+    </form>
+  </div>
+  <div class="overlay hidden"></div>
+
+  <!-- This is the delete form modal -->
+  <div class="modal2 hidden2">
+    <div class="flex">
+       <h2>Delete Author</h2>
+       <button class="btn-close2">&times;</button>
+    </div>
+    <form action="">
+      <input type="text" placeholder="ID">
+      <input type="text" placeholder="Author To Delete">
+      <input type="submit" value="Delete">
+    </form>
+  </div>
+  <div class="overlay2 hidden2"></div>
+
+
 </section>
   </main>
+
+  <script>
+    $(document).ready(() => {
+     
+
+     const modal2 = $('.modal2')
+     const modal = $('.modal')
+     const overlay = $('.overlay')
+     const overlay2 = $('.overlay2')
+     const openModalBtn = $('.btn-open')
+     const openModalBtn2 = $('.btn-delete')
+     const closeModalBtn = $('.btn-close')
+     const closeModalBtn2 = $('.btn-close2')
+
+     const openModal = function(){
+       modal.removeClass('hidden')
+       overlay.removeClass('hidden')
+     }
+
+     openModalBtn.on('click', openModal)
+
+     const openModal2 = function(){
+       modal2.removeClass('hidden2')
+       overlay2.removeClass('hidden2')
+     }
+
+     openModalBtn2.on('click', openModal2)
+
+     const closeModal = function(){
+       modal.addClass('hidden')
+       overlay.addClass('hidden')
+     }
+
+     closeModalBtn.on('click', closeModal)
+
+     const closeModal2 = function(){
+       modal2.addClass('hidden2')
+       overlay2.addClass('hidden2')
+     }
+
+     closeModalBtn2.on('click', closeModal2)
+     overlay.on('click', closeModal); 
+    });
+ </script>
 </body>
 </html>
