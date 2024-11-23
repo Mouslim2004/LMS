@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIDEBAR HEADER</title>  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <title>SIDEBAR HEADER</title>
   <link rel="stylesheet" href="/style/sidebar.css">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/style/adminViewBook.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
   <header>
@@ -45,15 +44,13 @@
     </div>
     
 <section id="adminViewBook">
-  <div class="admin-title">VIEW BOOK</div>
-  <!-- <div class="subheader-flex">
-    <div class="inventory">Book Inventory</div>
+  <div class="admin-title">
+    <div>VIEW BOOK</div>
     <form class="search-bar"><input type="text" id="search-bar" placeholder="Search"></form> 
-  </div> -->
+  </div>
   <div class="book-left">
     <div class="subheader-flex">
       <div class="inventory">Book Inventory</div>
-      <form class="search-bar"><input type="text" id="search-bar" placeholder="Search"></form> 
     </div>
     <div class="book-grid">
       <div class="book-inventory">
@@ -66,7 +63,7 @@
             <div><button class="issue-detail">Not Issued</button></div>
             <div class="issue-book"><button>Issue</button></div>
             <div class="issue-update"><button>Update</button></div>
-            <div class="issue-delete"><button>Delete</button></div>
+            <div class="issue-delete"><button class="btn-delete">Delete</button></div>
           </div>
        </div>
         <div class="book-image">
@@ -84,7 +81,7 @@
             <div><button class="issue-detail">Not Issued</button></div>
             <div class="issue-book"><button>Issue</button></div>
             <div class="issue-update"><button>Update</button></div>
-            <div class="issue-delete"><button>Delete</button></div>
+            <div class="issue-delete"><button class="btn-delete">Delete</button></div>
           </div>
        </div>
         <div class="book-image">
@@ -102,7 +99,7 @@
             <div><button class="issue-detail">Not Issued</button></div>
             <div class="issue-book"><button>Issue</button></div>
             <div class="issue-update"><button>Update</button></div>
-            <div class="issue-delete"><button>Delete</button></div>
+            <div class="issue-delete"><button class="btn-delete">Delete</button></div>
           </div>
        </div>
         <div class="book-image">
@@ -120,7 +117,7 @@
             <div><button class="issue-detail">Not Issued</button></div>
             <div class="issue-book"><button>Issue</button></div>
             <div class="issue-update"><button>Update</button></div>
-            <div class="issue-delete"><button>Delete</button></div>
+            <div class="issue-delete"><button class="btn-delete">Delete</button></div>
           </div>
         </div>
         <div class="book-image">
@@ -130,8 +127,49 @@
     </div>
       
 </div>
+
+<!-- This is the delete form modal -->
+<div class="modal2 hidden2">
+  <div class="flex">
+     <h2>Are you Sure to Delete this book?</h2>
+     <button class="btn-close2">&times;</button>
+  </div>
+  <div>Book Id : <span>2356pklg</span></div>
+  <div>Book title : <span>Batman</span></div>
+  <div>Book Author : <span>Huge Jackman</span></div>
+  <div>Book Category : <span>Fiction</span></div>
+  <form action="">
+    <input type="submit" value="Delete">
+  </form>
+</div>
+<div class="overlay2 hidden2"></div>
 </section>
   </main>
   
+
+  <script>
+    $(document).ready(() => {
+
+     const modal2 = $('.modal2')
+     const overlay2 = $('.overlay2')
+     const openModalBtn2 = $('.btn-delete')
+     const closeModalBtn2 = $('.btn-close2')
+
+     const openModal2 = function(){
+       modal2.removeClass('hidden2')
+       overlay2.removeClass('hidden2')
+     }
+
+     openModalBtn2.on('click', openModal2)
+
+     const closeModal2 = function(){
+       modal2.addClass('hidden2')
+       overlay2.addClass('hidden2')
+     }
+
+     closeModalBtn2.on('click', closeModal2)
+     overlay2.on('click', closeModal2); 
+    });
+ </script>
 </body>
 </html>
