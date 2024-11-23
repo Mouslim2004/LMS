@@ -80,6 +80,10 @@ const adminIssue = (req,res) => {
 const userRequest = (req,res) => {
   res.render('userRequest')
 }
+
+const adminChange = (req,res) => {
+  res.render('adminChange')
+}
 module.exports = {
   index,
   userSignup,
@@ -100,5 +104,6 @@ module.exports = {
   adminCategory,
   adminAuthor,
   adminIssue,
-  userRequest
+  userRequest,
+  adminChange
 }

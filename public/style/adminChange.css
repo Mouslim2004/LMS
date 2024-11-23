@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+section{
+  height: calc(100vh - 130px);
+  position: relative;
+}
+.change-title{
+  padding: 15px;
+  border-bottom: 1px solid lightgray;
+}
+.main-form{
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form{
+  border: 1px solid lightgray;
+  padding: 17px;
+  width: 420px;
+  border-radius: 5px;
+  box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+  height: 180px;
+}
+.change-title-form{
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+#email, #password, #Confpassword{
+  padding: 8px;
+  width: 90%;
+  margin-bottom: 10px;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+}
+.change-btn button{
+  padding: 8px 15px;
+  background: rgb(116, 114, 189);
+  color: white;
+  border-radius: 3px;
+  border: none;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+button:hover{
+  background: white;
+  color: rgb(116, 114, 189);
+  border: 1px solid rgb(116, 114, 189);
+  transition: all 0.3s ease-out;
+}

@@ -22,5 +22,6 @@ router.get('/adminCategory', LibraryController.adminCategory)
 router.get('/adminAuthor', LibraryController.adminAuthor)
 router.get('/adminIssued', LibraryController.adminIssue)
 router.get('/userRequest', LibraryController.userRequest)
+router.get('/adminChange', LibraryController.adminChange)
 
 module.exports = router
