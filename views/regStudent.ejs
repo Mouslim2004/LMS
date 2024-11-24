@@ -64,32 +64,32 @@
               <div class="wrap">
                 <div class="icon"><img src="/images/boy.png" alt=""></div>
                 <div class="fullname">Mouslim Ombadi</div>
-                <div title="Delete Student"><span>&times;</span></div>
+                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
               </div>
               <div class="wrap">
                 <div class="icon"><img src="/images/boy.png" alt=""></div>
                 <div class="fullname">Mouslim Ombadi</div>
-                <div title="Delete Student"><span>&times;</span></div>
+                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
               </div>
               <div class="wrap">
                 <div class="icon"><img src="/images/boy.png" alt=""></div>
                 <div class="fullname">Mouslim Ombadi</div>
-                <div title="Delete Student"><span>&times;</span></div>
+                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
               </div>
               <div class="wrap">
                 <div class="icon"><img src="/images/boy.png" alt=""></div>
                 <div class="fullname">Mouslim Ombadi</div>
-                <div title="Delete Student"><span>&times;</span></div>
+                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
               </div>
               <div class="wrap">
                 <div class="icon"><img src="/images/boy.png" alt=""></div>
                 <div class="fullname">Mouslim Ombadi</div>
-                <div title="Delete Student"><span>&times;</span></div>
+                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
               </div>
               <div class="wrap">
                 <div class="icon"><img src="/images/boy.png" alt=""></div>
                 <div class="fullname">Mouslim Ombadi</div>
-                <div title="Delete Student"><span>&times;</span></div>
+                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
               </div>
               
           </div>  
@@ -152,6 +152,7 @@
     </div>
     <form action="">
       <input type="file" name="avatar" id="avatar">
+      <input type="text" placeholder="CNE">
       <input type="text" placeholder="Full Name">
       <input type="email" placeholder="Email">
       <input type="text" placeholder="Phone">
@@ -160,6 +161,23 @@
     </form>
   </div>
   <div class="overlay hidden"></div>
+
+   <!-- This is the delete form modal -->
+   <div class="modal2 hidden2">
+    <div class="flex">
+       <h2>Are you sure to delete this Student ?</h2>
+       <button class="btn-close2">&times;</button>
+    </div>
+    <div>Student ID: <strong>256987</strong></div>
+    <div>Student Name: <strong>Mouslim Ombadi</strong></div>
+    <div>Student Email: <strong>mouslimombadi@gmail.com</strong></div>
+    <div>Student Phone: <strong>0700981188</strong></div>
+    <div>Student Address: <strong>Hay Riad</strong></div>
+    <form action="">
+      <input type="submit" value="Confirm">
+    </form>
+  </div>
+  <div class="overlay2 hidden2"></div>
 </section>
   </main>
   
@@ -188,7 +206,28 @@
      }
 
      closeModalBtn.on('click', closeModal)
+
+     const modal2 = $('.modal2')
+      const overlay2 = $('.overlay2')
+      const openModalBtn2 = $('.btn-delete')
+      const closeModalBtn2 = $('.btn-close2')
+
+      const openModal2 = function(){
+        modal2.removeClass('hidden2')
+        overlay2.removeClass('hidden2')
+      }
+
+      openModalBtn2.on('click', openModal2)
+
+      const closeModal2 = function(){
+        modal2.addClass('hidden2')
+        overlay2.addClass('hidden2')
+      }
+
+      closeModalBtn2.on('click', closeModal2)
+
      overlay.on('click', closeModal); 
+     overlay2.on('click', closeModal2); 
     });
  </script>
 </body>
