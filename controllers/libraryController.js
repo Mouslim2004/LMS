@@ -84,6 +84,10 @@ const userRequest = (req,res) => {
 const adminChange = (req,res) => {
   res.render('adminChange')
 }
+
+const adminRequest = (req,res) => {
+  res.render('adminViewRequest')
+}
 module.exports = {
   index,
   userSignup,
@@ -105,5 +109,6 @@ module.exports = {
   adminAuthor,
   adminIssue,
   userRequest,
-  adminChange
+  adminChange,
+  adminRequest
 }

@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIDEBAR HEADER</title>  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/style/sidebar.css">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <link rel="stylesheet" href="/style/adminDash.css">
+  <link rel="stylesheet" href="/style/adminViewRequest.css">
 </head>
 <body>
   <header>
@@ -45,40 +43,35 @@
       </div>
     </div>
     
-<section id="adminDash">
-  <div class="admin-title">ADMIN DASHBOARD</div>
-  <div class="main-section">
-      <a class="cube" href="/adminBooks">
-        <div class="icon" ><i class="fa-solid fa-book-open" style="color: #385170;"></i></div>
-        <div class="number" style="color: #385170;">0</div>
-        <div class="info" style="color: #385170;">Books</div>
-      </a>
-     <a class="cube" href="/adminIssued">
-      <div class="icon"><i class="fa-solid fa-bars" style="color: silver;"></i></div>
-      <div class="number" style="color: silver;">0</div>
-      <div class="info" style="color: silver;">Issue Books</div>
-     </a>
-    <a class="cube" href=".adminReturn">
-      <div class="icon"><i class="fa-solid fa-recycle" style="color: #facf5a;"></i></div>
-      <div class="number" style="color: #facf5a;">0</div>
-      <div class="info" style="color: #facf5a;">Not return Books</div>
-    </a>
-    <a class="cube" href="/adminStudents">
-      <div class="icon"><i class="fa-solid fa-users" style="color: green"></i></div>
-      <div class="number" style="color: green">0</div>
-      <div class="info" style="color: green">Students</div>
-    </a>
-    <a class="cube" href="/adminAuthor">
-        <div class="icon"><i class="fa-solid fa-user-pen" style="color: brown;"></i></div>
-        <div class="number" style="color: brown;">0</div>
-        <div class="info" style="color: brown;">Authors</div>
-    </a>
-   
-    <a class="cube" href="/adminCategory">
-      <div class="icon"><i class="fa-solid fa-file-zipper" style="color: burlywood;"></i></div>
-      <div class="number" style="color: burlywood;">0</div>
-      <div class="info" style="color: burlywood;">Categories</div>
-    </a>
+<section id="adminRequest">
+  <div class="admin-title">MANAGE REQUEST</div>
+  <div class="main-request">
+      <table>
+          <tr>
+            <th>Book Title</th>
+            <th>Book Description</th>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Added on</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td>Spiderman</td>
+            <td>The coolest friend in your neighborhood come to ensure the safety of the city</td>
+            <td>2563pklg</td>
+            <td>Mouslim Ombadi</td>
+            <td>2024-12-12</td>
+            <td><span><i class="fa-solid fa-check"></i></span> <span><i class="fa-solid fa-trash"></i></span></td>
+          </tr>
+          <tr>
+            <td>Spiderman</td>
+            <td>The coolest friend in your neighborhood come to ensure the safety of the city</td>
+            <td>2563pklg</td>
+            <td>Mouslim Ombadi</td>
+            <td>2024-12-12</td>
+            <td><span><i class="fa-solid fa-check"></i></span> <span><i class="fa-solid fa-trash"></i></span></td>
+          </tr>
+      </table>
   </div>
 </section>
   </main>
