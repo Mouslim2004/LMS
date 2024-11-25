@@ -64,52 +64,71 @@
   </div>
   <div class="right-section">
     <div class="grid-book">
-       <a href="/previewBook" class="book">
+       <div class="book">
          <img src="/books/batman.jpeg" alt="">
-         <div class="book-name">Batman</div>
-         <div class="book-author">Alice Oceman</div>
-         <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+         <a href="/previewBook" class="book-name">Batman</a> <br>
+         <a href="/previewBook" class="book-author">Alice Oceman</a>
+         <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
          <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-       </a>
-       <a href="/previewBook" class="book">
+       </div>
+       <div class="book">
         <img src="/books/law.jpeg" alt="">
-        <div class="book-name">Batman</div>
-        <div class="book-author">Alice Oceman</div>
-        <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+        <a href="/previewBook" class="book-name">Batman</a> <br>
+         <a href="/previewBook" class="book-author">Alice Oceman</a>
+         <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
         <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-       </a>
-      <a href="/previewBook" class="book">
+       </div>
+      <div class="book">
         <img src="/books/fault-stairs.jpeg" alt="">
-        <div class="book-name">Batman</div>
-        <div class="book-author">Alice Oceman</div>
-        <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+        <a href="/previewBook" class="book-name">Batman</a> <br>
+         <a href="/previewBook" class="book-author">Alice Oceman</a>
+         <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
         <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-      </a>
-      <a href="/previewBook" class="book">
+      </div>
+      <div class="book">
         <img src="/books/house.jpeg" alt="">
-        <div class="book-name">Batman</div>
-        <div class="book-author">Alice Oceman</div>
-        <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+        <a href="/previewBook" class="book-name">Batman</a> <br>
+         <a href="/previewBook" class="book-author">Alice Oceman</a>
+         <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
         <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-      </a>
-      <a href="/previewBook" class="book">
+      </div>
+      <div href="/previewBook" class="book">
         <img src="/books/sherlock.jpg" alt="">
-        <div class="book-name">Batman</div>
-        <div class="book-author">Alice Oceman</div>
-        <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+        <a href="/previewBook" class="book-name">Batman</a> <br>
+         <a href="/previewBook" class="book-author">Alice Oceman</a>
+         <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
         <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-      </a>
-      <a href="/previewBook" class="book">
+      </div>
+      <div class="book">
         <img src="/books/stephen.jpeg" alt="">
-        <div class="book-name">Batman</div>
-        <div class="book-author">Alice Oceman</div>
-        <div class="book-like"><i class="fa-solid fa-heart heart"></i></div>
+        <a href="/previewBook" class="book-name">Batman</a> <br>
+         <a href="/previewBook" class="book-author">Alice Oceman</a>
+         <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
         <div class="plus"><i class="fa-solid fa-circle-plus"></i></div>
-      </a>
+      </div>
     </div>
   </div>
 </section>
   </main>
   
+  <script>
+    function toggleHeartColor(event) {
+            const heartIcon = event.target;
+
+            if (heartIcon.classList.contains("active")) {
+                heartIcon.classList.remove("active");
+                heartIcon.classList.add("inactive");
+            } else {
+                heartIcon.classList.remove("inactive");
+                heartIcon.classList.add("active");
+            }
+    }
+
+    // Select all heart icons
+    const heartIcons = document.querySelectorAll(".heart");
+    heartIcons.forEach(heart => {
+        heart.addEventListener("click", toggleHeartColor);
+    });
+  </script>
 </body>
 </html>

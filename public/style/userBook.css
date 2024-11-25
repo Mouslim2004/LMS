@@ -108,6 +108,8 @@ section{
 }
 .book{
   position: relative;
+  /* display: flex;
+  flex-direction: column; */
 }
 .book img{
   border-radius: 10px;
@@ -145,8 +147,6 @@ section{
 }
 .grid-book a{
   text-decoration: none;
-}
-a .book-name{
   color: black;
 }
 label[for="Category"]{
