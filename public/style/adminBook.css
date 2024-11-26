@@ -247,9 +247,8 @@ form input[type="file"]{
   align-items: center;
   overflow: auto;
 }
-.pseudo-book #pseudo,
-#available{
-  width: 41%;
+.pseudo-book #pseudo{
+  width: 83%;
   padding: 5px;
   border: 1px solid lightgray;
   border-radius: 3px;

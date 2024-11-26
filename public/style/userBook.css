@@ -74,9 +74,10 @@ section{
   border: 1px solid lightgray;
   border-radius: 3px;
   outline: none;
+  margin-bottom: 10px;
 }
 .sbt-btn #search{
-  padding: 5px 8px;
+  padding: 7px 10px;
   color: white;
   background: slateblue;
   border-radius: 3px;
@@ -128,6 +129,7 @@ section{
   font-size: 15px; /* Adjust size as needed */
   cursor: pointer;
   transition: color 0.3s ease;
+  padding: 3px 7px;
   text-shadow: 
         1px 1px 0 black, 
        -1px 1px 0 black, 
@@ -150,5 +152,5 @@ section{
   color: black;
 }
 label[for="Category"]{
-  padding: 10px;
+  padding: 2px 0;
 }
