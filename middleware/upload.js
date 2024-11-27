@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     cb(null, path.join(__dirname, '../public/profile'))
   },
   filename: (req, file, cb) => {
-    const name = Date.now + '-' + file.originalname
+    const name = Date.now() + '-' + file.originalname
     cb(null, name)
   }
 })

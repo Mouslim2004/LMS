@@ -17,6 +17,14 @@ db.once('open', () => {
   console.log('Connection to db success!')
 })
 
+app.use(
+  session({
+    secret: 'mylibrary',
+    resave: false,
+    saveUninitialized: true
+  })
+)
+
 app.use(flash());
 app.set('view engine', 'ejs')//EJS is a templating engine that allows you to generate HTML with dynamic data.
 app.use(express.static('public'))//express.static('public') tells the app to look in the public folder for these files,

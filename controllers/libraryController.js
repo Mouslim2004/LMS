@@ -9,7 +9,8 @@ const index = (req,res) => {
 }
 
 const userSignup = (req,res) => {
-  res.render('userSignup');
+  const message = req.flash('error')
+  res.render('userSignup', {message});
 }
 
 const userSignupPost = async (req,res,next) => {
@@ -23,7 +24,7 @@ const userSignupPost = async (req,res,next) => {
       phone: req.body.phone,
       address: req.body.address,
       password: passwordHash,
-      avatar: 'profile/' + req.file
+      avatar: 'profile/' + req.file.filename
     })
 
     await student.save();
@@ -31,6 +32,7 @@ const userSignupPost = async (req,res,next) => {
     res.render('userLogin')
   }catch(error){
     console.log(error.message);
+    req.flash('error', 'Please fill all the form.');
     res.redirect('/userSignup');
   }
   
