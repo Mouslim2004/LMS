@@ -1,3 +1,5 @@
+const { Student } = require('../models/user')
+const bcrypt = require('bcrypt')
 const { render } = require("ejs")
 
 
@@ -7,6 +9,30 @@ const index = (req,res) => {
 
 const userSignup = (req,res) => {
   res.render('userSignup')
+}
+
+const userSignupPost = async (req,res,next) => {
+  try{
+  const passwordHash = await bcrypt.hash(req.body.password, 10)
+
+    let student = new Student({
+      name: req.body.name,
+      email: req.body.email,
+      cne: req.body.cne,
+      phone: req.body.phone,
+      address: req.body.address,
+      password: passwordHash,
+      avatar: 'profile/' + req.file
+    })
+
+    await student.save();
+
+    res.render('userLogin')
+  }catch(error){
+    console.log(error.message);
+    res.redirect('/userSignup');
+  }
+  
 }
 
 const userLogin = (req,res) => {
@@ -110,5 +136,6 @@ module.exports = {
   adminIssue,
   userRequest,
   adminChange,
-  adminRequest
+  adminRequest,
+  userSignupPost
 }

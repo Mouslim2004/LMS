@@ -21,6 +21,7 @@ section{
   align-items: center;
   border-radius: 5px ;
   box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+  width: 350px;
 }
 h1{
   font-size: 35px;
@@ -58,4 +59,7 @@ input[type="submit"]:hover{
 }
 div a {
   text-decoration: none;
+}
+form{
+  width: 100%;
 }
