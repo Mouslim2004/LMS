@@ -1,5 +1,6 @@
 const { Student } = require('../models/user')
 const bcrypt = require('bcrypt')
+const flash = require('connect-flash')
 const { render } = require("ejs")
 
 
@@ -8,7 +9,7 @@ const index = (req,res) => {
 }
 
 const userSignup = (req,res) => {
-  res.render('userSignup')
+  res.render('userSignup');
 }
 
 const userSignupPost = async (req,res,next) => {

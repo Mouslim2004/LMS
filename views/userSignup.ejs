@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signup Page</title>
   <link rel="stylesheet" href="/style/signup.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
   <!-- This is the header -->
@@ -12,7 +13,7 @@
   <!-- This is the section page (main page) -->
    <section id="userSignup">
       <div class="main-form">
-         <form action="/userSignup" method="post">
+         <form action="/userSignup" method="post" id="userSignupbtn">
              <h1>Signup</h1>
              <div class="info">Please fill in this form to create an account!</div>
              <input type="file" id="avatar" name="avatar"> <br>
@@ -23,11 +24,12 @@
              <input type="text" id="address" name="address" placeholder="Address"> <br>
              <input type="password" name="password" id="password" placeholder="Password"> <br>
              <div class="btn-sbt">
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit" >
              </div>
              <div>Already have an account ? <a href="/userLogin">Login</a></div>
          </form>
       </div>
    </section>
+   <script src="index.js"></script>
 </body>
 </html>
