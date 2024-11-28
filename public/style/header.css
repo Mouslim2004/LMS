@@ -5,7 +5,7 @@
   font-family: 'Poppins', sans-serif;
   /* background: rgb(171, 202, 247); */
 }
-.title{
+/* .title{
   height: 50px;
   display: flex;
   align-items: center;
@@ -17,7 +17,7 @@
 }
 .title .name-project{
   font-size: 20px;
-}
+} */
 .navbar{
   height: 50px;
   background: rgb(247, 247, 247);

@@ -14,7 +14,7 @@
       <div class="main-form">
         <form action="/userLogin" method="post">
            <h1>Login</h1>
-           <% if(typeof message !== undefined){ %>
+           <% if(typeof message != undefined){ %>
             <div class="info" style="color: red;"> <%= message %> </div>
            <%} else {%>
             <div class="info" style="color: lightgray;"> Login to access functionality </div>

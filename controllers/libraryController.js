@@ -11,7 +11,7 @@ const index = (req,res) => {
 
 const userSignup = (req,res) => {
   const message = req.flash('error')
-  res.render('userSignup', {message});
+  res.render('userSignup', {message:message});
 }
 
 const userSignupPost = async (req,res,next) => {
@@ -30,7 +30,8 @@ const userSignupPost = async (req,res,next) => {
 
     await student.save();
 
-    res.render('userLogin')
+    //req.flash('error', 'Please fill all the form.');
+    res.redirect('/userLogin')
   }catch(error){
     console.log(error.message);
     req.flash('error', 'Please fill all the form.');
@@ -41,7 +42,7 @@ const userSignupPost = async (req,res,next) => {
 
 const userLogin = (req,res) => {
   const message = req.flash('error')
-  res.render('userLogin', {message})
+  res.render('userLogin', {message: message})
 }
 
 const userLoginPost = async (req, res) => {
@@ -152,6 +153,7 @@ const adminRequest = (req,res) => {
 }
 
 const logout = (req,res) => {
+  req.session.destroy();
   res.clearCookie('auth_token')
   res.redirect('/');
 }

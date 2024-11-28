@@ -5,21 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home Page</title>
   <link rel="stylesheet" href="/style/home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"> 
 </head>
 <body>
-<!-- This is the header -->
- <%- include('header') %>
+ 
 <!-- This is the section page -->
  <section id="home">
-    <div class="presentation">
-       <div class="presentation-title">Online Library</div>
-       <div class="presentation-text">
-         Lorem ipsum dolor sit amet consectetur adipisicing elit.
-         Doloribus magnam similique facilis neque voluptatem
+    <div class="high-part">
+       <div class="high-part-navbar">
+          <div><img src="/icon/book-nav.png" alt=""></div>
+          <div class="navbar">
+            <ul>
+               <li><a href="/">HOME</a></li>
+               <li><a href="/userSignup">USER SIGNUP</a></li>
+               <li><a href="/userLogin">USER LOGIN</a></li>
+               <li><a href="/adminLogin" class="adminLogin">ADMIN LOGIN</a></li>
+            </ul>
+         </div>
        </div>
-       <div class="presentation-btn">
-         <button>Get started</button>
+       <div class="main-high-part">
+           <div class="presentation">
+              <div class="presentation-title">Online Library</div>
+              <div class="presentation-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Doloribus magnam similique facilis neque voluptatem
+              </div>
+              <div class="presentation-btn">
+                <button>Get started</button>
+              </div>
+            </div>
+            <div class="book-of-week">
+              <div class="book-view">
+                <div class="news">Author of the week</div>
+                <img src="/books/batman.jpeg" alt="">
+              </div>
+              <div class="book-view">
+                <div class="news">Author of the week</div>
+                <img src="/books/batman.jpeg" alt="">
+              </div>
+              
+            </div>
+            
        </div>
+    </div>
+
+    <div class="low-part">
+        
+        <div class="book-low-part">
+          <div class="best-seller">
+            <img src="/books/batman.jpeg" alt="">
+            <div class="low-info">
+                <div class="title">Black Ice</div>
+                <div class="author">Brad Thor</div>
+            </div>
+          </div>
+          <div class="best-seller">
+            <img src="/books/batman.jpeg" alt="">
+            <div class="low-info">
+                <div class="title">Black Ice</div>
+                <div class="author">Brad Thor</div>
+            </div>
+          </div>
+          <div class="best-seller">
+            <img src="/books/batman.jpeg" alt="">
+            <div class="low-info">
+                <div class="title">Black Ice</div>
+                <div class="author">Brad Thor</div>
+            </div>
+          </div>
+          <div class="best-seller">
+            <img src="/books/batman.jpeg" alt="">
+            <div class="low-info">
+                <div class="title">Black Ice</div>
+                <div class="author">Brad Thor</div>
+            </div>
+          </div>
+           
+        </div>
+        <div class="low-news"><em>Recent BestSellers</em></div>
     </div>
  </section>
 </body>
