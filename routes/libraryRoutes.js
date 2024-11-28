@@ -33,6 +33,8 @@ router.get('/userRequest', LibraryController.userRequest)
 router.get('/adminChange', LibraryController.adminChange)
 router.get('/adminViewRequest', LibraryController.adminRequest)
 
+router.get('/logout', LibraryController.logout);
+
 router.get('*', (req,res) => {
   res.redirect('/');
 })

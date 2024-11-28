@@ -150,6 +150,11 @@ const adminChange = (req,res) => {
 const adminRequest = (req,res) => {
   res.render('adminViewRequest')
 }
+
+const logout = (req,res) => {
+  res.clearCookie('auth_token')
+  res.redirect('/');
+}
 module.exports = {
   index,
   userSignup,
@@ -174,5 +179,6 @@ module.exports = {
   adminChange,
   adminRequest,
   userSignupPost,
-  userLoginPost
+  userLoginPost,
+  logout
 }
