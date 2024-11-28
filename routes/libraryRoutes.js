@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const LibraryController = require('../controllers/libraryController')
 const upload = require('../middleware/upload')
+const auth = require('../middleware/auth')
 
 router.get('/', LibraryController.index)
 
@@ -12,7 +13,8 @@ router.get('/userLogin', LibraryController.userLogin)
 router.post('/userLogin', LibraryController.userLoginPost)
 
 router.get('/adminLogin', LibraryController.adminLogin)
-router.get('/userDash', LibraryController.userDash)
+
+router.get('/userDash', auth, LibraryController.userDash)
 router.get('/userChange', LibraryController.userChange)
 router.get('/userIssued', LibraryController.userIssued)
 router.get('/adminDash', LibraryController.adminDash)

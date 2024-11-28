@@ -4,6 +4,7 @@ const mongoose = require('mongoose')//Connects to MongoDB and provides a structu
 const morgan = require('morgan')//Middleware for logging HTTP requests for debugging and monitoring purposes.
 const session = require('express-session')
 const flash = require('connect-flash')
+const cookieParser = require('cookie-parser')
 const app = express()
 
 mongoose.connect('mongodb://localhost:27017/lms')//tells Mongoose to connect to a MongoDB database located 
@@ -26,6 +27,7 @@ app.use(
 )
 
 app.use(flash());
+app.use(cookieParser());
 app.set('view engine', 'ejs')//EJS is a templating engine that allows you to generate HTML with dynamic data.
 app.use(express.static('public'))//express.static('public') tells the app to look in the public folder for these files,
 //so when a client requests /css/style.css, it will automatically look for it in public/css/style.css.

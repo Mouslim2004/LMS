@@ -1,5 +1,6 @@
 const { Student } = require('../models/user')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const flash = require('connect-flash')
 const { render } = require("ejs")
 
@@ -55,6 +56,9 @@ const userLoginPost = async (req, res) => {
     const checkPassword = await bcrypt.compare(password, studentData.password);
     if(checkPassword){
       req.session.user = {id: studentData._id.toString(), email: studentData.email}
+      let token = jwt.sign({name: studentData.name},'mylibrary', {expiresIn: '1h'})
+      console.log('Generated Token: ',token);
+      res.cookie('auth_token', token, { httpOnly: true, maxAge: 3600000 }); // Save token in a cookie
       res.redirect('/userDash')
     } else {
       req.flash('error', 'Password is incorrect' )
