@@ -15,13 +15,13 @@
       <div class="main-form">
          <form action="/userSignup" method="post" id="userSignupbtn" enctype="multipart/form-data">
              <h1>Signup</h1>
-             <div class="info">
+            
                <% if(typeof message != undefined){ %>
-                  <span><%= message %></span>
+                  <div class="info"><%= message %></div>
                <% } else { %>
-               Please fill in this form to create an account!
+                  <div class="info">Please fill in this form to create an account!</div>
                <% }%>
-            </div>
+          
              <input type="file" id="avatar" name="avatar"> <br>
              <input type="text" id="name" name="name" placeholder="Full Name"> <br>
              <input type="email" id="email" name="email" placeholder="Email"> <br>

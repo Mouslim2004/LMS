@@ -39,7 +39,36 @@ const userSignupPost = async (req,res,next) => {
 }
 
 const userLogin = (req,res) => {
-  res.render('userLogin')
+  const message = req.flash('error')
+  res.render('userLogin', {message})
+}
+
+const userLoginPost = async (req, res) => {
+  try{
+
+  const email = req.body.email
+  const password = req.body.password
+
+  const studentData = await Student.findOne({email: email})
+
+  if(studentData){
+    const checkPassword = await bcrypt.compare(password, studentData.password);
+    if(checkPassword){
+      req.session.user = {id: studentData._id.toString(), email: studentData.email}
+      res.redirect('/userDash')
+    } else {
+      req.flash('error', 'Password is incorrect' )
+      res.redirect('/userLogin')
+    }
+  } else {
+    req.flash('error', 'Email or Password required')
+    res.redirect('/userLogin')
+  }
+  }catch(error){
+    console.log(error.message);
+    req.flash('error', 'Something went wrong. Please try again!')
+    res.redirect('/userLogin')
+  }
 }
 
 const adminLogin = (req,res) => {
@@ -140,5 +169,6 @@ module.exports = {
   userRequest,
   adminChange,
   adminRequest,
-  userSignupPost
+  userSignupPost,
+  userLoginPost
 }

@@ -14,7 +14,11 @@
       <div class="main-form">
         <form action="/userLogin" method="post">
            <h1>Login</h1>
-           <!-- <div class="info">Log in with the credentials you received </div> -->
+           <% if(typeof message !== undefined){ %>
+            <div class="info" style="color: red;"> <%= message %> </div>
+           <%} else {%>
+            <div class="info" style="color: lightgray;"> Login to access functionality </div>
+            <%}%>
            <input type="email" name="email" id="email" placeholder="Enter email"> <br>
            <input type="password" name="password" id="password" placeholder="Enter password"> <br>
            <div class="btn-sbt">

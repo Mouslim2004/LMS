@@ -9,6 +9,8 @@ router.get('/userSignup', LibraryController.userSignup)
 router.post('/userSignup', upload.single('avatar'), LibraryController.userSignupPost)
 
 router.get('/userLogin', LibraryController.userLogin)
+router.post('/userLogin', LibraryController.userLoginPost)
+
 router.get('/adminLogin', LibraryController.adminLogin)
 router.get('/userDash', LibraryController.userDash)
 router.get('/userChange', LibraryController.userChange)
