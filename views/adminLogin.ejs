@@ -17,6 +17,9 @@
        <form action="/adminLogin" method="post">
           <div class="admin-title">ADMIN LOGIN</div>
           <div class="icon"><i class="fa-regular fa-user"></i></div>
+          <% if(typeof message != undefined){ %>
+               <div style="margin: 5px; color: red;"><%= message %></div>
+          <%}%>
           <input type="email" name="email" id="email" placeholder="Email"> <br>
           <input type="password" name="password" id="password" placeholder="Password">
           <div class="link-forget"><a href="/forget">Forget password ? </a></div>

@@ -1,4 +1,5 @@
 const { Student } = require('../models/user')
+const Librarian  = require('../models/librarian')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const flash = require('connect-flash')
@@ -77,8 +78,68 @@ const userLoginPost = async (req, res) => {
 }
 
 const adminLogin = (req,res) => {
-  res.render('adminLogin')
+  const message = req.flash('error')
+  res.render('adminLogin', {message: message})
 }
+
+const adminLoginPost = async (req, res, next) => {
+  try {
+
+    // Validate form input
+    const { email, password } = req.body;
+    if (!email || !password) { // Use || to check if either field is empty
+      req.flash('error', 'Please fill all the form!');
+      return res.redirect('/adminLogin'); // Stop execution with return
+    }
+
+    // Check if librarian exists
+    const existingLibrarian = await Librarian.findOne({ email: email });
+    if (existingLibrarian) {
+      // Hash password and create new librarian
+      const hashPassword = await bcrypt.compare(password, existingLibrarian.password);
+      if(hashPassword){
+        req.session.librarian = { id: existingLibrarian._id.toString(), email: existingLibrarian.email };
+        return res.redirect('/adminDash');
+      } else {
+        req.flash('error', 'Password is incorrect!');
+        return res.redirect('/adminLogin');
+      }
+      
+    } else {
+      req.flash('error', 'Email is incorrect!');
+      return res.redirect('/adminLogin');
+    }
+  } catch (error) {
+    console.error(error.message);
+    req.flash('error', 'Something went wrong');
+    res.redirect('/adminLogin');
+  }
+};
+
+async function createLibrarianAccount() {
+  // Check if a librarian already exists
+  const librarianCount = await Librarian.countDocuments();
+  if (librarianCount >= 1) {
+    console.log('Multiple librarians detected!')
+  }
+
+  const hashedPassword = await bcrypt.hash("lms2024@&", 10);
+
+  const existingLibrarian = await Librarian.findOne({ email: "adminlms@gmail.com" });
+  if (!existingLibrarian) {
+      const librarian = new Librarian({
+          name: "Mr Librarian",
+          email: "adminlms@gmail.com",
+          password: hashedPassword,
+      });
+      await librarian.save();
+      console.log( 'Librarian account created successfully!');
+  } else {
+      console.log("Librarian account already exists!");
+  }
+}
+
+createLibrarianAccount();
 
 const userDash = (req,res) => {
   res.render('userDash')
@@ -182,5 +243,6 @@ module.exports = {
   adminRequest,
   userSignupPost,
   userLoginPost,
-  logout
+  logout,
+  adminLoginPost
 }

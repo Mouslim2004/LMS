@@ -13,6 +13,7 @@ router.get('/userLogin', LibraryController.userLogin)
 router.post('/userLogin', LibraryController.userLoginPost)
 
 router.get('/adminLogin', LibraryController.adminLogin)
+router.post('/adminLogin', LibraryController.adminLoginPost)
 
 router.get('/userDash', auth, LibraryController.userDash)
 router.get('/userChange', LibraryController.userChange)
