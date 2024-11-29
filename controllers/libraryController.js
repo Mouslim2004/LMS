@@ -66,7 +66,7 @@ const userLoginPost = async (req, res) => {
       res.redirect('/userLogin')
     }
   } else {
-    req.flash('error', 'Email or Password required')
+    req.flash('error', 'Email is incorrect')
     res.redirect('/userLogin')
   }
   }catch(error){

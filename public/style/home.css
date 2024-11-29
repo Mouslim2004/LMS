@@ -17,10 +17,10 @@ section{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 1000px;
+  width: 850px;
 }
 .presentation .presentation-text{
-  width: 50%;
+  width: 55%;
   margin: 15px 0;
   font-weight: 500;
 }
@@ -62,7 +62,7 @@ button:hover{
   padding: 10px 0;
 }
 .high-part{
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid lightgray;
   min-height: 400px;
   display: flex;
@@ -93,12 +93,10 @@ button:hover{
 .navbar{
   padding: 15px 0;
 }
-/* .navbar ul li a:hover{
-  background: rgb( 255, 255, 255);
+.navbar ul li a:hover{
   color: slateblue;
-  border:1px solid slateblue;
   transition: all 0.3s ease-out;
-} */
+}
 .book-view{
   display: flex;
   margin-left: 40px;
@@ -135,7 +133,7 @@ button:hover{
 .best-seller img{
   height: 150px;
   border-radius: 5px;
-  margin-right: 10px;
+  margin-right: 20px;
   box-shadow: 7px 7px 7px rgba(0,0,0,0.5);
 }
 .low-news{
@@ -145,5 +143,5 @@ button:hover{
   font-weight: 500;
 }
 .low-info .author{
-  color: lightgray;
+  color: rgb(188, 187, 187);
 }
