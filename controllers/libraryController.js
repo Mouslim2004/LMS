@@ -1,7 +1,8 @@
 const { Student } = require('../models/user')
 const Librarian  = require('../models/librarian')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')//is a compact and self-contained way of securely transmitting information between parties as a JSON object.
+// It is widely used for authentication and authorization in web applications.
 const flash = require('connect-flash')
 const { render } = require("ejs")
 
@@ -15,11 +16,11 @@ const userSignup = (req,res) => {
   res.render('userSignup', {message:message});
 }
 
-const userSignupPost = async (req,res,next) => {
+const userSignupPost = async (req,res,next) => {//this represent the register of the user
   try{
-  const passwordHash = await bcrypt.hash(req.body.password, 10)
+  const passwordHash = await bcrypt.hash(req.body.password, 10)//This will hash the password for more security by using bcrypt
 
-    let student = new Student({
+    let student = new Student({ //This add a new user in the student model
       name: req.body.name,
       email: req.body.email,
       cne: req.body.cne,
@@ -29,7 +30,7 @@ const userSignupPost = async (req,res,next) => {
       avatar: 'profile/' + req.file.filename
     })
 
-    await student.save();
+    await student.save(); //After adding the user, we will store his document in the database using save() method
 
     //req.flash('error', 'Please fill all the form.');
     res.redirect('/userLogin')
@@ -48,19 +49,32 @@ const userLogin = (req,res) => {
 
 const userLoginPost = async (req, res) => {
   try{
-
+  //These lines require the email and password from the body
   const email = req.body.email
   const password = req.body.password
+  if(!email || !password){
+    req.flash('error', 'Please fill the form')
+    return res.redirect('/userLogin')
+  }
 
-  const studentData = await Student.findOne({email: email})
+  const studentData = await Student.findOne({email: email}) //this verify if the user exist in the db
 
-  if(studentData){
-    const checkPassword = await bcrypt.compare(password, studentData.password);
-    if(checkPassword){
+  if(studentData){ //If true
+    const checkPassword = await bcrypt.compare(password, studentData.password);//then, We will check if the password is similar,
+    //By using compare() method from bcrypt 
+    if(checkPassword){//if password exist
+      //we will store the user information to the session for authentication or user preferences
       req.session.user = {id: studentData._id.toString(), email: studentData.email}
+
+      //JWT PART
+      // 1. A server generates a JWT after verifying user credentials (e.g., during login).
       let token = jwt.sign({name: studentData.name},'mylibrary', {expiresIn: '1h'})
+      //payload: An object containing the data you want to encode in the token
+      //secretOrPrivateKey: A secret string or a private key used to sign the token
+      //Option: An object with additional options, such as setting the token's expiration time
       console.log('Generated Token: ',token);
       res.cookie('auth_token', token, { httpOnly: true, maxAge: 3600000 }); // Save token in a cookie
+      // 2. The client stores the token (e.g., in cookies) and includes it in the headers for subsequent requests to access protected routes.
       res.redirect('/userDash')
     } else {
       req.flash('error', 'Password is incorrect' )
@@ -82,6 +96,32 @@ const adminLogin = (req,res) => {
   res.render('adminLogin', {message: message})
 }
 
+//This create a admin account for the librarian
+async function createLibrarianAccount() {
+  // Check if a librarian already exists
+  const librarianCount = await Librarian.countDocuments();//This will give use the number of document in the librarian model
+  if (librarianCount >= 1) {//if there is more than 1 account we will deny the create of the account, only one account should exist
+    console.log('Multiple librarians detected!')
+  }
+
+  const hashedPassword = await bcrypt.hash("lms2024@&", 10);//As we said, using bcrypt hash password for security
+
+  const existingLibrarian = await Librarian.findOne({ email: "adminlms@gmail.com" });//This will search for an email in the db
+  if (!existingLibrarian) {//If email do not exist, we will create it
+      const librarian = new Librarian({
+          name: "Mr Librarian",
+          email: "adminlms@gmail.com",
+          password: hashedPassword,
+      });
+      await librarian.save();//then we will store it in our db
+      console.log( 'Librarian account created successfully!');
+  } else {
+      console.log("Librarian account already exists!");
+  }
+}
+
+createLibrarianAccount();//After we will call our function in order to alert the db and add the admin information
+
 const adminLoginPost = async (req, res, next) => {
   try {
 
@@ -98,6 +138,7 @@ const adminLoginPost = async (req, res, next) => {
       // Hash password and create new librarian
       const hashPassword = await bcrypt.compare(password, existingLibrarian.password);
       if(hashPassword){
+        //we will store the admin information for authentication
         req.session.librarian = { id: existingLibrarian._id.toString(), email: existingLibrarian.email };
         return res.redirect('/adminDash');
       } else {
@@ -116,30 +157,6 @@ const adminLoginPost = async (req, res, next) => {
   }
 };
 
-async function createLibrarianAccount() {
-  // Check if a librarian already exists
-  const librarianCount = await Librarian.countDocuments();
-  if (librarianCount >= 1) {
-    console.log('Multiple librarians detected!')
-  }
-
-  const hashedPassword = await bcrypt.hash("lms2024@&", 10);
-
-  const existingLibrarian = await Librarian.findOne({ email: "adminlms@gmail.com" });
-  if (!existingLibrarian) {
-      const librarian = new Librarian({
-          name: "Mr Librarian",
-          email: "adminlms@gmail.com",
-          password: hashedPassword,
-      });
-      await librarian.save();
-      console.log( 'Librarian account created successfully!');
-  } else {
-      console.log("Librarian account already exists!");
-  }
-}
-
-createLibrarianAccount();
 
 const userDash = (req,res) => {
   res.render('userDash')

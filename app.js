@@ -2,9 +2,12 @@ const express = require('express')// Framework to handle HTTP requests and defin
 const bodyParser = require('body-parser')//Middleware to handle and parse incoming request bodies (especially useful for POST and PUT requests).
 const mongoose = require('mongoose')//Connects to MongoDB and provides a structured way to interact with your database.
 const morgan = require('morgan')//Middleware for logging HTTP requests for debugging and monitoring purposes.
-const session = require('express-session')
+const session = require('express-session')////The express-session middleware 
+//allows the creation and storage of the session data used for authentication or user preferences.
 const flash = require('connect-flash')
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser')//A cookie is a small piece of data that a web server sends to a user's browser.
+//  The browser stores the cookie and sends it back to the server with subsequent requests to the same server.
+//  Cookies are commonly used for maintaining user sessions, storing user preferences, and tracking user activity on a website.
 const app = express()
 
 mongoose.connect('mongodb://localhost:27017/lms')//tells Mongoose to connect to a MongoDB database located 
@@ -26,8 +29,9 @@ app.use(
   })
 )
 
-app.use(flash());
-app.use(cookieParser());
+app.use(flash());// connect-flash is a middleware that allows you to store temporary messages (flash messages)
+//  in the session, so they’re available only on the next request.
+app.use(cookieParser());//middleware in Node.js is used to parse and manage cookies in HTTP requests.
 app.set('view engine', 'ejs')//EJS is a templating engine that allows you to generate HTML with dynamic data.
 app.use(express.static('public'))//express.static('public') tells the app to look in the public folder for these files,
 //so when a client requests /css/style.css, it will automatically look for it in public/css/style.css.

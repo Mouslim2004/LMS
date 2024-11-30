@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 
+//3. The server validates the token to grant or deny access.
 const auth = (req, res, next) => {
   try{
     const token = req.cookies.auth_token;
