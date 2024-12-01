@@ -41,6 +41,7 @@ router.get('/adminChange',authAdmin, LibraryController.adminChange)
 router.get('/adminViewRequest',authAdmin, LibraryController.adminRequest)
 
 router.get('/logout', LibraryController.logout);
+router.get('/logoutAdmin', LibraryController.logoutAdmin)
 
 router.get('*', (req,res) => {
   res.redirect('/');

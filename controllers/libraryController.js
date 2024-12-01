@@ -257,6 +257,12 @@ const logout = (req,res) => {
   res.clearCookie('auth_token')
   res.redirect('/');
 }
+
+const logoutAdmin = (req,res) => {
+  req.session.destroy();
+  res.clearCookie('admin_token')
+  res.redirect('/');
+}
 module.exports = {
   index,
   userSignup,
@@ -283,5 +289,6 @@ module.exports = {
   userSignupPost,
   userLoginPost,
   logout,
-  adminLoginPost
+  adminLoginPost,
+  logoutAdmin
 }
