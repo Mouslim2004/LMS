@@ -3,6 +3,8 @@ const router = express.Router()
 const LibraryController = require('../controllers/libraryController')
 const upload = require('../middleware/upload')
 const auth = require('../middleware/auth')
+const adminAuth = require('../middleware/adminAuth')
+const authAdmin = require('../middleware/adminAuth')
 
 router.get('/', LibraryController.index)
 
@@ -18,21 +20,25 @@ router.post('/adminLogin', LibraryController.adminLoginPost)
 router.get('/userDash', auth, LibraryController.userDash)
 router.get('/userChange',auth, LibraryController.userChange)
 router.get('/userIssued',auth, LibraryController.userIssued)
-router.get('/adminDash', LibraryController.adminDash)
+
+router.get('/adminDash',authAdmin, LibraryController.adminDash)
+
 router.get('/userBooks',auth, LibraryController.userBook)
-router.get('/adminBooks', LibraryController.adminBook)
+
+router.get('/adminBooks',authAdmin, LibraryController.adminBook)
 router.get('/previewBook',auth, LibraryController.previewBook)
-router.get('/regStudent',LibraryController.regStudent)
+
+router.get('/regStudent',authAdmin,LibraryController.regStudent)
 router.get('/userRule',auth, LibraryController.userRule)
 router.get('/sidebar', LibraryController.sidebar)
 router.get('/userUpdate',auth, LibraryController.updateDetail)
-router.get('/adminViewBook', LibraryController.viewBook)
-router.get('/adminCategory', LibraryController.adminCategory)
-router.get('/adminAuthor', LibraryController.adminAuthor)
-router.get('/adminIssued', LibraryController.adminIssue)
+router.get('/adminViewBook',authAdmin, LibraryController.viewBook)
+router.get('/adminCategory',authAdmin, LibraryController.adminCategory)
+router.get('/adminAuthor',authAdmin, LibraryController.adminAuthor)
+router.get('/adminIssued',authAdmin, LibraryController.adminIssue)
 router.get('/userRequest',auth, LibraryController.userRequest)
-router.get('/adminChange', LibraryController.adminChange)
-router.get('/adminViewRequest', LibraryController.adminRequest)
+router.get('/adminChange',authAdmin, LibraryController.adminChange)
+router.get('/adminViewRequest',authAdmin, LibraryController.adminRequest)
 
 router.get('/logout', LibraryController.logout);
 

@@ -140,6 +140,9 @@ const adminLoginPost = async (req, res, next) => {
       if(hashPassword){
         //we will store the admin information for authentication
         req.session.librarian = { id: existingLibrarian._id.toString(), email: existingLibrarian.email };
+        let token = jwt.sign({name: existingLibrarian.name},'librarian@&2025', {expiresIn: '1h'})
+        console.log('Generated Token: ',token);
+        res.cookie('admin_token', token, { httpOnly: true, maxAge: 3600000 });
         return res.redirect('/adminDash');
       } else {
         req.flash('error', 'Password is incorrect!');
@@ -180,8 +183,17 @@ const userIssued = (req,res) => {
   res.render('userIssued')
 }
 
-const adminDash = (req,res) => {
-  res.render('adminDash')
+const adminDash = async (req,res) => {
+  if(!req.session.librarian){
+    return res.redirect('/adminLogin')
+  }
+  try{
+    const librarian = await Librarian.findById(req.session.librarian.id)
+    res.render('adminDash', {librarian})
+  }catch(error){
+    return res.status(500).json({ message: 'Failed to login', error });
+  }
+  
 }
 
 const userBook = (req,res) => {
