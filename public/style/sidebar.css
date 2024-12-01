@@ -34,12 +34,15 @@ header{
 .right-header{
   display: flex;
   align-items: center;
-  width: 20%;
-  justify-content: space-evenly;
+  width: 13%;
+  /* justify-content: space-around; */
   position: relative;
 }
 .right-header img{
-  height: 40px;
+  height: 35px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 .right-header div span{
   position:absolute;
@@ -85,8 +88,11 @@ section{
   position: relative;
 }
 .sidebar-profile img{
-  height: 50px;
-  margin-right: 5px;
+  height: 35px;
+  margin-left: 2px;
+  border: 1px solid black;
+  border-radius: 50%;
+  
 }
 .navbar{
   margin-top: 30px;
@@ -114,13 +120,14 @@ ul li a i{
 .sidebar-profile .username{
   display: none;
   transition: display 0.3s ease-in-out;
+  margin-left: 10px;
 }
 ul li a span{
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
 .sidebar:hover{
-  width: 18%;
+  width: 17%;
 }
 .sidebar:hover + section{
   width: 82%;

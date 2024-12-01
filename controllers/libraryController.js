@@ -158,8 +158,18 @@ const adminLoginPost = async (req, res, next) => {
 };
 
 
-const userDash = (req,res) => {
-  res.render('userDash')
+const userDash = async (req,res) => {
+  if(!req.session.user){
+    return res.redirect('/userLogin')
+  }
+  try{
+    const student = await Student.findById(req.session.user.id);
+    res.render('userDash', {student})
+  }catch(error){
+    console.log(error.message)
+    return res.status(500).json({ message: 'Failed to login', error });
+  }
+  
 }
 
 const userChange = (req,res) => {
