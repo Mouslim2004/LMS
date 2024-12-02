@@ -1,4 +1,4 @@
-const { Student } = require('../models/user')
+const { Student, Book } = require('../models/user')
 const Librarian  = require('../models/librarian')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')//is a compact and self-contained way of securely transmitting information between parties as a JSON object.
@@ -204,6 +204,34 @@ const adminBook = (req,res) => {
   res.render('adminBook')
 }
 
+const adminBookPost = async (req, res) => {
+  try{
+    let book = new Book({
+      bookId : req.body.bookId,
+      bookTitle : req.body.bookTitle,
+      author : req.body.author,
+      category : req.body.category,
+      publishDate : req.body.publishDate,
+      publisher : req.body.publisher,
+      pseudo : req.body.pseudo,
+      description : req.body.description,
+      image: 'bookImage/' + req.file,
+      bookpdf : 'bookImage/' + req.file
+    })
+    // if(req.file){
+    //   book.image = req.file.path
+    //   book.bookpdf = req.file.path
+    // }
+
+    await book.save()
+
+    res.redirect('/adminBooks')    
+  }catch(error){
+    console.log(error.message)
+    req.flash('error', 'Please fill all the form to add the book');
+    res.redirect('/adminBooks');
+  }
+}
 const previewBook  = (req,res) => {
   res.render('previewBook')
 }
@@ -290,5 +318,6 @@ module.exports = {
   userLoginPost,
   logout,
   adminLoginPost,
-  logoutAdmin
+  logoutAdmin,
+  adminBookPost
 }

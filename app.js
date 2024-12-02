@@ -21,6 +21,16 @@ db.once('open', () => {
   console.log('Connection to db success!')
 })
 
+// app.use((err, req, res, next) => {
+//   if (err instanceof multer.MulterError) {
+//     console.error('Multer Error:', err.message);
+//     req.flash('error', 'File upload failed!');
+//     res.redirect('/adminBooks');
+//   } else {
+//     next(err);
+//   }
+// });
+
 app.use(
   session({
     secret: 'mylibrary',

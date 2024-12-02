@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const LibraryController = require('../controllers/libraryController')
-const upload = require('../middleware/upload')
+const {upload, uploadImage} = require('../middleware/upload')
 const auth = require('../middleware/auth')
 const adminAuth = require('../middleware/adminAuth')
 const authAdmin = require('../middleware/adminAuth')
@@ -26,6 +26,9 @@ router.get('/adminDash',authAdmin, LibraryController.adminDash)
 router.get('/userBooks',auth, LibraryController.userBook)
 
 router.get('/adminBooks',authAdmin, LibraryController.adminBook)
+router.post('/adminBooks',uploadImage.fields([{ name: 'image' },
+  { name: 'bookpdf' }]), LibraryController.adminBookPost)
+
 router.get('/previewBook',auth, LibraryController.previewBook)
 
 router.get('/regStudent',authAdmin,LibraryController.regStudent)
