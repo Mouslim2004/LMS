@@ -206,6 +206,9 @@ const adminBook = (req,res) => {
 
 const adminBookPost = async (req, res) => {
   try{
+    const imageFile = req.files?.image?.[0]; // Access the first file under 'image'
+    const bookPdfFile = req.files?.bookpdf?.[0]; // Access the first file under 'bookpdf'
+
     let book = new Book({
       bookId : req.body.bookId,
       bookTitle : req.body.bookTitle,
@@ -215,13 +218,10 @@ const adminBookPost = async (req, res) => {
       publisher : req.body.publisher,
       pseudo : req.body.pseudo,
       description : req.body.description,
-      image: 'bookImage/' + req.file,
-      bookpdf : 'bookImage/' + req.file
+      image: 'bookImage/' + imageFile.filename,
+      bookpdf : 'bookImage/' + bookPdfFile.filename
     })
-    // if(req.file){
-    //   book.image = req.file.path
-    //   book.bookpdf = req.file.path
-    // }
+    
 
     await book.save()
 
