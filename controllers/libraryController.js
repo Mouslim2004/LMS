@@ -252,8 +252,9 @@ const updateDetail = (req,res) => {
   res.render('userUpdate')
 }
 
-const viewBook = (req,res) => {
-  res.render('adminViewBook')
+const viewBook = async (req,res) => {
+  const showBook = await Book.find()
+  res.render('adminViewBook', {showBook: showBook})
 }
 
 const adminCategory = (req,res) => {

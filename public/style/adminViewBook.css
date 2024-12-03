@@ -243,3 +243,10 @@
 .hidden2{
   display: none;
 }
+
+.no-book{
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 40px;
+  width: 100%;
+}

@@ -54,78 +54,29 @@
       <div class="inventory">Book Inventory</div>
     </div>
     <div class="book-grid">
+      <% if(typeof showBook !== undefined && showBook.length > 0){%>
+        <%for(var i = 0; i< showBook.length; i++){%>
       <div class="book-inventory">
         <div class="book-details">
-          <div class="book-title">Batman : Dark Knight</div>
-          <div class="book-ID">ID : <strong>2356pklg</strong></div>
-          <div class="book-author">Author : <strong>Huge Jackman</strong></div>
-          <div class="book-category">Category : <strong>Fiction</strong></div>
+          <div class="book-title"><%= showBook[i].bookTitle %></div>
+          <div class="book-ID">ID : <strong><%= showBook[i].bookId %></strong></div>
+          <div class="book-author">Author : <strong><%= showBook[i].author %></strong></div>
+          <div class="book-category">Category : <strong><%= showBook[i].category %></strong></div>
           <div class="book-btn">
-            <div><button class="issue-detail">Not Issued</button></div>
+            <div><button class="issue-detail"><%= showBook[i].isBorrowed ? "Issued" : "Not Issued" %></button></div>
             <!-- <div class="issue-book"><button>Issue</button></div> -->
             <div class="issue-update"><button>Update</button></div>
             <div class="issue-delete"><button class="btn-delete">Delete</button></div>
           </div>
        </div>
         <div class="book-image">
-          <img src="/books/batman.jpeg" alt="">
+          <img src="<%= showBook[i].image %>" alt="">
         </div>  
       </div>
-
-      <div class="book-inventory">
-        <div class="book-details">
-          <div class="book-title">Batman : Dark Knight</div>
-          <div class="book-ID">ID : <strong>2356pklg</strong></div>
-          <div class="book-author">Author : <strong>Huge Jackman</strong></div>
-          <div class="book-category">Category : <strong>Fiction</strong></div>
-          <div class="book-btn">
-            <div><button class="issue-detail">Not Issued</button></div>
-            <!-- <div class="issue-book"><button>Issue</button></div> -->
-            <div class="issue-update"><button>Update</button></div>
-            <div class="issue-delete"><button class="btn-delete">Delete</button></div>
-          </div>
+      <%}}else {%>
+            <div class="no-book">There is no book added for the moment &#128517;</div>
+        <%}%>
        </div>
-        <div class="book-image">
-          <img src="/books/batman.jpeg" alt="">
-        </div>  
-      </div>
-
-      <div class="book-inventory">
-        <div class="book-details">
-          <div class="book-title">Batman : Dark Knight</div>
-          <div class="book-ID">ID : <strong>2356pklg</strong></div>
-          <div class="book-author">Author : <strong>Huge Jackman</strong></div>
-          <div class="book-category">Category : <strong>Fiction</strong></div>
-          <div class="book-btn">
-            <div><button class="issue-detail">Not Issued</button></div>
-            <!-- <div class="issue-book"><button>Issue</button></div> -->
-            <div class="issue-update"><button>Update</button></div>
-            <div class="issue-delete"><button class="btn-delete">Delete</button></div>
-          </div>
-       </div>
-        <div class="book-image">
-          <img src="/books/batman.jpeg" alt="">
-        </div>  
-      </div>
-    
-      <div class="book-inventory">
-        <div class="book-details">
-          <div class="book-title">Batman : Dark Knight</div>
-          <div class="book-ID">ID : <strong>2356pklg</strong></div>
-          <div class="book-author">Author : <strong>Huge Jackman</strong></div>
-          <div class="book-category">Category : <strong>Fiction</strong></div>
-          <div class="book-btn">
-            <div><button class="issue-detail">Not Issued</button></div>
-            <!-- <div class="issue-book"><button>Issue</button></div> -->
-            <div class="issue-update"><button>Update</button></div>
-            <div class="issue-delete"><button class="btn-delete">Delete</button></div>
-          </div>
-        </div>
-        <div class="book-image">
-          <img src="/books/batman.jpeg" alt="">
-        </div>  
-     </div>
-    </div>
       
 </div>
 
