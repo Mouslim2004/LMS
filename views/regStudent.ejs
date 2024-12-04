@@ -56,13 +56,26 @@
          <th style="width: 20%;">Student List</th>
          <th>Student Information</th>
        </tr>
+
        <tr>
          <td style="vertical-align: top;">
           <form action="">
             <input type="text" placeholder="Search" id="search">
           </form>
           <div class="wrap-student" style="overflow-y: auto;">
-              <div class="wrap">
+            <%if(typeof student !== undefined && student.length > 0){%>
+                <%for(var i = 0; i < student.length; i++){%>
+                  <div class="wrap">
+                    <div class="icon"><img src="<%= student[i].avatar %>" alt=""></div>
+                    <div class="fullname"><%= student[i].name %></div>
+                    <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
+                  </div>
+                
+            <%}} else {%>
+                    <h1>No User Found</h1>
+              <%}%>
+              
+              <!-- <div class="wrap">
                 <div class="icon"><img src="/images/boy.png" alt=""></div>
                 <div class="fullname">Mouslim Ombadi</div>
                 <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
@@ -86,15 +99,13 @@
                 <div class="icon"><img src="/images/boy.png" alt=""></div>
                 <div class="fullname">Mouslim Ombadi</div>
                 <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
-              </div>
-              <div class="wrap">
-                <div class="icon"><img src="/images/boy.png" alt=""></div>
-                <div class="fullname">Mouslim Ombadi</div>
-                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
-              </div>
+              </div> -->
               
           </div>  
          </td>
+
+
+
          <td style="vertical-align: top;">
            <div class="above-section">
               <div class="student-profile">

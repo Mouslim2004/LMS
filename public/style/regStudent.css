@@ -94,7 +94,7 @@ td,th {
 .wrap{
   border: 1px solid #dddddd;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 95%;
   align-items: center;
   border-radius: 5px;
@@ -106,7 +106,7 @@ td,th {
   cursor: pointer;
 }
 .wrap img{
-  height: 50px;
+  height: 40px;
 }
 .above-section{
   display: flex;

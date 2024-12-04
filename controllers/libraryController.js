@@ -243,8 +243,14 @@ const previewBook  = (req,res) => {
   res.render('previewBook')
 }
 
-const regStudent = (req,res) => {
-  res.render('regStudent')
+const regStudent = async (req,res) => {
+  try{
+    const student = await Student.find()
+    res.render('regStudent', {student: student})
+  }catch(error){
+    return res.status(500).json({ message: 'Failed to display user', error });
+  }
+  
 }
 
 const userRule = (req,res) => {
