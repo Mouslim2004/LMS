@@ -184,9 +184,7 @@ const userIssued = (req,res) => {
 }
 
 const adminDash = async (req,res) => {
-  if(!req.session.librarian){
-    return res.redirect('/adminLogin')
-  }
+  
   try{
     const librarian = await Librarian.findById(req.session.librarian.id)
     res.render('adminDash', {librarian})
