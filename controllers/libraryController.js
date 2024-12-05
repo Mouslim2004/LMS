@@ -186,7 +186,7 @@ const userIssued = (req,res) => {
 const adminDash = async (req,res) => {
   
   try{
-    const librarian = await Librarian.findById(req.session.librarian.id)
+    const librarian = await Librarian.find()
     res.render('adminDash', {librarian})
   }catch(error){
     return res.status(500).json({ message: 'Failed to login', error });
@@ -279,8 +279,14 @@ const adminCategory = (req,res) => {
   res.render('adminCategory')
 }
 
-const adminAuthor = (req,res) => {
-  res.render('adminAuthor')
+const adminAuthor = async (req,res) => {
+  try{
+    const book = await Book.find();
+    res.render('adminAuthor',{book: book})
+  }catch(error){
+    return res.status(500).json({ message: 'Failed to display all the book', error });
+  }
+  
 }
 
 const adminIssue = (req,res) => {

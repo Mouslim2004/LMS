@@ -65,15 +65,19 @@
              <th>Action</th>
            </tr>
            <tr>
-             <td>1</td>
-             <td>Jules Pierre</td>
-             <td>Fiction</td>
-             <td>
-              <button class="btn btn-open">Edit</button>
-              <button class="btn-delete">Delete</button>
+            <%if(typeof book !== undefined && book.length > 0){%>
+                  <%for(var i = 0; i < book.length ; i++){%>
+                    <td><%= i %></td>
+                    <td><%= book[i].author %></td>
+                    <td><%= book[i].category %></td>
+                    <td>
+                     <button class="btn btn-open">Edit</button>
+                     <button class="btn-delete">Delete</button>
+             <%}}%>
+             
             </td>
            </tr>
-           <tr>
+           <!-- <tr>
             <td>1</td>
             <td>Artur Rimbaud</td>
             <td>Poetry</td>
@@ -81,8 +85,8 @@
              <button class="btn btn-open">Edit</button>
              <button class="btn-delete">Delete</button>
            </td>
-          </tr>
-          <tr>
+          </tr> -->
+          <!-- <tr>
             <td>1</td>
             <td>Jean Charles</td>
             <td>Romantic</td>
@@ -90,7 +94,7 @@
              <button class="btn btn-open">Edit</button>
              <button class="btn-delete">Delete</button>
            </td>
-          </tr>
+          </tr> -->
          </table>
      </div>
   </div>
