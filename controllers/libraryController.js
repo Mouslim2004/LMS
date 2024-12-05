@@ -194,8 +194,13 @@ const adminDash = async (req,res) => {
   
 }
 
-const userBook = (req,res) => {
-  res.render('userBook')
+const userBook = async (req,res) => {
+  try{
+    const book = await Book.find();
+    res.render('userBook', {book: book})
+  }catch(error){
+    return res.status(500).json({ message: 'Failed to display all the book', error });
+  }
 }
 
 const adminBook = (req,res) => {
