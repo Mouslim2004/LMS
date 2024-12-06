@@ -68,7 +68,7 @@
             <%for(var i = 0; i < book.length ; i++){%>
                 <tr>
                   <td><%= i %></td>
-                  <td><%= book[i].category %></td>
+                  <td class="category"><%= book[i].category %></td>
                   <td><span class="status">Active</span></td>
                   <td>
                     <button class="btn btn-open">Edit</button>
@@ -76,42 +76,24 @@
                   </td>
                 </tr>
            <%}}%>
-           <!-- <tr>
-            <td>1</td>
-            <td>Romantic</td>
-            <td><span class="status">Active</span></td>
-            <td>
-             <button class="btn btn-open">Edit</button>
-             <span class="btn btn-delete"><i class="fa-solid fa-trash"></i></span>
-           </td>
-          </tr> -->
-          <!-- <tr>
-            <td>1</td>
-            <td>Romantic</td>
-            <td><span class="status">Inactive</span></td>
-            <td>
-             <button class="btn btn-open">Edit</button>
-             <span class="btn btn-delete"><i class="fa-solid fa-trash"></i></span>
-           </td>
-          </tr> -->
          </table>
 
      </div>
   </div>
   <!-- This is the update form modal -->
-  <div class="modal hidden">
+  <div class="modal hidden" id="modalOpen">
     <div class="flex">
        <h2>Update Category</h2>
        <button class="btn-close">&times;</button>
     </div>
     <form action="">
-      <input type="text" placeholder="ID">
-      <input type="text" placeholder="New Category">
-      <input type="date">
-      <select name="status" id="status">
+      <input type="text" id="category-id" placeholder="ID" readonly>
+      <input type="text" id="category-name" placeholder="New Category">
+      <!-- <input type="date"> -->
+      <!-- <select name="status" id="status">
          <option value="available">Available</option>
          <option value="not-available">Not Available</option>
-      </select>
+      </select> -->
       <input type="submit" value="Update">
     </form>
   </div>
@@ -158,6 +140,21 @@
       const openModal = function(){
         modal.removeClass('hidden')
         overlay.removeClass('hidden')
+
+        let parentTr = $(this).closest('tr')
+        const Searchcategory = parentTr.find('.category')
+        const category = Searchcategory.text()
+        $.ajax({
+          url: `/category/${category}`,
+          type: 'GET',
+          success: function(response){
+              $('#category-id').val(response._id);
+              $('#category-name').val(response.category);
+          },
+          error: function (xhr, status, error) {
+            console.error(`Error: ${error}`);
+          }
+        })
       }
 
       openModalBtn.on('click', openModal)

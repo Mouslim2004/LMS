@@ -284,6 +284,20 @@ const adminCategory = async (req,res) => {
   }
 }
 
+const findCategory = async (req,res) => {
+  try{
+    const category = await Book.findOne({category : req.params.category})
+    if(category){
+      return res.json(category)
+    } else {
+      res.status(404).json({ message: 'Category not found' });
+    }
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
 const adminAuthor = async (req,res) => {
   try{
     const book = await Book.find();
@@ -349,5 +363,6 @@ module.exports = {
   logout,
   adminLoginPost,
   logoutAdmin,
-  adminBookPost
+  adminBookPost,
+  findCategory
 }
