@@ -64,19 +64,20 @@
              <th>Field</th>
              <th>Action</th>
            </tr>
-           <tr>
+          
             <%if(typeof book !== undefined && book.length > 0){%>
                   <%for(var i = 0; i < book.length ; i++){%>
+                  <tr>
                     <td><%= i %></td>
                     <td><%= book[i].author %></td>
                     <td><%= book[i].category %></td>
                     <td>
                      <button class="btn btn-open">Edit</button>
                      <button class="btn-delete">Delete</button>
+                    </td>
+                  </tr>
              <%}}%>
-             
-            </td>
-           </tr>
+           
            <!-- <tr>
             <td>1</td>
             <td>Artur Rimbaud</td>

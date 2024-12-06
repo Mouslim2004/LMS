@@ -275,8 +275,13 @@ const viewBook = async (req,res) => {
   res.render('adminViewBook', {showBook: showBook})
 }
 
-const adminCategory = (req,res) => {
-  res.render('adminCategory')
+const adminCategory = async (req,res) => {
+  try{
+    const book = await Book.find();
+    res.render('adminCategory',{book: book})
+  }catch(error){
+    return res.status(500).json({ message: 'Failed to display all the category', error });
+  }
 }
 
 const adminAuthor = async (req,res) => {
@@ -284,7 +289,7 @@ const adminAuthor = async (req,res) => {
     const book = await Book.find();
     res.render('adminAuthor',{book: book})
   }catch(error){
-    return res.status(500).json({ message: 'Failed to display all the book', error });
+    return res.status(500).json({ message: 'Failed to display all the author', error });
   }
   
 }

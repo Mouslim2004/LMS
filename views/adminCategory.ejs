@@ -64,16 +64,19 @@
              <th>Status</th>
              <th>Action</th>
            </tr>
-           <tr>
-             <td>1</td>
-             <td>Romantic</td>
-             <td><span class="status">Active</span></td>
-             <td>
-              <button class="btn btn-open">Edit</button>
-              <span class="btn btn-delete"><i class="fa-solid fa-trash"></i></span>
-            </td>
-           </tr>
-           <tr>
+           <%if(typeof book !== undefined && book.length > 0){%>
+            <%for(var i = 0; i < book.length ; i++){%>
+                <tr>
+                  <td><%= i %></td>
+                  <td><%= book[i].category %></td>
+                  <td><span class="status">Active</span></td>
+                  <td>
+                    <button class="btn btn-open">Edit</button>
+                    <span class="btn btn-delete"><i class="fa-solid fa-trash"></i></span>
+                  </td>
+                </tr>
+           <%}}%>
+           <!-- <tr>
             <td>1</td>
             <td>Romantic</td>
             <td><span class="status">Active</span></td>
@@ -81,8 +84,8 @@
              <button class="btn btn-open">Edit</button>
              <span class="btn btn-delete"><i class="fa-solid fa-trash"></i></span>
            </td>
-          </tr>
-          <tr>
+          </tr> -->
+          <!-- <tr>
             <td>1</td>
             <td>Romantic</td>
             <td><span class="status">Inactive</span></td>
@@ -90,11 +93,8 @@
              <button class="btn btn-open">Edit</button>
              <span class="btn btn-delete"><i class="fa-solid fa-trash"></i></span>
            </td>
-          </tr>
+          </tr> -->
          </table>
-
-         
-
 
      </div>
   </div>
