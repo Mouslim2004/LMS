@@ -298,6 +298,22 @@ const findCategory = async (req,res) => {
   }
 }
 
+const updateCategory = async (req,res) => {
+  const {category,id} = req.body
+  try{
+    const updateCategory = await Book.findOneAndUpdate(id, {category: category}, {new : true})
+    if(updateCategory){
+      console.log(updateCategory)
+      return res.json(updateCategory)
+    } else {
+      res.status(404).json({ message: 'Category not updated' });
+    }
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
 const adminAuthor = async (req,res) => {
   try{
     const book = await Book.find();
@@ -364,5 +380,6 @@ module.exports = {
   adminLoginPost,
   logoutAdmin,
   adminBookPost,
-  findCategory
+  findCategory,
+  updateCategory
 }

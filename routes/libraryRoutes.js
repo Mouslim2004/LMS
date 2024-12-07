@@ -39,6 +39,8 @@ router.get('/adminViewBook',authAdmin, LibraryController.viewBook)
 
 router.get('/adminCategory',authAdmin, LibraryController.adminCategory)
 router.get('/category/:category', LibraryController.findCategory)
+router.put('/updateCategory', LibraryController.updateCategory)
+
 router.get('/adminAuthor',authAdmin, LibraryController.adminAuthor)
 router.get('/adminIssued',authAdmin, LibraryController.adminIssue)
 router.get('/userRequest',auth, LibraryController.userRequest)

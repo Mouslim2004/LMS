@@ -86,14 +86,9 @@
        <h2>Update Category</h2>
        <button class="btn-close">&times;</button>
     </div>
-    <form action="">
-      <input type="text" id="category-id" placeholder="ID" readonly>
-      <input type="text" id="category-name" placeholder="New Category">
-      <!-- <input type="date"> -->
-      <!-- <select name="status" id="status">
-         <option value="available">Available</option>
-         <option value="not-available">Not Available</option>
-      </select> -->
+    <form id="updateCategory">
+      <input type="text" id="category-id" placeholder="ID" readonly name="id">
+      <input type="text" id="category-name" placeholder="New Category" name="category">
       <input type="submit" value="Update">
     </form>
   </div>
@@ -158,6 +153,21 @@
       }
 
       openModalBtn.on('click', openModal)
+
+      $('#updateCategory').on('submit', (e) => {
+        e.preventDefault()
+        const category = $('#category-name').val();
+        $.ajax({
+          url: `/updateCategory/`,
+          type: 'PUT',
+          success: function(response){
+            console.log('Update successful:', response);
+          },
+          error: function (xhr, status, error) {
+            console.error(`Error: ${error}`);
+          }
+        })
+      })
 
       const openModal2 = function(){
         modal2.removeClass('hidden2')
