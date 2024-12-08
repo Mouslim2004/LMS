@@ -88,7 +88,8 @@
     </div>
     <form id="updateCategory">
       <input type="text" id="category-id" placeholder="ID" readonly name="id">
-      <input type="text" id="category-name" placeholder="New Category" name="category">
+      <input type="text" id="category-name" placeholder="Category" name="category">
+      <input type="text" id="new-category" placeholder="New Category" name="newCategory">
       <input type="submit" value="Update">
     </form>
   </div>
@@ -157,11 +158,15 @@
       $('#updateCategory').on('submit', (e) => {
         e.preventDefault()
         const category = $('#category-name').val();
+        const newCategory = $('#new-category').val()
         $.ajax({
           url: `/updateCategory/`,
           type: 'PUT',
+          contentType: 'application/json',
+          data: JSON.stringify({ category, newCategory }),
           success: function(response){
             console.log('Update successful:', response);
+            location.reload();
           },
           error: function (xhr, status, error) {
             console.error(`Error: ${error}`);

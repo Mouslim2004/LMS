@@ -299,9 +299,9 @@ const findCategory = async (req,res) => {
 }
 
 const updateCategory = async (req,res) => {
-  const {category,id} = req.body
+  const {category, newCategory} = req.body
   try{
-    const updateCategory = await Book.findOneAndUpdate(id, {category: category}, {new : true})
+    const updateCategory = await Book.findOneAndUpdate({category}, {category: newCategory}, {new : true})
     if(updateCategory){
       console.log(updateCategory)
       return res.json(updateCategory)
