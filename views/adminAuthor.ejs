@@ -69,7 +69,7 @@
                   <%for(var i = 0; i < book.length ; i++){%>
                   <tr>
                     <td><%= i %></td>
-                    <td><%= book[i].author %></td>
+                    <td class="author"><%= book[i].author %></td>
                     <td><%= book[i].category %></td>
                     <td>
                      <button class="btn btn-open">Edit</button>
@@ -107,10 +107,10 @@
        <h2>Update Author</h2>
        <button class="btn-close">&times;</button>
     </div>
-    <form action="">
-      <input type="text" placeholder="ID">
-      <input type="text" placeholder="New Author">
-      <input type="date">
+    <form id="updateAuthor">
+      <input type="text" placeholder="ID" id="author-id">
+      <input type="text" placeholder="Author" name="author" id="author-name">
+      <input type="text" placeholder="New Author" name="newAuthor" id="new-author">
       <input type="submit" value="Update">
     </form>
   </div>
@@ -150,9 +150,44 @@
      const openModal = function(){
        modal.removeClass('hidden')
        overlay.removeClass('hidden')
+
+       let parentTr = $(this).closest('tr')
+        const Searchauthor = parentTr.find('.author')
+        const author = Searchauthor.text()
+        console.log(author)
+        $.ajax({
+          url: `/author/${author}`,
+          type: 'GET',
+          success: function(response){
+              $('#author-id').val(response._id);
+              $('#author-name').val(response.author);
+          },
+          error: function (xhr, status, error) {
+            console.error(`Error: ${error}`);
+          }
+        })
      }
 
      openModalBtn.on('click', openModal)
+
+     $('#updateAuthor').on('submit', (e) => {
+        e.preventDefault()
+        const author = $('#author-name').val();
+        const newAuthor = $('#new-author').val()
+        $.ajax({
+          url: `/updateAuthor/`,
+          type: 'PUT',
+          contentType: 'application/json',
+          data: JSON.stringify({ author, newAuthor }),
+          success: function(response){
+            console.log('Update successful:', response);
+            location.reload();
+          },
+          error: function (xhr, status, error) {
+            console.error(`Error: ${error}`);
+          }
+        })
+      })
 
      const openModal2 = function(){
        modal2.removeClass('hidden2')

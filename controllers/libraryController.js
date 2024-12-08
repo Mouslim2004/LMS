@@ -324,6 +324,36 @@ const adminAuthor = async (req,res) => {
   
 }
 
+const findAuthor = async (req,res) => {
+  try{
+    const author = await Book.findOne({author : req.params.author})
+    if(author){
+      return res.json(author)
+    } else {
+      res.status(404).json({ message: 'Author not found' });
+    }
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+const updateAuthor = async (req,res) => {
+  const {author, newAuthor} = req.body
+  try{
+    const updateAuthor = await Book.findOneAndUpdate({author}, {author: newAuthor}, {new : true})
+    if(updateAuthor){
+      console.log(updateAuthor)
+      return res.json(updateAuthor)
+    } else {
+      res.status(404).json({ message: 'Author not updated' });
+    }
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
 const adminIssue = (req,res) => {
   res.render('adminIssue')
 }
@@ -381,5 +411,7 @@ module.exports = {
   logoutAdmin,
   adminBookPost,
   findCategory,
-  updateCategory
+  updateCategory,
+  findAuthor,
+  updateAuthor
 }

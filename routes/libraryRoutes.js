@@ -42,6 +42,9 @@ router.get('/category/:category', LibraryController.findCategory)
 router.put('/updateCategory', LibraryController.updateCategory)
 
 router.get('/adminAuthor',authAdmin, LibraryController.adminAuthor)
+router.get('/author/:author', LibraryController.findAuthor)
+router.put('/updateAuthor', LibraryController.updateAuthor)
+
 router.get('/adminIssued',authAdmin, LibraryController.adminIssue)
 router.get('/userRequest',auth, LibraryController.userRequest)
 router.get('/adminChange',authAdmin, LibraryController.adminChange)
