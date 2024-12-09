@@ -51,36 +51,45 @@
  <section id="adminBook">
   <div class="book-form">
      <div class="detail-title">Book Details</div>
-     <div class="detail-image"><img src="/images/books.png" alt=""></div>
+     <div class="detail-image" style="margin-bottom: 10px;"><img src="/images/books.png" alt=""></div>
+     <!-- Display Success Message -->
+     <% if (successMessage) { %>
+      <div style="color: green; margin: 5px 0; padding: 5px;"><%= successMessage %></div>
+     <% } %>
+
+     <!-- Display Error Message -->
+     <% if (errorMessage) { %>
+      <div style="color: red; margin: 5px 0; padding: 5px;"><%= errorMessage %></div>
+     <% } %>
      <form action="/adminBooks" enctype="multipart/form-data" method="post">
        <div class="input-file">
         <div>
           <label for="img-book">Upload Book Img</label>
-          <input type="file" name="image">
+          <input type="file" name="image" >
         </div>
         <div>
           <label for="pdf-book">Upload Book PDF</label>
-          <input type="file" name="bookpdf">
+          <input type="file" name="bookpdf" >
         </div>
         
       </div>
        <div class="book-id-name">
-         <input type="text" placeholder="Book Id" id="bookId" name="bookId" disabled> 
-         <input type="text" placeholder="Book Title" id="bookTitle" name="bookTitle"> 
+         <input type="text" placeholder="Book Id" id="bookId" name="bookId" disabled > 
+         <input type="text" placeholder="Book Title" id="bookTitle" name="bookTitle" > 
        </div>
        <div class="book-author-genre">
-          <input type="text" placeholder="Author name" id="author" name="author"> 
-          <input type="text" id="category" placeholder="Category" name="category">
+          <input type="text" placeholder="Author name" id="author" name="author" > 
+          <input type="text" id="category" placeholder="Category" name="category" >
       </div>
       <div class="book-date-name">
-         <input type="date" id="publishDate" name="publishDate">
-         <input type="text" placeholder="Publisher" id="publishName" name="publisher">
+         <input type="date" id="publishDate" name="publishDate" >
+         <input type="text" placeholder="Publisher" id="publishName" name="publisher" >
       </div>
       <div class="pseudo-book">
-        <input type="text" placeholder="Pseudo" id="pseudo" name="pseudo">
+        <input type="text" placeholder="Pseudo" id="pseudo" name="pseudo" >
       </div>
       <div class="book-description">
-         <textarea name="description" id="description" placeholder="Book description"></textarea>
+         <textarea name="description" id="description" placeholder="Book description" ></textarea>
       </div>
       <div class="book-button">
           <input type="submit" value="Add" id="add-submit">

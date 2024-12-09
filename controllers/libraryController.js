@@ -204,13 +204,20 @@ const userBook = async (req,res) => {
 }
 
 const adminBook = (req,res) => {
-  res.render('adminBook')
+  const successMessage = req.flash('success');
+  const errorMessage = req.flash('error');
+  res.render('adminBook', { successMessage, errorMessage })
 }
 
 const adminBookPost = async (req, res) => {
   try{
     const imageFile = req.files?.image?.[0]; // Access the first file under 'image'
     const bookPdfFile = req.files?.bookpdf?.[0]; // Access the first file under 'bookpdf'
+
+    if (!imageFile || !bookPdfFile) {
+      req.flash('error', 'Both image and book PDF files are required.');
+      return res.redirect('/adminBooks');
+    }
 
     const chars =
     "0123456789abcdefghijklmnopqrstuvwxtz!@#&_ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -220,6 +227,7 @@ const adminBookPost = async (req, res) => {
       const randomNum = Math.floor(Math.random() * chars.length);
       madeId += chars.substring(randomNum, randomNum + 1);
     }
+
 
     let book = new Book({
       bookId : madeId,
@@ -233,14 +241,13 @@ const adminBookPost = async (req, res) => {
       image: 'bookImage/' + imageFile.filename,
       bookpdf : 'bookImage/' + bookPdfFile.filename
     })
-    
 
     await book.save()
-
+    req.flash('success', 'Book added successfully!');
     res.redirect('/adminBooks')    
   }catch(error){
     console.log(error.message)
-    req.flash('error', 'Please fill all the form to add the book');
+    req.flash('error', 'Please fill all the form to add a book!');
     res.redirect('/adminBooks');
   }
 }
