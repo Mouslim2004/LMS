@@ -61,7 +61,7 @@
            <tr>
              <th>#</th>
              <th>Name</th>
-             <th>Field</th>
+             <!-- <th>Field</th> -->
              <th>Action</th>
            </tr>
           
@@ -69,11 +69,11 @@
                   <%for(var i = 0; i < book.length ; i++){%>
                   <tr>
                     <td><%= i %></td>
-                    <td class="author"><%= book[i].author %></td>
-                    <td><%= book[i].category %></td>
+                    <td class="author"><%= book[i] %></td>
+                    <!-- <td><%= book[i].category %></td> -->
                     <td>
                      <button class="btn btn-open">Edit</button>
-                     <button class="btn-delete">Delete</button>
+                     <!-- <button class="btn-delete">Delete</button> -->
                     </td>
                   </tr>
              <%}}%>

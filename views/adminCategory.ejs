@@ -68,11 +68,11 @@
             <%for(var i = 0; i < book.length ; i++){%>
                 <tr>
                   <td><%= i %></td>
-                  <td class="category"><%= book[i].category %></td>
+                  <td class="category"><%= book[i] %></td>
                   <td><span class="status">Active</span></td>
                   <td>
                     <button class="btn btn-open">Edit</button>
-                    <span class="btn btn-delete"><i class="fa-solid fa-trash"></i></span>
+                    <!-- <span class="btn btn-delete"><i class="fa-solid fa-trash"></i></span> -->
                   </td>
                 </tr>
            <%}}%>
