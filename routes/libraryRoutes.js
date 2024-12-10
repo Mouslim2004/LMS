@@ -32,6 +32,8 @@ router.post('/adminBooks',uploadImage.fields([{ name: 'image' },
 router.get('/previewBook',auth, LibraryController.previewBook)
 
 router.get('/regStudent',authAdmin,LibraryController.regStudent)
+router.get('/student/:id', LibraryController.studentInfo)
+
 router.get('/userRule',auth, LibraryController.userRule)
 router.get('/sidebar', LibraryController.sidebar)
 router.get('/userUpdate',auth, LibraryController.updateDetail)

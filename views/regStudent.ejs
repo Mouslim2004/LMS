@@ -65,48 +65,24 @@
           <div class="wrap-student" style="overflow-y: auto;">
             <%if(typeof student !== undefined && student.length > 0){%>
                 <%for(var i = 0; i < student.length; i++){%>
-                  <div class="wrap">
+                  <div class="wrap" data-user-id="<%= student[i]._id %>">
                     <div class="icon"><img src="<%= student[i].avatar %>" alt=""></div>
                     <div class="fullname"><%= student[i].name %></div>
                     <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
                   </div>
-                
+                  
             <%}} else {%>
                     <h1>No User Found</h1>
               <%}%>
               
-              <!-- <div class="wrap">
-                <div class="icon"><img src="/images/boy.png" alt=""></div>
-                <div class="fullname">Mouslim Ombadi</div>
-                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
-              </div>
-              <div class="wrap">
-                <div class="icon"><img src="/images/boy.png" alt=""></div>
-                <div class="fullname">Mouslim Ombadi</div>
-                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
-              </div>
-              <div class="wrap">
-                <div class="icon"><img src="/images/boy.png" alt=""></div>
-                <div class="fullname">Mouslim Ombadi</div>
-                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
-              </div>
-              <div class="wrap">
-                <div class="icon"><img src="/images/boy.png" alt=""></div>
-                <div class="fullname">Mouslim Ombadi</div>
-                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
-              </div>
-              <div class="wrap">
-                <div class="icon"><img src="/images/boy.png" alt=""></div>
-                <div class="fullname">Mouslim Ombadi</div>
-                <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
-              </div> -->
+              
               
           </div>  
          </td>
 
 
 
-         <td style="vertical-align: top;">
+         <td style="vertical-align: top;" class="display-student-info">
            <div class="above-section">
               <div class="student-profile">
                 <img src="/images/boy.png" alt="">
@@ -218,6 +194,33 @@
      }
 
      closeModalBtn.on('click', closeModal)
+
+     //display user information
+    //  The issue is caused by how this behaves in the arrow function (=>).
+    //  In arrow functions, this does not refer to the element that triggered the event (like it does in traditional function expressions).
+    //  Instead, it refers to the surrounding lexical context, which in this case is not the .wrap element.
+
+      // Solution:
+      // Use a regular function instead of an arrow function for the event handler.
+      //  This will allow this to refer to the clicked element.
+     $('.wrap').on('click', function(){
+      let id = $(this).data('user-id')
+      console.log(id)
+      $.ajax({
+        type:'GET',
+        url: `/student/${id}`,
+        success: function(response){
+          if(response){
+            console.log(response.name)
+          } else {
+            console.log('An error occured!')
+          }
+        },
+        error: function(xhr) {
+            console.log('Error user not found')
+        }
+      })
+     })
 
      const modal2 = $('.modal2')
       const overlay2 = $('.overlay2')

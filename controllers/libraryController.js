@@ -265,6 +265,21 @@ const regStudent = async (req,res) => {
   
 }
 
+const studentInfo = async (req, res) => {
+  try{
+    const student = await Student.findOne({_id : req.params.id})
+    if(student){
+      // console.log(student)
+      return res.json(student)
+    } else {
+      res.status(404).json({message: 'Student not found'})
+    }
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message: 'Servor error'})
+  }
+}
+
 const userRule = (req,res) => {
   res.render('userRule')
 }
@@ -420,5 +435,6 @@ module.exports = {
   findCategory,
   updateCategory,
   findAuthor,
-  updateAuthor
+  updateAuthor,
+  studentInfo
 }
