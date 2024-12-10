@@ -269,7 +269,7 @@ const studentInfo = async (req, res) => {
   try{
     const student = await Student.findOne({_id : req.params.id})
     if(student){
-      // console.log(student)
+      
       return res.json(student)
     } else {
       res.status(404).json({message: 'Student not found'})
