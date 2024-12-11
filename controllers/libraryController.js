@@ -295,6 +295,22 @@ const findDeleteStudent = async (req,res) => {
   }
 }
 
+const destroyStudent = async (req,res) => {
+  try{
+    const student = await Student.deleteOne({cne: req.params.studentCne})
+    if(student.deletedCount === 1){
+      console.log(`Successfully deleted one document with the cne: ${req.params.studentCne}`);
+      return res.status(200).json({message: 'Student successfully deleted!'})
+    } else {
+      console.log('No document find with that cne')
+      res.status(404).json({message: 'No document find with that cne'})
+    }
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message: 'An error occured'})
+  }
+}
+
 const userRule = (req,res) => {
   res.render('userRule')
 }
@@ -452,5 +468,6 @@ module.exports = {
   findAuthor,
   updateAuthor,
   studentInfo,
-  findDeleteStudent
+  findDeleteStudent,
+  destroyStudent
 }

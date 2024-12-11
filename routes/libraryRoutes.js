@@ -34,6 +34,7 @@ router.get('/previewBook',auth, LibraryController.previewBook)
 router.get('/regStudent',authAdmin,LibraryController.regStudent)
 router.get('/student/:id', LibraryController.studentInfo)
 router.get('/deleteStudent/:userId', LibraryController.findDeleteStudent)
+router.delete('/destroyStudent/:studentCne', LibraryController.destroyStudent)
 
 router.get('/userRule',auth, LibraryController.userRule)
 router.get('/sidebar', LibraryController.sidebar)

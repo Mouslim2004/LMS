@@ -118,7 +118,7 @@
     <div>Student Email: <strong id="delete-email">mouslimombadi@gmail.com</strong></div>
     <div>Student Phone: <strong id="delete-phone">0700981188</strong></div>
     <div>Student Address: <strong id="delete-address">Hay Riad</strong></div>
-    <form action="">
+    <form id="destroyStudent">
       <input type="submit" value="Confirm">
     </form>
   </div>
@@ -262,11 +262,11 @@
         url: `/deleteStudent/${userId}`,
         type: 'GET',
         success: function(response){
-            $('#delete-cne').val(response.cne)
-            $('#delete-name').val(response.name)
-            $('#delete-email').val(response.email)
-            $('#delete-phone').val(response.phone)
-            $('#delete-address').val(response.address)
+            $('#delete-cne').text(response.cne);
+            $('#delete-name').text(response.name);
+            $('#delete-email').text(response.email);
+            $('#delete-phone').text(response.phone);
+            $('#delete-address').text(response.address);
         },
         error: function (xhr, status, error) {
           console.error(`Error: ${error}`);
@@ -285,6 +285,24 @@
 
      overlay.on('click', closeModal); 
      overlay2.on('click', closeModal2); 
+
+     $('#destroyStudent').on('submit', function(e){
+      e.preventDefault()
+
+      let studentCne = $('#delete-cne').text()
+      
+      $.ajax({
+        url: `/destroyStudent/${studentCne}`,
+        type: 'DELETE',
+        success: function(response){
+          console.log('Student deleted : ', response.name)
+          location.reload()
+        },
+        error: function(error){
+          console.error('Error : ', error)
+        }
+      })
+     })
 
      
     });
