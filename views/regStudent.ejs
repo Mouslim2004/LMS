@@ -68,7 +68,7 @@
                   <div class="wrap" data-user-id="<%= student[i]._id %>">
                     <div class="icon"><img src="<%= student[i].avatar %>" alt=""></div>
                     <div class="fullname"><%= student[i].name %></div>
-                    <div class="btn-delete" title="Delete Student"><span>&times;</span></div>
+                    <div class="btn-delete" title="Delete Student"><span class="times-btn">&times;</span></div>
                   </div>
                   
             <%}} else {%>
@@ -84,50 +84,6 @@
 
          <td style="vertical-align: top;" class="display-student-info">
           <h1>Click The Student To Get Student Information &#128516;</h1>
-           <!-- <div class="above-section">
-              <div class="student-profile">
-                <img src="/images/boy.png" alt="">
-              </div>
-              <div class="student-info">
-                <div class="student-ID">ID : <span>256987</span></div>
-                 <div class="student-name">Full Name : <span>Mouslim Ombadi</span></div>
-                 <div class="student-email">Email : <span>mouslimombadi@gmail.com</span></div>
-                 <div class="student-address">Address : <span>Hay Riad</span></div>
-                 <div class="student-phone">Phone : <span>0700981188</span></div>
-              </div>
-           </div>
-           <div class="below-section">
-              <div class="issue-book">Issue Book</div>
-              <div class="table-issue">
-                  <table>
-                    <tr>
-                      <th>Book ID</th>
-                      <th>Book Title</th>
-                      <th>Issue Date</th>
-                      <th>Due Date</th>
-                    </tr>
-                    <tr>
-                      <td>2567pzlk</td>
-                      <td>Batman</td>
-                      <td>31-12-2024</td>
-                      <td>07-01-2025</td>
-                    </tr>
-                    <tr>
-                      <td>2567pzlk</td>
-                      <td>Batman</td>
-                      <td>31-12-2024</td>
-                      <td>07-01-2025</td>
-                    </tr>
-                    <tr>
-                      <td>2567pzlk</td>
-                      <td>Batman</td>
-                      <td>31-12-2024</td>
-                      <td>07-01-2025</td>
-                    </tr>
-                    
-                  </table>
-              </div>
-           </div> -->
          </td>
 
        </tr>
@@ -157,11 +113,11 @@
        <h2>Are you sure to delete this Student ?</h2>
        <button class="btn-close2">&times;</button>
     </div>
-    <div>Student ID: <strong>256987</strong></div>
-    <div>Student Name: <strong>Mouslim Ombadi</strong></div>
-    <div>Student Email: <strong>mouslimombadi@gmail.com</strong></div>
-    <div>Student Phone: <strong>0700981188</strong></div>
-    <div>Student Address: <strong>Hay Riad</strong></div>
+    <div>Student CNE: <strong id="delete-cne">256987</strong></div>
+    <div>Student Name: <strong id="delete-name">Mouslim Ombadi</strong></div>
+    <div>Student Email: <strong id="delete-email">mouslimombadi@gmail.com</strong></div>
+    <div>Student Phone: <strong id="delete-phone">0700981188</strong></div>
+    <div>Student Address: <strong id="delete-address">Hay Riad</strong></div>
     <form action="">
       <input type="submit" value="Confirm">
     </form>
@@ -206,14 +162,14 @@
       //  This will allow this to refer to the clicked element.
      $('.wrap').on('click', function(){
       let id = $(this).data('user-id')
-      console.log(id)
+      // console.log(id)
       $.ajax({
         type:'GET',
         url: `/student/${id}`,
         success: function(response){
-          if(response){
+          if(response.borrowedBooks.length > 0){
             $('.display-student-info').html(`
-              <div class="above-section">
+            <div class="above-section">
               <div class="student-profile">
                 <img src="${response.avatar}" alt="">
               </div>
@@ -258,9 +214,28 @@
               </div>
            </div>
             
+           
             `)
           } else {
-            $('.display-student-info').html('<h1>Click To Get Student Information</h1>')
+            $('.display-student-info').html(`
+                   <div class="above-section">
+              <div class="student-profile">
+                <img src="${response.avatar}" alt="">
+              </div>
+              <div class="student-info">
+                <div class="student-ID">CNE : <span>${response.cne}</span></div>
+                 <div class="student-name">Full Name : <span>${response.name}</span></div>
+                 <div class="student-email">Email : <span>${response.email}</span></div>
+                 <div class="student-address">Address : <span>${response.address}</span></div>
+                 <div class="student-phone">Phone : <span>${response.phone}</span></div>
+              </div>
+           </div>
+
+            <div class="below-section">
+              <div class="issue-book">Issue Book</div>
+              <div style="margin-left:10px">This Student did not borrow a book</div>
+            </div>
+            `)
           }
         },
         error: function(xhr) {
@@ -277,6 +252,26 @@
       const openModal2 = function(){
         modal2.removeClass('hidden2')
         overlay2.removeClass('hidden2')
+
+        let parentWrap = $(this).closest('.wrap')
+        let findName = parentWrap.data('user-id')
+        let userId = findName
+        console.log("This is the user id : ",userId)
+
+        $.ajax({
+        url: `/deleteStudent/${userId}`,
+        type: 'GET',
+        success: function(response){
+            $('#delete-cne').val(response.cne)
+            $('#delete-name').val(response.name)
+            $('#delete-email').val(response.email)
+            $('#delete-phone').val(response.phone)
+            $('#delete-address').val(response.address)
+        },
+        error: function (xhr, status, error) {
+          console.error(`Error: ${error}`);
+        }
+      })
       }
 
       openModalBtn2.on('click', openModal2)
@@ -290,6 +285,8 @@
 
      overlay.on('click', closeModal); 
      overlay2.on('click', closeModal2); 
+
+     
     });
  </script>
 </body>

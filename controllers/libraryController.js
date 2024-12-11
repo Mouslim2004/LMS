@@ -269,7 +269,6 @@ const studentInfo = async (req, res) => {
   try{
     const student = await Student.findOne({_id : req.params.id})
     if(student){
-      
       return res.json(student)
     } else {
       res.status(404).json({message: 'Student not found'})
@@ -277,6 +276,22 @@ const studentInfo = async (req, res) => {
   }catch(error){
     console.log(error.message)
     res.status(500).json({message: 'Servor error'})
+  }
+}
+
+const findDeleteStudent = async (req,res) => {
+  try{
+    const studentToDelete = await Student.findOne({_id: req.params.userId})
+    if(studentToDelete){
+      // console.log(studentToDelete)
+      return res.status(200).json(studentToDelete)
+    }else {
+      res.status(404).json({message: 'Student to delete not found'})
+    }
+
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message : 'An error occured'})
   }
 }
 
@@ -436,5 +451,6 @@ module.exports = {
   updateCategory,
   findAuthor,
   updateAuthor,
-  studentInfo
+  studentInfo,
+  findDeleteStudent
 }
