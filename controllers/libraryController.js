@@ -187,7 +187,7 @@ const adminDash = async (req,res) => {
   
   try{
     const librarian = await Librarian.find()
-    res.render('adminDash', {librarian})
+    res.render('adminDash', {librarian:librarian})
   }catch(error){
     return res.status(500).json({ message: 'Failed to login', error });
   }
@@ -203,10 +203,11 @@ const userBook = async (req,res) => {
   }
 }
 
-const adminBook = (req,res) => {
+const adminBook =  async (req,res) => {
   const successMessage = req.flash('success');
   const errorMessage = req.flash('error');
-  res.render('adminBook', { successMessage, errorMessage })
+  const librarian = await Librarian.find()
+  res.render('adminBook', { successMessage, errorMessage, librarian: librarian })
 }
 
 const adminBookPost = async (req, res) => {
@@ -258,7 +259,8 @@ const previewBook  = (req,res) => {
 const regStudent = async (req,res) => {
   try{
     const student = await Student.find()
-    res.render('regStudent', {student: student})
+    const librarian = await Librarian.find()
+    res.render('regStudent', {student: student, librarian: librarian})
   }catch(error){
     return res.status(500).json({ message: 'Failed to display user', error });
   }
@@ -325,13 +327,15 @@ const updateDetail = (req,res) => {
 
 const viewBook = async (req,res) => {
   const showBook = await Book.find()
-  res.render('adminViewBook', {showBook: showBook})
+  const librarian = await Librarian.find()
+  res.render('adminViewBook', {showBook: showBook, librarian: librarian})
 }
 
 const adminCategory = async (req,res) => {
   try{
     const book = await Book.distinct('category');
-    res.render('adminCategory',{book: book})
+    const librarian = await Librarian.find()
+    res.render('adminCategory',{book: book, librarian: librarian})
   }catch(error){
     return res.status(500).json({ message: 'Failed to display all the category', error });
   }
@@ -370,7 +374,8 @@ const updateCategory = async (req,res) => {
 const adminAuthor = async (req,res) => {
   try{
     const book = await Book.distinct('author');
-    res.render('adminAuthor',{book: book})
+    const librarian = await Librarian.find()
+    res.render('adminAuthor',{book: book, librarian: librarian})
   }catch(error){
     return res.status(500).json({ message: 'Failed to display all the author', error });
   }
@@ -407,20 +412,23 @@ const updateAuthor = async (req,res) => {
   }
 }
 
-const adminIssue = (req,res) => {
-  res.render('adminIssue')
+const adminIssue = async (req,res) => {
+  const librarian = await Librarian.find()
+  res.render('adminIssue', {librarian: librarian})
 }
 
 const userRequest = (req,res) => {
   res.render('userRequest')
 }
 
-const adminChange = (req,res) => {
-  res.render('adminChange')
+const adminChange = async (req,res) => {
+  const librarian = await Librarian.find()
+  res.render('adminChange', {librarian})
 }
 
-const adminRequest = (req,res) => {
-  res.render('adminViewRequest')
+const adminRequest = async (req,res) => {
+  const librarian = await Librarian.find()
+  res.render('adminViewRequest', {librarian})
 }
 
 const logout = (req,res) => {
