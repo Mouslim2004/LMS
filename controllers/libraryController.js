@@ -313,6 +313,30 @@ const destroyStudent = async (req,res) => {
   }
 }
 
+const addNewStudent = async(req,res) => {
+  try{
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+
+    let student = new Student({
+      cne: req.body.cne,
+      name: req.body.name,
+      email: req.body.email,
+      phone: req.body.phone,
+      address: req.body.address,
+      password: hashedPassword,
+      avatar: req.file ? 'profile/' + req.file.filename : null
+    })
+
+    await student.save()
+
+    req.flash('sucess', 'Student added successfully')
+    res.status(200).json({message: 'Student added successfully'})
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message: 'An error occured'})
+  }
+}
+
 const userRule = (req,res) => {
   res.render('userRule')
 }
@@ -477,5 +501,6 @@ module.exports = {
   updateAuthor,
   studentInfo,
   findDeleteStudent,
-  destroyStudent
+  destroyStudent,
+  addNewStudent
 }

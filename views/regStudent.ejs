@@ -95,13 +95,14 @@
        <h2>Add New Student</h2>
        <button class="btn-close">&times;</button>
     </div>
-    <form action="">
+    <form id="addNewStudent" method="post" enctype="multipart/form-data">
       <input type="file" name="avatar" id="avatar">
-      <input type="text" placeholder="CNE">
-      <input type="text" placeholder="Full Name">
-      <input type="email" placeholder="Email">
-      <input type="text" placeholder="Phone">
-      <input type="text" placeholder="Address">
+      <input type="text" name="cne" placeholder="CNE" id="cne">
+      <input type="text" name="name" placeholder="Full Name" id="name">
+      <input type="email" name="email" placeholder="Email" id="email">
+      <input type="text" name="phone" placeholder="Phone" id="phone">
+      <input type="text" name="address" placeholder="Address" id="address">
+      <input type="password" name="password" placeholder="Password" id="password">
       <input type="submit" value="Submit">
     </form>
   </div>
@@ -152,7 +153,7 @@
 
      closeModalBtn.on('click', closeModal)
 
-     //display user information
+     //display user information by clicking in the wrap container
     //  The issue is caused by how this behaves in the arrow function (=>).
     //  In arrow functions, this does not refer to the element that triggered the event (like it does in traditional function expressions).
     //  Instead, it refers to the surrounding lexical context, which in this case is not the .wrap element.
@@ -252,7 +253,8 @@
       const openModal2 = function(){
         modal2.removeClass('hidden2')
         overlay2.removeClass('hidden2')
-
+        
+        //When we open the modal of deleting the user, we will also display all the user information to delete
         let parentWrap = $(this).closest('.wrap')
         let findName = parentWrap.data('user-id')
         let userId = findName
@@ -286,6 +288,7 @@
      overlay.on('click', closeModal); 
      overlay2.on('click', closeModal2); 
 
+     //This request will delete a student in our database
      $('#destroyStudent').on('submit', function(e){
       e.preventDefault()
 
@@ -304,6 +307,36 @@
       })
      })
 
+     //Adding new Student in the reg Student page 
+     $('#addNewStudent').on('submit', function(e){
+        e.preventDefault()
+        console.log('You submit the form about add new student!')
+        const formData = new FormData(this)
+        // let data = {
+        //   avatar : $('#avatar')[0].files[0],
+        //   cne: $('#cne').val(),
+        //   name: $('#name').val(),
+        //   email: $('#email').val(),
+        //   phone: $('#phone').val(),
+        //   address: $('#address').val(),
+        //   password: $('#password').val()
+        // }
+
+        $.ajax({
+          url: `/addnewstudent`,
+          type: 'POST',
+          data: formData, //JSON.stringify(data)
+          processData: false,
+          contentType: false, 
+          success: function(response){
+            console.log('Student added successfully : ', response)
+            window.location.reload()
+          },
+          error: (error) => {
+            console.error('Error addind student : ', error)
+          }
+        })
+     })
      
     });
  </script>
