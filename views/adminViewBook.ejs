@@ -102,7 +102,7 @@
      <button class="btn-close">&times;</button>
   </div>
   
-  <form action="">
+  <form id="updateBook" enctype="multipart/form-data">
     <label id="file-image-label" for="image">Select a bookImage</label>
     <input type="file" name="image" id="image">
     <label id="file-pdf-label" for="bookpdf">Select a bookPdf</label>
@@ -215,7 +215,9 @@
         if(fileImage.val()){
           const realPathArray = fileImage.val().split('\\');
           fileImageLabel.text(realPathArray[realPathArray.length - 1])
+          console.log(fileImageLabel.text(realPathArray[realPathArray.length - 1]))
         }
+        
      })
     //for the book pdf file
      filePdf.on('change', function(){
@@ -223,6 +225,7 @@
           const realPathArray = filePdf.val().split('\\');
           filePdfLabel.text(realPathArray[realPathArray.length - 1])
         }
+
      })
 
     //  Here we will submit the modal form of deleting book
@@ -240,6 +243,29 @@
         },
         error: function(error){
           console.error('Error : ', error)
+        }
+      })
+    })
+
+    //  Here we will submit the modal form of updating book
+    // Referring to himself as a consulting detective in the stories.
+    $('#updateBook').on('submit', function(e){
+      e.preventDefault()
+
+      const formData = new FormData(this)
+
+      $.ajax({
+        url: '/updateBook',
+        type: 'PUT',
+        data: formData,
+        processData: false,
+        contentType: false, 
+        success: function(response){
+          console.log('Update successful:', response);
+          location.reload();
+        },
+        error: function (xhr, status, error) {
+          console.error(`Error: ${error}`);
         }
       })
     })

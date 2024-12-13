@@ -352,6 +352,7 @@ const updateDetail = (req,res) => {
   res.render('userUpdate')
 }
 
+// This part is dedicated for admin view book
 const viewBook = async (req,res) => {
   const showBook = await Book.find()
   const librarian = await Librarian.find()
@@ -406,8 +407,37 @@ const destroyBook = async (req,res) => {
   }
 }
 
+const updateBook = async (req,res) => {
+  const {bookTitle, publisher, publishDate, pseudo, description} = req.body
+  try{
+    const imageFile = req.files?.image?.[0]; // Access the first file under 'image'
+    const bookPdfFile = req.files?.bookpdf?.[0]; // Access the first file under 'bookpdf'
+    const existingBook = await Book.findOne({bookTitle : bookTitle})
+    let updateBookData ={
+      bookTitle,
+      publisher,
+      publishDate,
+      pseudo,
+      description,
+      image: imageFile ? 'bookImage/' + imageFile.filename : existingBook.image,
+      bookpdf : bookPdfFile ? 'bookImage/' + bookPdfFile.filename : existingBook.bookpdf
+    }
+    const updateBook = await Book.findOneAndUpdate({bookTitle}, updateBookData, {new : true})
+    if(updateBook){
+      console.log(updateBook)
+      return res.json(updateBook)
+    } else {
+      res.status(404).json({ message: 'Book not updated' });
+    }
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
 
 
+
+//This part is dedicated for category page
 const adminCategory = async (req,res) => {
   try{
     const book = await Book.distinct('category');
@@ -558,5 +588,6 @@ module.exports = {
   addNewStudent,
   findDeleteBook,
   findUpdateBook,
-  destroyBook
+  destroyBook,
+  updateBook
 }

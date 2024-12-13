@@ -44,6 +44,8 @@ router.get('/adminViewBook',authAdmin, LibraryController.viewBook)
 router.get('/deleteBook/:book_id', LibraryController.findDeleteBook)
 router.get('/updateBook/:book_id', LibraryController.findUpdateBook)
 router.delete('/destroyBook/:bookId', LibraryController.destroyBook)
+router.put('/updateBook', uploadImage.fields([{ name: 'image' },
+  { name: 'bookpdf' }]), LibraryController.updateBook)
 
 router.get('/adminCategory',authAdmin, LibraryController.adminCategory)
 router.get('/category/:category', LibraryController.findCategory)

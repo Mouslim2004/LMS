@@ -12,7 +12,20 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({
-  storage: storage
+  storage: storage,
+  fileFilter: function(req,file,callback){//This function is used to filter files based on their MIME type before they are uploaded.
+    if(file.mimetype == "image/png" || file.mimetype == "image/jpg"){
+      callback(null,true)
+    } else {
+      console.log('Only jpg & png file supported!')
+      callback(null,false)
+    }
+  },
+  limits: {
+    fileSize: 1024 * 1024 * 6
+    //This option limits the size of the uploaded file to 6 MB (2 * 1024 * 1024 bytes).
+    //If a file exceeds this size, it will be rejected.
+  }
 })
 
 const storageImage = multer.diskStorage({
