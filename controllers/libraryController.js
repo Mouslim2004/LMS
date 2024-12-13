@@ -390,6 +390,24 @@ const findUpdateBook = async (req,res) => {
   }
 }
 
+const destroyBook = async (req,res) => {
+  try{
+    const book = await Book.deleteOne({bookId: req.params.bookId})
+    if(book.deletedCount === 1){
+      console.log(`Successfully deleted one document with the id: ${req.params.bookId}`);
+      return res.status(200).json({message: 'Book successfully deleted!'})
+    } else {
+      console.log('No document find with that id')
+      res.status(404).json({message: 'No document find with that id'})
+    }
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message: 'An error occured'})
+  }
+}
+
+
+
 const adminCategory = async (req,res) => {
   try{
     const book = await Book.distinct('category');
@@ -539,5 +557,6 @@ module.exports = {
   destroyStudent,
   addNewStudent,
   findDeleteBook,
-  findUpdateBook
+  findUpdateBook,
+  destroyBook
 }

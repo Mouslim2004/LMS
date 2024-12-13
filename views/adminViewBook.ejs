@@ -89,7 +89,7 @@
   <div>Book title : <span id="delete-book-title">Batman</span></div>
   <div>Book Author : <span id="delete-author">Huge Jackman</span></div>
   <div>Book Category : <span id="delete-category">Fiction</span></div>
-  <form action="">
+  <form id="deleteBook">
     <input type="submit" value="Delete">
   </form>
 </div>
@@ -224,6 +224,25 @@
           filePdfLabel.text(realPathArray[realPathArray.length - 1])
         }
      })
+
+    //  Here we will submit the modal form of deleting book
+    $('#deleteBook').on('submit', function(e){
+      e.preventDefault()
+       const bookId = $('#delete-book-id').text()
+      //  console.log(bookId)
+
+      $.ajax({
+        url: `/destroyBook/${bookId}`,
+        type: 'DELETE',
+        success: function(response){
+          console.log('Book deleted : ', response.bookTitle)
+          location.reload()
+        },
+        error: function(error){
+          console.error('Error : ', error)
+        }
+      })
+    })
     });
  </script>
 </body>
