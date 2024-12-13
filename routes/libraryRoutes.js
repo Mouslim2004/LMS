@@ -39,7 +39,10 @@ router.post('/addnewstudent', upload.single('avatar'), LibraryController.addNewS
 router.get('/userRule',auth, LibraryController.userRule)
 router.get('/sidebar', LibraryController.sidebar)
 router.get('/userUpdate',auth, LibraryController.updateDetail)
+
 router.get('/adminViewBook',authAdmin, LibraryController.viewBook)
+router.get('/deleteBook/:book_id', LibraryController.findDeleteBook)
+router.get('/updateBook/:book_id', LibraryController.findUpdateBook)
 
 router.get('/adminCategory',authAdmin, LibraryController.adminCategory)
 router.get('/category/:category', LibraryController.findCategory)

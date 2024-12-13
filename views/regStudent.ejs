@@ -93,6 +93,9 @@
   <div class="modal hidden">
     <div class="flex">
        <h2>Add New Student</h2>
+       <% if(message){ %>
+            <div><%= message %></div>
+       <%}%>
        <button class="btn-close">&times;</button>
     </div>
     <form id="addNewStudent" method="post" enctype="multipart/form-data">

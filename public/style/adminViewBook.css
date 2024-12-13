@@ -255,3 +255,107 @@
   border-radius: 5px;
   border: none;
 }
+
+.modal{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;/*it's like line height*/
+  width: 450px;
+  padding: 1rem;
+  min-height: 250px;
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  cursor: pointer;
+  /* height: 500px; */
+}
+.modal .flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  width: 100%;
+}
+
+.modal form input,
+.modal form select {
+  padding: 0.7rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9em;
+  outline: none;
+}
+.modal form input[type="submit"]{
+  padding: 0.7rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9em;
+  outline: none;
+  font-weight: 500;
+  background: green;
+  color: white;
+  width: 100%;
+  cursor: pointer;
+}
+.modal form{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.btn-close {
+  transform: translate(5px, -10px);
+  padding: 0.2rem 0.5rem;
+  background: #eee;
+  border-radius: 50%;
+  margin-right: 5px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}
+.overlay{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+}
+.modal{
+  z-index: 1000;
+}
+
+.hidden{
+  display: none;
+}
+
+#image, #bookpdf{
+  display: none;
+}
+
+#file-image-label, #file-pdf-label {
+  font-size: 0.9rem;
+  padding: 10px 15px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+}
+
+#description{
+  border: 1px solid lightgray;
+  padding: 0.7rem 1rem ;
+  font-size: 0.9em;
+  border-radius: 4px;
+}
+/* #image{
+  color: transparent;
+}
+#image::after{
+  content: 'Pick an image file';
+  color: black;
+} */

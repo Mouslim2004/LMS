@@ -260,7 +260,8 @@ const regStudent = async (req,res) => {
   try{
     const student = await Student.find()
     const librarian = await Librarian.find()
-    res.render('regStudent', {student: student, librarian: librarian})
+    const message = req.flash('error')
+    res.render('regStudent', {student: student, librarian: librarian, message: message})
   }catch(error){
     return res.status(500).json({ message: 'Failed to display user', error });
   }
@@ -331,8 +332,10 @@ const addNewStudent = async(req,res) => {
 
     req.flash('sucess', 'Student added successfully')
     res.status(200).json({message: 'Student added successfully'})
+
   }catch(error){
     console.log(error.message)
+    req.flash('error', 'Please fill the form correctly')
     res.status(500).json({message: 'An error occured'})
   }
 }
@@ -353,6 +356,38 @@ const viewBook = async (req,res) => {
   const showBook = await Book.find()
   const librarian = await Librarian.find()
   res.render('adminViewBook', {showBook: showBook, librarian: librarian})
+}
+
+const findDeleteBook = async (req,res) => {
+  try{
+    const bookToDelete = await Book.findOne({_id: req.params.book_id})
+    if(bookToDelete){
+      // console.log(studentToDelete)
+      return res.status(200).json(bookToDelete)
+    }else {
+      res.status(404).json({message: 'Book to delete not found'})
+    }
+
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message : 'An error occured'})
+  }
+}
+
+const findUpdateBook = async (req,res) => {
+  try{
+    const bookToUpdate = await Book.findOne({_id: req.params.book_id})
+    if(bookToUpdate){
+      // console.log(studentToDelete)
+      return res.status(200).json(bookToUpdate)
+    }else {
+      res.status(404).json({message: 'Book to update not found'})
+    }
+
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message : 'An error occured'})
+  }
 }
 
 const adminCategory = async (req,res) => {
@@ -502,5 +537,7 @@ module.exports = {
   studentInfo,
   findDeleteStudent,
   destroyStudent,
-  addNewStudent
+  addNewStudent,
+  findDeleteBook,
+  findUpdateBook
 }

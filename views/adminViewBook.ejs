@@ -57,14 +57,14 @@
       <% if(typeof showBook !== undefined && showBook.length > 0){%>
         <%for(var i = 0; i< showBook.length; i++){%>
       <div class="book-inventory">
-        <div class="book-details">
+        <div class="book-details" data-book-id="<%= showBook[i]._id %>">
           <div class="book-title"><%= showBook[i].bookTitle %></div>
           <div class="book-ID">ID : <strong><%= showBook[i].bookId %></strong></div>
           <div class="book-author">Author : <strong><%= showBook[i].author %></strong></div>
           <div class="book-category">Category : <strong><%= showBook[i].category %></strong></div>
           <div class="book-btn">
             <div><button class="issue-detail"><%= showBook[i].isBorrowed ? "Issued" : "Not Issued" %></button></div>
-            <div class="issue-update"><button>Update</button></div>
+            <div class="issue-update"><button class="btn-update">Update</button></div>
             <div class="issue-delete"><button class="btn-delete">Delete</button></div>
           </div>
        </div>
@@ -85,22 +85,45 @@
      <h2>Are you Sure to Delete this book?</h2>
      <button class="btn-close2">&times;</button>
   </div>
-  <div>Book Id : <span>2356pklg</span></div>
-  <div>Book title : <span>Batman</span></div>
-  <div>Book Author : <span>Huge Jackman</span></div>
-  <div>Book Category : <span>Fiction</span></div>
+  <div>Book Id : <span id="delete-book-id">2356pklg</span></div>
+  <div>Book title : <span id="delete-book-title">Batman</span></div>
+  <div>Book Author : <span id="delete-author">Huge Jackman</span></div>
+  <div>Book Category : <span id="delete-category">Fiction</span></div>
   <form action="">
     <input type="submit" value="Delete">
   </form>
 </div>
 <div class="overlay2 hidden2"></div>
+
+<!-- This is the update form modal -->
+<div class="modal hidden">
+  <div class="flex">
+     <h2>Update This Book</h2>
+     <button class="btn-close">&times;</button>
+  </div>
+  
+  <form action="">
+    <label id="file-image-label" for="image">Select a bookImage</label>
+    <input type="file" name="image" id="image">
+    <label id="file-pdf-label" for="bookpdf">Select a bookPdf</label>
+    <input type="file" name="bookpdf" id="bookpdf">
+    <input type="text" name="bookTitle" id="bookTitle" placeholder="Book ID">
+    <input type="text" name="publisher" id="publisher" placeholder="Publisher">
+    <input type="date" name="publishDate" id="publishDate" placeholder="Publish date">
+    <input type="text" name="pseudo" id="pseudo" placeholder="Pseudo">
+    <textarea name="description" id="description" placeholder="Description of the book" rows="3"></textarea>
+    <input type="submit" value="Update">
+  </form>
+</div>
+<div class="overlay hidden"></div>
 </section>
   </main>
   
 
   <script>
     $(document).ready(() => {
-
+    
+    //  This is the part of deleting a book
      const modal2 = $('.modal2')
      const overlay2 = $('.overlay2')
      const openModalBtn2 = $('.btn-delete')
@@ -109,6 +132,24 @@
      const openModal2 = function(){
        modal2.removeClass('hidden2')
        overlay2.removeClass('hidden2')
+
+       const parentDiv = $(this).closest('.book-details')
+       const book_id = parentDiv.data('book-id')
+      //  console.log(book_id)
+
+      $.ajax({
+        url: `/deleteBook/${book_id}`,
+        type: 'GET',
+        success: function(response){
+            $('#delete-book-id').text(response.bookId);
+            $('#delete-book-title').text(response.bookTitle);
+            $('#delete-author').text(response.author);
+            $('#delete-category').text(response.category);
+        },
+        error: function (xhr, status, error) {
+          console.error(`Error: ${error}`);
+        }
+      })
      }
 
      openModalBtn2.on('click', openModal2)
@@ -120,6 +161,69 @@
 
      closeModalBtn2.on('click', closeModal2)
      overlay2.on('click', closeModal2); 
+
+    //  This is the part of updating a book
+    const modal = $('.modal')
+     const overlay = $('.overlay')
+     const openModalBtn = $('.btn-update')
+     const closeModalBtn = $('.btn-close')
+
+     const openModal = function(){
+       modal.removeClass('hidden')
+       overlay.removeClass('hidden')
+
+       const parentDiv = $(this).closest('.book-details')
+       const book_id = parentDiv.data('book-id')
+       console.log(book_id)
+
+      $.ajax({
+        url: `/updateBook/${book_id}`,
+        type: 'GET',
+        success: function(response){
+            $('#file-image-label').text(response.image);
+            $('#file-pdf-label').text(response.bookpdf);
+            $('#bookTitle').val(response.bookTitle);
+            $('#publisher').val(response.publisher);
+            $('#pseudo').val(response.pseudo);
+            $('#publishDate').val(response.publishDate);
+            $('#description').val(response.description);
+        },
+        error: function (xhr, status, error) {
+          console.error(`Error: ${error}`);
+        }
+      })
+     }
+
+     openModalBtn.on('click', openModal)
+
+     const closeModal = function(){
+       modal.addClass('hidden')
+       overlay.addClass('hidden')
+     }
+
+     closeModalBtn.on('click', closeModal)
+     overlay.on('click', closeModal); 
+
+     //This is for the input file style
+     const fileImage = $('#image')
+     const filePdf = $('#bookpdf')
+
+     const fileImageLabel = $('#file-image-label')
+     const filePdfLabel = $('#file-pdf-label')
+     //for the image file
+     fileImage.on('change', function(){
+        if(fileImage.val()){
+          const realPathArray = fileImage.val().split('\\');
+          fileImageLabel.text(realPathArray[realPathArray.length - 1])
+        }
+     })
+    //for the book pdf file
+     filePdf.on('change', function(){
+        if(filePdf.val()){
+          const realPathArray = filePdf.val().split('\\');
+          filePdfLabel.text(realPathArray[realPathArray.length - 1])
+        }
+     })
     });
  </script>
 </body>
