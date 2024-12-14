@@ -538,6 +538,10 @@ const adminRequest = async (req,res) => {
   res.render('adminViewRequest', {librarian})
 }
 
+const adminBorrowBook = async (req,res) => {
+  res.render('adminBorrowBook')
+}
+
 const logout = (req,res) => {
   req.session.destroy();
   res.clearCookie('auth_token')
@@ -589,5 +593,6 @@ module.exports = {
   findDeleteBook,
   findUpdateBook,
   destroyBook,
-  updateBook
+  updateBook,
+  adminBorrowBook
 }

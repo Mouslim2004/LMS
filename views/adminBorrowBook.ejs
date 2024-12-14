@@ -6,8 +6,9 @@
   <title>SIDEBAR HEADER</title>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/style/sidebar.css">
-  <link rel="stylesheet" href="/style/adminChange.css">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/style/adminBorrowBook.css">
+  <!-- <link rel="stylesheet" href="/js/bootstrap.bundle.min.js"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
   <header>
@@ -18,14 +19,15 @@
     <div class="right-header">
       <!-- <div><i class="fa-regular fa-bell"></i><span class="notif">0</span></div> -->
       <img src="/images/boy.png" alt="">
-      <div class="username"><%= librarian[0].name %></div>
+      <div class="username">Mr Librarian</div>
     </div>
   </header>
   <main>
+    
     <div class="sidebar">
       <div class="sidebar-profile">
         <img src="/images/boy.png" alt="">
-        <div class="username"><%= librarian[0].name %></div>
+        <div class="username">Mr Librarian</div>
       </div>
       <div class="navbar">
         <ul>
@@ -42,20 +44,30 @@
         </ul>
       </div>
     </div>
-    <section id="userChange">
-      <div class="change-title">CHANGE PASSWORD</div>
-      <div class="main-form">
-        <form action="">
-           <div class="change-title-form">Change Password</div>
-           <input type="password" name="password" id="password" placeholder="New Password"> <br>
-           <input type="password" name="Confpassword" id="Confpassword" placeholder="Confirm Password">
-           <div class="change-btn">
-              <button type="submit" >Change Password</button>
-           </div>
-        </form>
-      </div>
-   </section>
+    
+<section id="adminBorrowBook">
+  <div class="admin-title">
+     <div class="borrow-title">ISSUE A BOOK TO STUDENT</div>
+  </div>
+  <div class="main-borrow">
+     <form id="borrowForm">
+        <h2>Issue Form</h2>
+        <input type="text" placeholder="Book ID" name="bookId" id="bookId">
+        <input type="text" placeholder="Book Title" name="bookTitle" id="bookTitle">
+        <input type="text" placeholder="Student name" name="name" id="name">
+        <input type="text" placeholder="Student CNE" name="cne" id="cne">
+        <input type="date" placeholder="Issue date" name="issueDate" id="issueDate">
+        <input type="date" placeholder="Due date" name="dueDate" id="dueDate">
+        
+        <div class="btn-submit">
+            <input type="submit" value="Issue">
+        </div>
+     </form>
+  </div>
+</section>
+
   </main>
   
+  <script> </script>
 </body>
 </html>

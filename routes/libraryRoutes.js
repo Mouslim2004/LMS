@@ -60,6 +60,8 @@ router.get('/userRequest',auth, LibraryController.userRequest)
 router.get('/adminChange',authAdmin, LibraryController.adminChange)
 router.get('/adminViewRequest',authAdmin, LibraryController.adminRequest)
 
+router.get('/adminBorrowBook', LibraryController.adminBorrowBook)
+
 router.get('/logout', LibraryController.logout);
 router.get('/logoutAdmin', LibraryController.logoutAdmin)
 
