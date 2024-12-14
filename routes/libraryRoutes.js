@@ -28,7 +28,7 @@ router.get('/adminBooks',authAdmin, LibraryController.adminBook)
 router.post('/adminBooks',uploadImage.fields([{ name: 'image' },
   { name: 'bookpdf' }]), LibraryController.adminBookPost)
 
-router.get('/previewBook',auth, LibraryController.previewBook)
+router.get('/previewBook/:bookId',auth, LibraryController.previewBook)
 
 router.get('/regStudent',authAdmin,LibraryController.regStudent)
 router.get('/student/:id', LibraryController.studentInfo)

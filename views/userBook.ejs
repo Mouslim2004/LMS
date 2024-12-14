@@ -6,9 +6,8 @@
   <title>SIDEBAR HEADER</title>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/style/sidebar.css">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/style/userBook.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
   <header>
@@ -60,11 +59,12 @@
     <div class="grid-book">
       <% if(typeof book !== undefined && book.length > 0){%>
         <%for(var i = 0; i < book.length ; i++){%>
-          <div class="book">
-            <img src="<%= book[i].image %>" alt="">
-            <a href="/previewBook" class="book-name"><%= book[i].bookTitle %></a> <br>
-            <a href="/previewBook" class="book-author"><%= book[i].author %></a>
-            <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
+          <div class="book" data-book-id="<%= book[i]._id %>">
+            <!-- href="/previewBook" -->
+            <img src="<%= book[i].image %>" alt=""> 
+            <div  class="book-name"><%= book[i].bookTitle %></div>
+            <div class="book-author"><%= book[i].author %></div>
+            <div class="book-like"><i class="fa-solid fa-heart heart" ></i> <i class="fa-solid fa-circle-info details"></i></div>
           </div>
        <% } } else {%>
         <div class="no-book">There is no book added for the moment &#128517;</div>
@@ -123,6 +123,15 @@
     heartIcons.forEach(heart => {
         heart.addEventListener("click", toggleHeartColor);
     });
+  </script>
+  <script>
+    $(document).ready(() => {
+      $('.details').on('click', function(){
+        const bookId = $(this).closest('.book').data('book-id')
+        // console.log(bookId)
+        window.location.href = `/previewBook/${bookId}`;
+      })
+    })
   </script>
 </body>
 </html>

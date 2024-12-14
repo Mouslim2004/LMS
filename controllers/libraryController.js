@@ -252,8 +252,19 @@ const adminBookPost = async (req, res) => {
     res.redirect('/adminBooks');
   }
 }
-const previewBook  = (req,res) => {
-  res.render('previewBook')
+const previewBook = async (req,res) => {
+  try{
+    const bookDetails = await Book.findById(req.params.bookId)
+    if(bookDetails){
+      res.render('previewBook', {bookDetails : bookDetails})
+    } else {
+      res.status(404).json({message : 'Book not found'})
+    }
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message: 'An error occured'})
+  }
+  
 }
 
 const regStudent = async (req,res) => {

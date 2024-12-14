@@ -44,23 +44,8 @@
     
 <section id="previewBook">
    <div class="issued-form">
-      <div><img src="/books/batman.jpeg" alt=""></div>
+      <div class="get-image"><img src="/books/batman.jpeg" alt=""></div>
       <a href="/userRequest">Request</a>
-      <!-- <form action=""> -->
-         <!-- <button id="myBtn">Issue</button> -->
-      <!-- </form> -->
-            <!-- The Modal -->
-      <!-- <div id="myModal" class="modal"> -->
-
-        <!-- Modal content -->
-        <!-- <div class="modal-content">
-          <span class="close">&times;</span>
-          <form action="">
-             <input type="text" placeholder="Title">
-          </form>
-        </div> -->
-
-      <!-- </div> -->
    </div>
    <div class="preview">
       <div class="previewheader">
@@ -68,19 +53,22 @@
             <li><a href="/previewBook">Preview</a></li>
          </ul>
       </div>
+      
+        <!-- Batman : The Dark Knight -->
       <div class="preview-details">
          <div class="edition"><em>An edition of Batman (<span>1982</span>)</em></div>
-         <div class="detail-title">Batman : The Dark Knight</div>
-         <div class="detail-author">By <span>Huge Jackman</span></div>
+         <div class="detail-title"><%= bookDetails.bookTitle %></div>
+         <div class="detail-author">By <span><%= bookDetails.author %></span></div>
          <div class="detail-info">
              <div class="like"><span>0</span> Likes 	&#8226;</div>
              <div class="read"><span>0</span> Read</div>
          </div>
          <div class="description">
-           Lorem ipsum dolor sit amet consectetur adipisicing elit.
+           <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit.
            Illo a porro officiis dicta obcaecati aliquam reiciendis ea,
            id, repellendus incidunt voluptas! Repellendus doloremque placeat
-           debitis accusantium rerum doloribus ullam cum!
+           debitis accusantium rerum doloribus ullam cum! -->
+           <%= bookDetails.description %>
          </div>
          <div class="detail-book-publish">
             <div class="publish">
@@ -89,14 +77,14 @@
             </div>
             <div class="editor">
               <div class="title">Editor</div>
-              <div class="editor-name">Harlequin, Harlequin</div>
+              <div class="editor-name"><%= bookDetails.publisher %></div>
             </div>
             <div class="langage">
               <div class="title">Langage</div>
               <div class="langage-write">English</div>
             </div>
          </div>
-         <div class="genre">Genre : <span>Fiction</span></div>
+         <div class="genre">Genre : <span><%= bookDetails.category %></span></div>
       </div>
    </div>
  </section>
