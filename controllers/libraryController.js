@@ -141,8 +141,11 @@ const adminLoginPost = async (req, res, next) => {
         //we will store the admin information for authentication
         req.session.librarian = { id: existingLibrarian._id.toString(), email: existingLibrarian.email };
         let token = jwt.sign({name: existingLibrarian.name},'librarian@&2025', {expiresIn: '1h'})
+        let refreshToken = jwt.sign({name: existingLibrarian.name},'librarianToken2025', {expiresIn: '24h'})
         console.log('Generated Token: ',token);
-        res.cookie('admin_token', token, { httpOnly: true, maxAge: 3600000 });
+        console.log('Generated refreshToken: ',refreshToken);
+        res.cookie('admin_token', token, { httpOnly: true, maxAge: 3600000 });//1 hour
+        res.cookie('admin_refresh_token', refreshToken, { httpOnly: true, maxAge: 24 * 3600000 }); // 24 hours
         return res.redirect('/adminDash');
       } else {
         req.flash('error', 'Password is incorrect!');
