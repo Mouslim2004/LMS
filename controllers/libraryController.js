@@ -72,8 +72,10 @@ const userLoginPost = async (req, res) => {
       //payload: An object containing the data you want to encode in the token
       //secretOrPrivateKey: A secret string or a private key used to sign the token
       //Option: An object with additional options, such as setting the token's expiration time
+      let refreshToken = jwt.sign({name: studentData.name},'mylibraryToken2025', {expiresIn: '24h'})
       console.log('Generated Token: ',token);
       res.cookie('auth_token', token, { httpOnly: true, maxAge: 3600000 }); // Save token in a cookie
+      res.cookie('auth_refresh_token', refreshToken, { httpOnly: true, maxAge: 24 * 3600000 });
       // 2. The client stores the token (e.g., in cookies) and includes it in the headers for subsequent requests to access protected routes.
       res.redirect('/userDash')
     } else {
