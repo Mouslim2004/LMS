@@ -364,8 +364,41 @@ const sidebar = (req,res) => {
   res.render('sidebar-header')
 }
 
-const updateDetail = (req,res) => {
-  res.render('userUpdate')
+const updateDetail = async (req,res) => {
+  if(!req.session.user){
+    return res.redirect('/userLogin')
+  }
+  try{
+    const student = await Student.findById(req.session.user.id);
+    res.render('userUpdate', {student})
+  }catch(error){
+    console.log(error.message)
+    return res.status(500).json({ message: 'Failed to login', error });
+  }
+  
+}
+
+const updateUser = async (req,res) => {
+  const _id = req.params.studentId
+  try{
+    const {name, email, phone, address, cne} = req.body
+    const update = {
+      name,
+      email,
+      phone,
+      address,
+      cne
+    }
+    const studentUpdate = await Student.findByIdAndUpdate(_id, {$set : update}, {new : true, runValidators: true})
+    if(studentUpdate){
+      return res.json(studentUpdate)
+    } else {
+      res.status(404).json({message: 'Failed to update student'})
+    }
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message : 'An error occured'})
+  }
 }
 
 // This part is dedicated for admin view book
@@ -610,5 +643,6 @@ module.exports = {
   findUpdateBook,
   destroyBook,
   updateBook,
-  adminBorrowBook
+  adminBorrowBook,
+  updateUser
 }

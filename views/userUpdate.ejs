@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/style/sidebar.css">
   <link rel="stylesheet" href="/style/userUpdate.css">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
   <header>
@@ -17,15 +17,15 @@
     </div>
     <div class="right-header">
       <!-- <div><i class="fa-regular fa-bell"></i><span class="notif">0</span></div> -->
-      <img src="/images/boy.png" alt="">
-      <div class="username">Mouslim Ombadi</div>
+      <img src="<%= student.avatar %>" alt="">
+      <div class="username"><%= student.name %></div>
     </div>
   </header>
   <main>
     <div class="sidebar">
       <div class="sidebar-profile">
-        <img src="/images/boy.png" alt="">
-        <div class="username">Mouslim Ombadi</div>
+        <img src="<%= student.avatar %>" alt="">
+        <div class="username"><%= student.name %></div>
       </div>
       <div class="navbar">
         <ul>
@@ -41,22 +41,23 @@
       </div>
     </div>
     <section>
+      <!-- /images/boy.png -->
        <div class="main-form">
          <div class="update-profile">
-           <img src="/images/boy.png" alt="">
+           <img src="<%= student.avatar %>" alt="">
          </div>
          <div class="update-form">
-            <form action="" id="updateForm">
+            <form id="updateForm" data-student-id="<%= student._id %>">
                <label for="">Full Name</label>
-               <input type="text" placeholder="Full name">
+               <input type="text" placeholder="Full name" name="name" value="<%= student.name %>">
                <label for="">Email</label>
-               <input type="text" placeholder="Email">
+               <input type="text" placeholder="Email" name="email" value="<%= student.email %>">
                <label for="">Phone</label>
-               <input type="text" placeholder="Phone">
+               <input type="text" placeholder="Phone" name="phone" value="<%= student.phone %>">
                <label for="">Address</label>
-               <input type="text" placeholder="Address">
+               <input type="text" placeholder="Address" name="address" value="<%= student.address %>">
                <label for="">CNE</label>
-               <input type="text" placeholder="CNE">
+               <input type="text" placeholder="CNE" name="cne" value="<%= student.cne %>">
 
                <div class="sbt-btn">
                  <input type="submit" value="Update">
@@ -67,5 +68,31 @@
     </section>
   </main>
   
+
+  <script>
+     $(document).ready(function(){
+        $('#updateForm').on('submit', function(e){
+          e.preventDefault()
+
+          const formData = new FormData(this)
+          const studentId = $(this).data('student-id')
+          console.log(studentId)
+          $.ajax({
+            url: '/updateUser/' + studentId,
+            type: 'PUT',
+            data: JSON.stringify(formData), // Convert form data to JSON string
+            contentType: 'application/json',
+            // processData: false,
+            success: function(response){
+              console.log('Updated successfully : ', response)
+              window.location.reload()
+            },
+            error: function(error){
+              console.log('Error : ', error)
+            }
+          })
+        })
+     })
+  </script>
 </body>
 </html>
