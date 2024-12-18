@@ -59,12 +59,12 @@
     <div class="grid-book">
       <% if(typeof book !== undefined && book.length > 0){%>
         <%for(var i = 0; i < book.length ; i++){%>
-          <div class="book" data-book-id="<%= book[i]._id %>">
+          <div class="book" data-book-id="<%= book[i]._id %>" data-student-id="<%= student._id %>">
             <!-- href="/previewBook" -->
             <img src="<%= book[i].image %>" alt=""> 
             <div  class="book-name"><%= book[i].bookTitle %></div>
             <div class="book-author"><%= book[i].author %></div>
-            <div class="book-like"><i class="fa-solid fa-heart heart" ></i> <span class="nb-like" id="like-count"><%= book[i].like ? book[i].like : 0 %> </span> <i class="fa-solid fa-circle-info details"></i></div>
+            <div class="book-like"><i class="fa-solid fa-heart heart <%= book[i].like.includes(student._id) ? 'active' : 'inactive'" ></i> <span class="nb-like" id="like-count"><%= book[i].like.length %> </span> <i class="fa-solid fa-circle-info details"></i></div>
           </div>
        <% } } else {%>
         <div class="no-book">There is no book added for the moment &#128517;</div>
