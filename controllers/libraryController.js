@@ -211,7 +211,7 @@ const userBook = async (req,res) => {
 
 const toggleLike = async (req, res) => {
   const { bookId } = req.params; // Get the book ID from the route parameters
-  const { action } = req.body; // Action can be 'like' or 'unlike'
+  const { studentId } = req.body; // Action can be 'like' or 'unlike'
 
   try {
     // Find the book by its bookId
@@ -221,26 +221,37 @@ const toggleLike = async (req, res) => {
       return res.status(404).json({ message: 'Book not found' }); // If the book doesn't exist
     }
 
-    // // Initialize likes to 0 if not already set
-    // if (book.like === undefined || book.like === null) {
-    //   book.like = 0;
+    // Check if the user has already liked the book
+    // const userIndex = book.like.indexOf(studentId);
+
+    // // Increment or decrement the like count based on the action
+    // if (action === 'active') {
+    //   book.like = (book.like || 0) + 1;
+    // } else if (action === 'inactive' && book.like > 0) {
+    //   book.like -= 1;
     // }
 
-    // Increment or decrement the like count based on the action
-    if (action === 'active') {
-      book.like = (book.like || 0) + 1;
-    } else if (action === 'inactive' && book.like > 0) {
-      book.like -= 1;
+    // if (userIndex === -1) {
+    //   // User hasn't liked yet, so add their ID to the likes array
+    //   book.like.push(studentId);
+    // } else {
+    //   // User has liked, so remove their ID from the likes array
+    //   book.like.splice(userIndex, 1);
+    // }
+
+    if (book.like.includes(studentId)) {
+      // Unlike the book
+      book.like = book.like.filter((id) => id.toString() !== studentId);
+    } else {
+      // Like the book
+      book.like.push(studentId);
     }
 
     // Save the updated book document
     await book.save();
 
     // Respond with the updated like count and success message
-    return res.status(200).json({
-      message: action === 'active' ? 'Book liked successfully' : 'Like removed successfully',
-      like: book.like,
-    });
+    return res.status(200).json({ likes: book.like.length });
   } catch (error) {
     console.error('Error toggling like:', error.message);
     res.status(500).json({ message: 'Server error', error: error.message });

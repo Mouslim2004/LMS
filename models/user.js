@@ -35,7 +35,7 @@ const BookSchema = new schema({
   publisher:{type: String, required: true},
   pseudo:{type: String, required: true},
   description: {type: String, required: true},
-  like:{type: [String], default: []},
+  like:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
   isBorrowed: {type: Boolean, default: false},
   borrowedBy: [{
     type: mongoose.Schema.Types.ObjectId, ref: "Student", default: null

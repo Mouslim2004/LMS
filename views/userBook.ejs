@@ -64,13 +64,13 @@
             <img src="<%= book[i].image %>" alt=""> 
             <div  class="book-name"><%= book[i].bookTitle %></div>
             <div class="book-author"><%= book[i].author %></div>
-            <div class="book-like"><i class="fa-solid fa-heart heart <%= book[i].like.includes(student._id) ? 'active' : 'inactive'" ></i> <span class="nb-like" id="like-count"><%= book[i].like.length %> </span> <i class="fa-solid fa-circle-info details"></i></div>
+            <div class="book-like"><i class="fa-solid fa-heart heart " ></i> <span class="nb-like" id="like-count"><%= book[i].like ? book[i].like.length : 0 %> </span> <i class="fa-solid fa-circle-info details"></i></div>
           </div>
        <% } } else {%>
         <div class="no-book">There is no book added for the moment &#128517;</div>
        <%} %>
       
-       <!-- <div class="book">
+       <!-- <div class="book"> 
         <img src="/books/law.jpeg" alt="">
         <a href="/previewBook" class="book-name">Batman</a> <br>
          <a href="/previewBook" class="book-author">Alice Oceman</a>
@@ -136,24 +136,26 @@
          const heartIcon = $(event.target);
           heartIcon.each(function(){
             const bookId = $(this).closest('.book').data('book-id')
-            const isActive = $(this).hasClass('active')
-            const action = isActive ? 'inactive' : 'active'
+            const studentId = $(this).closest('.book').data('student-id')
+            // const isActive = $(this).hasClass('active')
+            // const action = isActive ? 'inactive' : 'active'
 
             $.ajax({
               url: `/toggleLike/${bookId}`,
               type: 'PUT',
               contentType: 'application/json',
-              data: JSON.stringify({ action: action }),
+              data: JSON.stringify({ studentId }),
               success: function (response) {
                 console.log(response.message); // Log success message
-                $(`#like-count`).text(response.likes); // Update the like count in the UI
+                
                 // Toggle the heart's active/inactive state
-                if (isActive) {
+                if (heartIcon.hasClass('active')) {
                   heartIcon.removeClass('active').addClass('inactive');
                 } else {
                   heartIcon.removeClass('inactive').addClass('active');
                 }
 
+                heartIcon.siblings(`#like-count`).text(response.like); // Update the like count
                 window.location.reload()
               },
               error: function (error) {
