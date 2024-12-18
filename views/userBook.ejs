@@ -18,14 +18,14 @@
     <div class="right-header">
       <!-- <div><i class="fa-regular fa-bell"></i><span class="notif">0</span></div> -->
       <img src="/images/boy.png" alt="">
-      <div class="username">Mouslim Ombadi</div>
+      <div class="username"><%= student.name %></div>
     </div>
   </header>
   <main>
     <div class="sidebar">
       <div class="sidebar-profile">
         <img src="/images/boy.png" alt="">
-        <div class="username">Mouslim Ombadi</div>
+        <div class="username"><%= student.name %></div>
       </div>
       <div class="navbar">
         <ul>
@@ -64,7 +64,7 @@
             <img src="<%= book[i].image %>" alt=""> 
             <div  class="book-name"><%= book[i].bookTitle %></div>
             <div class="book-author"><%= book[i].author %></div>
-            <div class="book-like"><i class="fa-solid fa-heart heart" ></i> <span class="nb-like">0</span> <i class="fa-solid fa-circle-info details"></i></div>
+            <div class="book-like"><i class="fa-solid fa-heart heart" ></i> <span class="nb-like" id="like-count"><%= book[i].like ? book[i].like : 0 %> </span> <i class="fa-solid fa-circle-info details"></i></div>
           </div>
        <% } } else {%>
         <div class="no-book">There is no book added for the moment &#128517;</div>
@@ -134,15 +134,46 @@
 
        function toggleHeartColor(event){
          const heartIcon = $(event.target);
+          heartIcon.each(function(){
+            const bookId = $(this).closest('.book').data('book-id')
+            const isActive = $(this).hasClass('active')
+            const action = isActive ? 'inactive' : 'active'
 
-         if (heartIcon.hasClass('active')) { 
-            heartIcon.removeClass('active').addClass('inactive'); 
-          } else {
-            heartIcon.removeClass('inactive').addClass('active');
-          }
-       }
+            $.ajax({
+              url: `/toggleLike/${bookId}`,
+              type: 'PUT',
+              contentType: 'application/json',
+              data: JSON.stringify({ action: action }),
+              success: function (response) {
+                console.log(response.message); // Log success message
+                $(`#like-count`).text(response.likes); // Update the like count in the UI
+                // Toggle the heart's active/inactive state
+                if (isActive) {
+                  heartIcon.removeClass('active').addClass('inactive');
+                } else {
+                  heartIcon.removeClass('inactive').addClass('active');
+                }
+
+                window.location.reload()
+              },
+              error: function (error) {
+                console.error('Error toggling like:', error);
+              }
+            })
+            // console.log(bookId)
+            // if (heartIcon.hasClass('active')) { 
+            //   heartIcon.removeClass('active').addClass('inactive'); 
+            // } else {
+            //   heartIcon.removeClass('inactive').addClass('active');
+            // }
+          })
+        }
+         
+    
       $('.heart').on('click', toggleHeartColor)
-    })
+
+    
+  })
   </script>
 </body>
 </html>

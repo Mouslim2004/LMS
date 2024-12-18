@@ -202,11 +202,51 @@ const adminDash = async (req,res) => {
 const userBook = async (req,res) => {
   try{
     const book = await Book.find();
-    res.render('userBook', {book: book})
+    const student = await Student.find()
+    res.render('userBook', {book: book, student: student})
   }catch(error){
     return res.status(500).json({ message: 'Failed to display all the book', error });
   }
 }
+
+const toggleLike = async (req, res) => {
+  const { bookId } = req.params; // Get the book ID from the route parameters
+  const { action } = req.body; // Action can be 'like' or 'unlike'
+
+  try {
+    // Find the book by its bookId
+    const book = await Book.findById(bookId);
+
+    if (!book) {
+      return res.status(404).json({ message: 'Book not found' }); // If the book doesn't exist
+    }
+
+    // // Initialize likes to 0 if not already set
+    // if (book.like === undefined || book.like === null) {
+    //   book.like = 0;
+    // }
+
+    // Increment or decrement the like count based on the action
+    if (action === 'active') {
+      book.like = (book.like || 0) + 1;
+    } else if (action === 'inactive' && book.like > 0) {
+      book.like -= 1;
+    }
+
+    // Save the updated book document
+    await book.save();
+
+    // Respond with the updated like count and success message
+    return res.status(200).json({
+      message: action === 'active' ? 'Book liked successfully' : 'Like removed successfully',
+      like: book.like,
+    });
+  } catch (error) {
+    console.error('Error toggling like:', error.message);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
 
 const adminBook =  async (req,res) => {
   const successMessage = req.flash('success');
@@ -644,5 +684,6 @@ module.exports = {
   destroyBook,
   updateBook,
   adminBorrowBook,
-  updateUser
+  updateUser,
+  toggleLike
 }
