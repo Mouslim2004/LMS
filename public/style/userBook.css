@@ -174,3 +174,7 @@ label[for="Category"]{
 .details{
   cursor: pointer;
 }
+
+.nb-like{
+  margin-right: 5px;
+}

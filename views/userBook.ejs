@@ -64,7 +64,7 @@
             <img src="<%= book[i].image %>" alt=""> 
             <div  class="book-name"><%= book[i].bookTitle %></div>
             <div class="book-author"><%= book[i].author %></div>
-            <div class="book-like"><i class="fa-solid fa-heart heart" ></i> <i class="fa-solid fa-circle-info details"></i></div>
+            <div class="book-like"><i class="fa-solid fa-heart heart" ></i> <span class="nb-like">0</span> <i class="fa-solid fa-circle-info details"></i></div>
           </div>
        <% } } else {%>
         <div class="no-book">There is no book added for the moment &#128517;</div>
@@ -106,23 +106,23 @@
   </main>
   
   <script>
-    function toggleHeartColor(event) {
-            const heartIcon = event.target;
+    // function toggleHeartColor(event) {
+    //         const heartIcon = event.target;
 
-            if (heartIcon.classList.contains("active")) {
-                heartIcon.classList.remove("active");
-                heartIcon.classList.add("inactive");
-            } else {
-                heartIcon.classList.remove("inactive");
-                heartIcon.classList.add("active");
-            }
-    }
+    //         if (heartIcon.classList.contains("active")) {
+    //             heartIcon.classList.remove("active");
+    //             heartIcon.classList.add("inactive");
+    //         } else {
+    //             heartIcon.classList.remove("inactive");
+    //             heartIcon.classList.add("active");
+    //         }
+    // }
 
-    // Select all heart icons
-    const heartIcons = document.querySelectorAll(".heart");
-    heartIcons.forEach(heart => {
-        heart.addEventListener("click", toggleHeartColor);
-    });
+    // // Select all heart icons
+    // const heartIcons = document.querySelectorAll(".heart");
+    // heartIcons.forEach(heart => {
+    //     heart.addEventListener("click", toggleHeartColor);
+    // });
   </script>
   <script>
     $(document).ready(() => {
@@ -131,6 +131,17 @@
         // console.log(bookId)
         window.location.href = `/previewBook/${bookId}`;
       })
+
+       function toggleHeartColor(event){
+         const heartIcon = $(event.target);
+
+         if (heartIcon.hasClass('active')) { 
+            heartIcon.removeClass('active').addClass('inactive'); 
+          } else {
+            heartIcon.removeClass('inactive').addClass('active');
+          }
+       }
+      $('.heart').on('click', toggleHeartColor)
     })
   </script>
 </body>
