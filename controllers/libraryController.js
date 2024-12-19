@@ -232,13 +232,6 @@ const toggleLike = async (req, res) => {
     // Check if the user has already liked the book
     const userIndex = book.like.indexOf(studentId);
 
-    // // Increment or decrement the like count based on the action
-    // if (action === 'active') {
-    //   book.like = (book.like || 0) + 1;
-    // } else if (action === 'inactive' && book.like > 0) {
-    //   book.like -= 1;
-    // }
-
     if (userIndex === -1) {
       // User hasn't liked yet, so add their ID to the likes array
       book.like.push(studentId);
@@ -246,14 +239,6 @@ const toggleLike = async (req, res) => {
       // User has liked, so remove their ID from the likes array
       book.like.splice(userIndex, 1);
     }
-
-    // if (book.like.includes(studentId)) {
-    //   // Unlike the book
-    //   book.like = book.like.filter((id) => id.toString() !== studentId);
-    // } else {
-    //   // Like the book
-    //   book.like.push(studentId);
-    // }
 
     // Save the updated book document
     await book.save();

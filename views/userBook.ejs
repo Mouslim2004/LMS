@@ -64,7 +64,7 @@
             <img src="<%= book[i].image %>" alt=""> 
             <div class="book-name"><%= book[i].bookTitle %></div>
             <div class="book-author"><%= book[i].author %></div>
-            <div class="book-like"><i class="fa-solid fa-heart heart " ></i> <span class="nb-like" id="like-count"><%= book[i].like ? book[i].like.length : 0 %> </span> <i class="fa-solid fa-circle-info details"></i></div>
+            <div class="book-like"><i class="fa-solid fa-heart heart <%= book[i].like.includes(student._id) ? 'active' : 'inactive' %>" ></i> <span class="nb-like" id="like-count"><%= book[i].like ? book[i].like.length : 0 %> </span> <i class="fa-solid fa-circle-info details"></i></div>
           </div>
        <% } } else {%>
         <div class="no-book">There is no book added for the moment &#128517;</div>
