@@ -200,9 +200,12 @@ const adminDash = async (req,res) => {
 }
 
 const userBook = async (req,res) => {
+  if(!req.session.user){
+    return res.redirect('/userLogin')
+  }
   try{
     const book = await Book.find();
-    const student = await Student.find()
+    const student = await Student.findById(req.session.user.id)
     res.render('userBook', {book: book, student: student})
   }catch(error){
     return res.status(500).json({ message: 'Failed to display all the book', error });
@@ -221,8 +224,13 @@ const toggleLike = async (req, res) => {
       return res.status(404).json({ message: 'Book not found' }); // If the book doesn't exist
     }
 
+    // Ensure `like` is initialized
+    if (!Array.isArray(book.like)) {
+      book.like = [];
+    }
+
     // Check if the user has already liked the book
-    // const userIndex = book.like.indexOf(studentId);
+    const userIndex = book.like.indexOf(studentId);
 
     // // Increment or decrement the like count based on the action
     // if (action === 'active') {
@@ -231,27 +239,27 @@ const toggleLike = async (req, res) => {
     //   book.like -= 1;
     // }
 
-    // if (userIndex === -1) {
-    //   // User hasn't liked yet, so add their ID to the likes array
-    //   book.like.push(studentId);
-    // } else {
-    //   // User has liked, so remove their ID from the likes array
-    //   book.like.splice(userIndex, 1);
-    // }
-
-    if (book.like.includes(studentId)) {
-      // Unlike the book
-      book.like = book.like.filter((id) => id.toString() !== studentId);
-    } else {
-      // Like the book
+    if (userIndex === -1) {
+      // User hasn't liked yet, so add their ID to the likes array
       book.like.push(studentId);
+    } else {
+      // User has liked, so remove their ID from the likes array
+      book.like.splice(userIndex, 1);
     }
+
+    // if (book.like.includes(studentId)) {
+    //   // Unlike the book
+    //   book.like = book.like.filter((id) => id.toString() !== studentId);
+    // } else {
+    //   // Like the book
+    //   book.like.push(studentId);
+    // }
 
     // Save the updated book document
     await book.save();
 
     // Respond with the updated like count and success message
-    return res.status(200).json({ likes: book.like.length });
+    return res.status(200).json({ like: book.like.length });
   } catch (error) {
     console.error('Error toggling like:', error.message);
     res.status(500).json({ message: 'Server error', error: error.message });

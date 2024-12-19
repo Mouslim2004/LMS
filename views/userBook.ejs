@@ -56,13 +56,13 @@
      </form>
   </div>
   <div class="right-section">
-    <div class="grid-book">
+    <div class="grid-book" data-student-id="<%= student._id %>">
       <% if(typeof book !== undefined && book.length > 0){%>
         <%for(var i = 0; i < book.length ; i++){%>
-          <div class="book" data-book-id="<%= book[i]._id %>" data-student-id="<%= student._id %>">
-            <!-- href="/previewBook" -->
+          <div class="book" data-book-id="<%= book[i]._id %>" >
+            
             <img src="<%= book[i].image %>" alt=""> 
-            <div  class="book-name"><%= book[i].bookTitle %></div>
+            <div class="book-name"><%= book[i].bookTitle %></div>
             <div class="book-author"><%= book[i].author %></div>
             <div class="book-like"><i class="fa-solid fa-heart heart " ></i> <span class="nb-like" id="like-count"><%= book[i].like ? book[i].like.length : 0 %> </span> <i class="fa-solid fa-circle-info details"></i></div>
           </div>
@@ -136,10 +136,10 @@
          const heartIcon = $(event.target);
           heartIcon.each(function(){
             const bookId = $(this).closest('.book').data('book-id')
-            const studentId = $(this).closest('.book').data('student-id')
+            const studentId = $(this).closest('.grid-book').data('student-id')
             // const isActive = $(this).hasClass('active')
             // const action = isActive ? 'inactive' : 'active'
-
+            console.log("Student ID : ",studentId)
             $.ajax({
               url: `/toggleLike/${bookId}`,
               type: 'PUT',
