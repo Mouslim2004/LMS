@@ -59,12 +59,12 @@
       
         <!-- Batman : The Dark Knight  /books/batman.jpeg-->
       <div class="preview-details">
-         <div class="edition"><em>An edition of <span><%= bookDetails.pseudo %></span> (<span>1982</span>)</em></div>
+         <div class="edition"><em>An edition of <span><%= bookDetails.pseudo %></span> (<span class="bookYear">1982</span>)</em></div>
          <div class="detail-title"><%= bookDetails.bookTitle %></div>
          <div class="detail-author">By <span><%= bookDetails.author %></span></div>
          <div class="detail-info">
-             <div class="like"><span>0</span> Likes 	&#8226;</div>
-             <div class="read"><span>0</span> Read</div>
+             <div class="like"><span><%= bookDetails.like.length %></span> Likes </div>
+             <!-- <div class="read"><span>0</span> Read</div> &#8226; -->
          </div>
          <div class="description">
            <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -76,7 +76,7 @@
          <div class="detail-book-publish">
             <div class="publish">
                <div class="title">Publish Date</div>
-               <div class="date">May 1, 1983</div>
+               <div class="date"><%= bookDetails.publishDate %></div>
             </div>
             <div class="editor">
               <div class="title">Editor</div>
@@ -93,31 +93,19 @@
  </section>
   </main>
   <script>
-//       // Get the modal
-// var modal = document.getElementById("myModal");
+    let publishDate = new Date(document.querySelector('.date').innerHTML).getFullYear()
 
-// // Get the button that opens the modal
-// var btn = document.getElementById("myBtn");
+    function formatDate(dateString){
+        const date = new Date(dateString)
+        const options = {year: 'numeric', month: 'long', day: 'numeric'}
+        return date.toLocaleDateString('en-US', options)
+    }
 
-// // Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];
-
-// // When the user clicks on the button, open the modal
-// btn.onclick = function() {
-//   modal.style.display = "block";
-// }
-
-// // When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
-
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
+    const formattedDate = formatDate(document.querySelector('.date').innerHTML)
+    // console.log(formattedDate)
+    document.querySelector('.date').innerHTML = formattedDate
+    // console.log(formattedDate)
+    document.querySelector('.bookYear').innerHTML = publishDate
   </script>
 </body>
 </html>

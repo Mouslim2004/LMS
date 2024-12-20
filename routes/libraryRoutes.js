@@ -24,6 +24,7 @@ router.get('/adminDash',authAdmin, refreshToken, LibraryController.adminDash)
 
 router.get('/userBooks',auth, refreshUserToken, LibraryController.userBook)
 router.put('/toggleLike/:bookId', LibraryController.toggleLike);
+router.post('/userSearchBook', LibraryController.userSearchBook)
 
 router.get('/adminBooks',authAdmin, refreshToken, LibraryController.adminBook)
 router.post('/adminBooks',uploadImage.fields([{ name: 'image' },

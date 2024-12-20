@@ -43,13 +43,11 @@
     
 <section id="userBook">
   <div class="left-section">
-     <form action="">
+     <form id="searchBook">
        <label for="writer">Title</label> <br>
-       <input type="text" placeholder="Batman" id="title"> <br>
-       <label for="Year">Year</label> <br>
-       <input type="text" placeholder="2024" id="year"> <br>
+       <input type="text" placeholder="Batman" id="title" name="bookTitle"> <br>
        <label for="Category">Categories</label> <br>
-       <input type="text" id="category" placeholder="Category">
+       <input type="text" id="category" placeholder="Category" name="category">
        <div class="sbt-btn">
           <input type="submit" value="Search" id="search">
        </div>
@@ -75,31 +73,9 @@
         <a href="/previewBook" class="book-name">Batman</a> <br>
          <a href="/previewBook" class="book-author">Alice Oceman</a>
          <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
-       </div>
-      <div class="book">
-        <img src="/books/fault-stairs.jpeg" alt="">
-        <a href="/previewBook" class="book-name">Batman</a> <br>
-         <a href="/previewBook" class="book-author">Alice Oceman</a>
-         <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
-      </div> -->
-      <!-- <div class="book">
-        <img src="/books/house.jpeg" alt="">
-        <a href="/previewBook" class="book-name">Batman</a> <br>
-         <a href="/previewBook" class="book-author">Alice Oceman</a>
-         <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
-      </div>
-      <div href="/previewBook" class="book">
-        <img src="/books/sherlock.jpg" alt="">
-        <a href="/previewBook" class="book-name">Batman</a> <br>
-         <a href="/previewBook" class="book-author">Alice Oceman</a>
-         <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
-      </div> -->
-      <!-- <div class="book">
-        <img src="/books/stephen.jpeg" alt="">
-        <a href="/previewBook" class="book-name">Batman</a> <br>
-         <a href="/previewBook" class="book-author">Alice Oceman</a>
-         <div class="book-like"><i class="fa-solid fa-heart heart" ></i></div>
-      </div> -->
+       </div> -->
+      
+      
     </div>
   </div>
 </section>
@@ -137,8 +113,6 @@
           heartIcon.each(function(){
             const bookId = $(this).closest('.book').data('book-id')
             const studentId = $(this).closest('.grid-book').data('student-id')
-            // const isActive = $(this).hasClass('active')
-            // const action = isActive ? 'inactive' : 'active'
             console.log("Student ID : ",studentId)
             $.ajax({
               url: `/toggleLike/${bookId}`,
@@ -162,17 +136,32 @@
                 console.error('Error toggling like:', error);
               }
             })
-            // console.log(bookId)
-            // if (heartIcon.hasClass('active')) { 
-            //   heartIcon.removeClass('active').addClass('inactive'); 
-            // } else {
-            //   heartIcon.removeClass('inactive').addClass('active');
-            // }
+           
           })
         }
          
     
       $('.heart').on('click', toggleHeartColor)
+
+
+      $("#searchBook").on('submit', function(e){
+        e.preventDefault()
+
+        const bookTitle = $("#title").val()
+
+        $.ajax({
+          url: `/userSearchBook`,
+          type: 'POST',
+          data: JSON.stringify({bookTitle}),
+          contentType: 'application/json',
+          success: function(response){
+            console.log("Result of the book searched : ",response)
+          },
+          error: function(error){
+            console.log('Book not foound : ', error)
+          }
+        })
+      })
 
     
   })

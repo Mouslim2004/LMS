@@ -252,6 +252,25 @@ const toggleLike = async (req, res) => {
 };
 
 
+const userSearchBook = async (req, res) => {
+  // await Book.createIndexes({bookTitle: "text", category: "text"})
+  const bookTitle = req.body.bookTitle
+  try{
+    const bookSearch = await Book.find({"bookTitle" : {$regex: new RegExp(bookTitle, "i")}})
+    console.log(bookTitle)
+    if(bookSearch.length > 0){
+      return res.status(200).json(bookSearch)
+    } else {
+      res.status(400).json({message: "Book not found"})
+    }
+  }catch(error){
+    console.log(error)
+    res.status(500).json({message: "An error occurred"})
+  }
+}
+
+
+
 const adminBook =  async (req,res) => {
   const successMessage = req.flash('success');
   const errorMessage = req.flash('error');
@@ -689,5 +708,6 @@ module.exports = {
   updateBook,
   adminBorrowBook,
   updateUser,
-  toggleLike
+  toggleLike,
+  userSearchBook
 }
