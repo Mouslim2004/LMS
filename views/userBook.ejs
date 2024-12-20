@@ -46,8 +46,8 @@
      <form id="searchBook">
        <label for="writer">Title</label> <br>
        <input type="text" placeholder="Batman" id="title" name="bookTitle"> <br>
-       <label for="Category">Categories</label> <br>
-       <input type="text" id="category" placeholder="Category" name="category">
+       <!-- <label for="Category">Categories</label> <br>
+       <input type="text" id="category" placeholder="Category" name="category"> -->
        <div class="sbt-btn">
           <input type="submit" value="Search" id="search">
        </div>
@@ -62,7 +62,11 @@
             <img src="<%= book[i].image %>" alt=""> 
             <div class="book-name"><%= book[i].bookTitle %></div>
             <div class="book-author"><%= book[i].author %></div>
-            <div class="book-like"><i class="fa-solid fa-heart heart <%= book[i].like.includes(student._id) ? 'active' : 'inactive' %>" ></i> <span class="nb-like" id="like-count"><%= book[i].like ? book[i].like.length : 0 %> </span> <i class="fa-solid fa-circle-info details"></i></div>
+            <div class="book-like">
+              <i class="fa-solid fa-heart heart <%= book[i].like.includes(student._id) ? 'active' : 'inactive' %>" ></i>
+              <span class="nb-like" id="like-count"><%= book[i].like ? book[i].like.length : 0 %> </span>
+              <i class="fa-solid fa-circle-info details" data-book-id="<%= book[i]._id %>"></i>
+            </div>
           </div>
        <% } } else {%>
         <div class="no-book">There is no book added for the moment &#128517;</div>
@@ -103,7 +107,7 @@
   <script>
     $(document).ready(() => {
       $('.details').on('click', function(){
-        const bookId = $(this).closest('.book').data('book-id')
+        const bookId = $(this).data('book-id')
         // console.log(bookId)
         window.location.href = `/previewBook/${bookId}`;
       })
@@ -154,10 +158,39 @@
           type: 'POST',
           data: JSON.stringify({bookTitle}),
           contentType: 'application/json',
-          success: function(response){
-            console.log("Result of the book searched : ",response)
-          },
+          success: function (response) {
+        console.log("Search results: ", response);
+
+        // Clear existing content
+        $(".grid-book").empty();
+
+        if (response.length > 0) {
+          // Dynamically generate book cards
+          response.forEach((book) => {
+            const studentId = $(".grid-book").data("student-id");
+
+            const bookHTML = `
+              <div class="book" data-book-id="${book._id}">
+                <img src="${book.image}" alt=""> 
+                <div class="book-name">${book.bookTitle}</div>
+                <div class="book-author">${book.author}</div>
+                <div class="book-like">
+                  <i class="fa-solid fa-heart heart ${book.like && book.like.includes(studentId) ? "active" : "inactive"}"></i> 
+                  <span class="nb-like" id="like-count">${book.like ? book.like.length : 0}</span> 
+                  <i class="fa-solid fa-circle-info details" data-book-id="${book._id}"></i>
+                </div>
+              </div>`;
+            $(".grid-book").append(bookHTML); // Append book to grid
+          });
+        } else {
+          // Show no-book message if no results
+          const noBookHTML = `<div class="no-book">No books found &#128517;</div>`;
+          $(".grid-book").append(noBookHTML);
+        }
+      },
           error: function(error){
+            const noBookHTML = `<div class="no-book">No books found &#128517;</div>`;
+            $(".grid-book").html(noBookHTML);
             console.log('Book not foound : ', error)
           }
         })

@@ -257,7 +257,7 @@ const userSearchBook = async (req, res) => {
   const bookTitle = req.body.bookTitle
   try{
     const bookSearch = await Book.find({"bookTitle" : {$regex: new RegExp(bookTitle, "i")}})
-    console.log(bookTitle)
+    // console.log(bookTitle)
     if(bookSearch.length > 0){
       return res.status(200).json(bookSearch)
     } else {
