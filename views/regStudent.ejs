@@ -59,8 +59,8 @@
 
        <tr>
          <td style="vertical-align: top;">
-          <form action="">
-            <input type="text" placeholder="Search" id="search">
+          <form id="searchUser">
+            <input type="text" placeholder="Search" id="search" name="name">
           </form>
           <div class="wrap-student" style="overflow-y: auto;">
             <%if(typeof student !== undefined && student.length > 0){%>
@@ -339,6 +339,26 @@
             console.error('Error addind student : ', error)
           }
         })
+     })
+
+     $('#searchUser').on('submit', function(e){
+      e.preventDefault()
+
+      // const formData = new FormData(this) formData.get("name")
+      const username = $('#search').val().trim()
+      // console.log("Username : ",username)
+      $.ajax({
+        url: `/searchUser`,
+        type: 'POST',
+        data: JSON.stringify({name: username}),
+        contentType: 'application/json',
+        success: function(response){
+          console.log('Result : ', response)
+        },
+        error: function(error){
+          console.log('An error occured : ', error)
+        }
+      })
      })
      
     });

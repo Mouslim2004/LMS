@@ -37,6 +37,7 @@ router.get('/student/:id', LibraryController.studentInfo)
 router.get('/deleteStudent/:userId', LibraryController.findDeleteStudent)
 router.delete('/destroyStudent/:studentCne', LibraryController.destroyStudent)
 router.post('/addnewstudent', upload.single('avatar'), LibraryController.addNewStudent)
+router.post('/searchUser', LibraryController.searchUser)
 
 router.get('/userRule',auth, refreshUserToken, LibraryController.userRule)
 router.get('/sidebar', LibraryController.sidebar)

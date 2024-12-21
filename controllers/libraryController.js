@@ -419,6 +419,30 @@ const addNewStudent = async(req,res) => {
   }
 }
 
+const searchUser = async (req,res) => {
+  const name = req.body.name
+
+  // Validate name
+  if (!name || name.trim() === "") {
+    return res.status(400).json({message: "Name is required"});
+  }
+  try{
+    const result = await Student.find({"name" : {$regex: new RegExp(name, "i")}})
+    if(result.length > 0){
+      return res.status(200).json(result)
+    } else {
+      res.staus(400).json({message: 'Student not found'})
+    }
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message: 'An error occured'})
+  }
+}
+
+
+
+
+
 const userRule = (req,res) => {
   res.render('userRule')
 }
@@ -709,5 +733,6 @@ module.exports = {
   adminBorrowBook,
   updateUser,
   toggleLike,
-  userSearchBook
+  userSearchBook,
+  searchUser
 }
