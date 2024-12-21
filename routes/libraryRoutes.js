@@ -29,6 +29,7 @@ router.post('/userSearchBook', LibraryController.userSearchBook)
 router.get('/adminBooks',authAdmin, refreshToken, LibraryController.adminBook)
 router.post('/adminBooks',uploadImage.fields([{ name: 'image' },
   { name: 'bookpdf' }]), LibraryController.adminBookPost)
+router.post('/searchAdminBook', LibraryController.searchAdminBook)
 
 router.get('/previewBook/:bookId',auth, refreshUserToken, LibraryController.previewBook)
 

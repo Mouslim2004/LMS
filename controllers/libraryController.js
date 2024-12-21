@@ -320,6 +320,30 @@ const adminBookPost = async (req, res) => {
     res.redirect('/adminBooks');
   }
 }
+
+const searchAdminBook = async(req,res) => {
+  const pseudo = req.body.pseudo
+
+  if(!pseudo || pseudo.trim() === ""){
+    return res.status(400).json({message: "Pseudo is required"});
+  }
+
+  try{
+    const result = await Book.find({"pseudo": {$regex: new RegExp(pseudo, "i")}})
+
+    if(result.length > 0){
+      return res.status(200).json(result)
+    } else {
+      res.status(400).json({message : 'Book not found'})
+    }
+  }catch(error){
+    console.log(error.message)
+    res.status(500).json({message: 'An error occurred'})
+  }
+}
+
+
+
 const previewBook = async (req,res) => {
   try{
     const bookDetails = await Book.findById(req.params.bookId)
@@ -734,5 +758,6 @@ module.exports = {
   updateUser,
   toggleLike,
   userSearchBook,
-  searchUser
+  searchUser,
+  searchAdminBook
 }

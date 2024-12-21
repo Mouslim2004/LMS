@@ -47,7 +47,7 @@
 <section id="adminViewBook">
   <div class="admin-title">
     <div>VIEW BOOK</div>
-    <form class="search-bar"><input type="text" id="search-bar" placeholder="Search"></form> 
+    <form class="search-bar" id="searchBook"><input type="text" id="search-bar" placeholder="Search" name="pseudo"></form> 
   </div>
   <div class="book-left">
     <div class="subheader-flex">
@@ -266,6 +266,26 @@
         },
         error: function (xhr, status, error) {
           console.error(`Error: ${error}`);
+        }
+      })
+    })
+
+
+    $('#searchBook').on('submit', function(e){
+      e.preventDefault()
+
+      const bookPseudo = ('#search-bar').val().trim()
+
+      $.ajax({
+        url: '/searchAdminBook',
+        type: 'POST',
+        data: JSON.stringify({pseudo: bookPseudo}),
+        contentType: 'application/json',
+        success: function(response){
+          console.log('Response : ', response)
+        },
+        error: function(error){
+          console.log('Error : ', error)
         }
       })
     })
