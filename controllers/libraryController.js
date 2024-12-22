@@ -455,7 +455,7 @@ const searchUser = async (req,res) => {
     if(result.length > 0){
       return res.status(200).json(result)
     } else {
-      res.staus(400).json({message: 'Student not found'})
+      res.status(400).json({message: 'Student not found'})
     }
   }catch(error){
     console.log(error.message)

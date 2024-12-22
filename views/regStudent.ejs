@@ -72,11 +72,9 @@
                   </div>
                   
             <%}} else {%>
-                    <h1>No User Found</h1>
+                    <h1>No User Added</h1>
               <%}%>
-              
-              
-              
+               
           </div>  
          </td>
 
@@ -353,10 +351,32 @@
         data: JSON.stringify({name: username}),
         contentType: 'application/json',
         success: function(response){
-          console.log('Result : ', response)
+          if(response.length > 0){
+            response.forEach((student) => {
+              $('.wrap-student').empty()
+
+              const studentHTML = `
+                  <div class="wrap" data-user-id=" ${student._id}">
+                    <div class="icon"><img src=" ${student.avatar}" alt=""></div>
+                    <div class="fullname"> ${student.name}</div>
+                    <div class="btn-delete" title="Delete Student"><span class="times-btn">&times;</span></div>
+                  </div>
+              `;
+
+              $('.wrap-student').append(studentHTML)
+              console.log('Result : ', response)
+            })
+          } else {
+             // Show no-book message if no results
+            const noStudentHTML = `<div class="no-student">No students found &#128517;</div>`;
+            $(".wrap-student").append(noStudentHTML);
+          }
+          
         },
         error: function(error){
           console.log('An error occured : ', error)
+          const noStudentHTML = `<div class="no-student">No students found &#128517;</div>`;
+          $(".wrap-student").html(noStudentHTML);
         }
       })
      })

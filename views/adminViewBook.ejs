@@ -318,6 +318,8 @@
           
         },
         error: function(error){
+          const noBookHTML = `<div class="no-book">No books found &#128517;</div>`;
+          $(".book-grid").html(noBookHTML);
           console.log('Error : ', error)
         }
       })
