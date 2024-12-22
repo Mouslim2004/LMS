@@ -67,7 +67,7 @@
             <div class="issue-update"><button class="btn-update">Update</button></div>
             <div class="issue-delete"><button class="btn-delete">Delete</button></div>
           </div>
-       </div>
+        </div>
         <div class="book-image">
           <img src="<%= showBook[i].image %>" alt="">
         </div>  
@@ -274,7 +274,7 @@
     $('#searchBook').on('submit', function(e){
       e.preventDefault()
 
-      const bookPseudo = ('#search-bar').val().trim()
+      const bookPseudo = $('#search-bar').val().trim()
 
       $.ajax({
         url: '/searchAdminBook',
@@ -282,7 +282,40 @@
         data: JSON.stringify({pseudo: bookPseudo}),
         contentType: 'application/json',
         success: function(response){
-          console.log('Response : ', response)
+
+          $('.book-grid').empty()
+
+          if(response.length > 0){
+
+            response.forEach((book) => {
+              const bookSearch = `
+                <div class="book-inventory">
+                  <div class="book-details" data-book-id="${book._id}">
+                    <div class="book-title"> ${book.bookTitle} </div>
+                    <div class="book-ID">ID : <strong> ${book.bookId }</strong></div>
+                    <div class="book-author">Author : <strong> ${book.author}</strong></div>
+                    <div class="book-category">Category : <strong> ${book.category}</strong></div>
+                    <div class="book-btn">
+                      <div><button class="issue-detail"> ${book.isBorrowed ? "Issued" : "Not Issued"} </button></div>
+                      <div class="issue-update"><button class="btn-update">Update</button></div>
+                      <div class="issue-delete"><button class="btn-delete">Delete</button></div>
+                    </div>
+                  </div>
+                  <div class="book-image">
+                    <img src="${response.image}" alt="">
+                  </div>  
+                </div>
+            `;
+
+            $('.book-grid').append(bookSearch)
+            console.log('Response : ', response)
+            })
+           
+          } else {
+            const noBookHTML = `<div class="no-book">No books found &#128517;</div>`;
+            $(".book-grid").append(noBookHTML);
+          }
+          
         },
         error: function(error){
           console.log('Error : ', error)
