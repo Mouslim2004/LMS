@@ -1,11 +1,18 @@
-const { Student, Book } = require('../models/user')
+const Student = require('../models/user')
+const Book = require('../models/book')
 const Librarian  = require('../models/librarian')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')//is a compact and self-contained way of securely transmitting information between parties as a JSON object.
 // It is widely used for authentication and authorization in web applications.
-const flash = require('connect-flash')
-const { render } = require("ejs")
+const {v4 : uuidv4} = require('uuid')
+// const flash = require('connect-flash')
+// const { render } = require("ejs")
 
+const temporaryCode = uuidv4().slice(-8);
+const temporaryPassword = Math.random().toString(36).slice(-8)
+
+console.log('Temporary Code : ', temporaryCode)
+console.log('Temporary Password : ',temporaryPassword)
 
 const index = (req,res) => {
   res.render('home')
