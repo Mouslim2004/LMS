@@ -13,7 +13,9 @@ const StudentSchema = new schema({
   avatar: {type: String, required: true},
   phone: {type: String, required: true},
   address: {type: String, required: true},
-  password: {type: String, required: true},
+  // password: {type: String, required: true},
+  temporaryCode: {type: String, default: null},
+  temporaryPassword: {type: String, default: null},
   borrowedBooks: [{
     book: {type: mongoose.Schema.Types.ObjectId, ref: "Book"},
     borrowedDate: {type: Date, default: Date.now},

@@ -2,17 +2,18 @@ const Student = require('../models/user')
 const Book = require('../models/book')
 const Librarian  = require('../models/librarian')
 const bcrypt = require('bcrypt')
+const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')//is a compact and self-contained way of securely transmitting information between parties as a JSON object.
 // It is widely used for authentication and authorization in web applications.
 const {v4 : uuidv4} = require('uuid')
 // const flash = require('connect-flash')
 // const { render } = require("ejs")
 
-const temporaryCode = uuidv4().slice(-8);
-const temporaryPassword = Math.random().toString(36).slice(-8)
+// const temporaryCode = uuidv4().slice(-8);
+// const temporaryPassword = Math.random().toString(36).slice(-8)
 
-console.log('Temporary Code : ', temporaryCode)
-console.log('Temporary Password : ',temporaryPassword)
+// console.log('Temporary Code : ', temporaryCode)
+// console.log('Temporary Password : ',temporaryPassword)
 
 const index = (req,res) => {
   res.render('home')
@@ -57,17 +58,17 @@ const userLogin = (req,res) => {
 const userLoginPost = async (req, res) => {
   try{
   //These lines require the email and password from the body
-  const email = req.body.email
-  const password = req.body.password
-  if(!email || !password){
+  const temporaryCode = req.body.temporaryCode
+  const temporaryPassword = req.body.temporaryPassword
+  if(!temporaryCode || !temporaryPassword){
     req.flash('error', 'Please fill the form')
     return res.redirect('/userLogin')
   }
 
-  const studentData = await Student.findOne({email: email}) //this verify if the user exist in the db
+  const studentData = await Student.findOne({temporaryCode: temporaryCode}) //this verify if the user exist in the db
 
   if(studentData){ //If true
-    const checkPassword = await bcrypt.compare(password, studentData.password);//then, We will check if the password is similar,
+    const checkPassword = await bcrypt.compare(temporaryPassword, studentData.temporaryPassword);//then, We will check if the password is similar,
     //By using compare() method from bcrypt 
     if(checkPassword){//if password exist
       //we will store the user information to the session for authentication or user preferences
@@ -90,7 +91,7 @@ const userLoginPost = async (req, res) => {
       res.redirect('/userLogin')
     }
   } else {
-    req.flash('error', 'Email is incorrect')
+    req.flash('error', 'Code is incorrect')
     res.redirect('/userLogin')
   }
   }catch(error){
@@ -424,9 +425,19 @@ const destroyStudent = async (req,res) => {
   }
 }
 
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'mouslimombadi@gmail.com',
+    pass: 'ayve emlp qtbu zhgc'
+  }
+});
+
 const addNewStudent = async(req,res) => {
   try{
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    const temporaryCode = uuidv4().slice(-8);
+    const temporaryPassword = Math.random().toString(36).slice(-8)
+    const hashedPassword = await bcrypt.hash(temporaryPassword, 10)
 
     let student = new Student({
       cne: req.body.cne,
@@ -434,11 +445,29 @@ const addNewStudent = async(req,res) => {
       email: req.body.email,
       phone: req.body.phone,
       address: req.body.address,
-      password: hashedPassword,
+      temporaryCode: temporaryCode,
+      temporaryPassword: hashedPassword,
       avatar: req.file ? 'profile/' + req.file.filename : null
     })
 
     await student.save()
+
+    const mailOptions = {
+      from: student.email, // sender address
+      to: 'mouslimombadi@gmail.com', // list of receivers, replace with your email
+      subject: `Your new credentials`,
+      text: `You have a new message from library Management System :
+             \n\nYour Code : ${temporaryCode}
+             \n\nYour Password : ${temporaryPassword}`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            return res.status(500).send('Error sending email');
+        }
+        res.status(200).send('Email sent successfully');
+    });
 
     req.flash('sucess', 'Student added successfully')
     res.status(200).json({message: 'Student added successfully'})
