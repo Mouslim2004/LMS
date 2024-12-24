@@ -54,7 +54,7 @@
   </div>
   <div class="main-category">
      <div class="category-searchbar">
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" id="inputSearch">
      </div>
      <div class="category-list">
          <table>
@@ -66,6 +66,7 @@
            </tr>
            <%if(typeof book !== undefined && book.length > 0){%>
             <%for(var i = 0; i < book.length ; i++){%>
+              <tbody id="category-table">
                 <tr>
                   <td><%= i %></td>
                   <td class="category"><%= book[i] %></td>
@@ -75,6 +76,7 @@
                     <!-- <span class="btn btn-delete"><i class="fa-solid fa-trash"></i></span> -->
                   </td>
                 </tr>
+              </tbody>
            <%}}%>
          </table>
 
@@ -195,6 +197,15 @@
 
       closeModalBtn2.on('click', closeModal2)
       overlay.on('click', closeModal); 
+
+      $('#inputSearch').on('keyup', function(){
+        var value = $(this).val().toLowerCase()
+        // console.log(value)
+        $('#category-table tr').filter(function(){
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        })
+      })
+
      });
   </script>
 </body>
