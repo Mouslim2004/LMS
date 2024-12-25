@@ -339,46 +339,11 @@
         })
      })
 
-     $('#searchUser').on('submit', function(e){
-      e.preventDefault()
-
-      // const formData = new FormData(this) formData.get("name")
-      const username = $('#search').val().trim()
-      // console.log("Username : ",username)
-      $.ajax({
-        url: `/searchUser`,
-        type: 'POST',
-        data: JSON.stringify({name: username}),
-        contentType: 'application/json',
-        success: function(response){
-          if(response.length > 0){
-            response.forEach((student) => {
-              $('.wrap-student').empty()
-
-              const studentHTML = `
-                  <div class="wrap" data-user-id=" ${student._id}">
-                    <div class="icon"><img src=" ${student.avatar}" alt=""></div>
-                    <div class="fullname"> ${student.name}</div>
-                    <div class="btn-delete" title="Delete Student"><span class="times-btn">&times;</span></div>
-                  </div>
-              `;
-
-              $('.wrap-student').append(studentHTML)
-              console.log('Result : ', response)
-            })
-          } else {
-             // Show no-book message if no results
-            const noStudentHTML = `<div class="no-student">No students found &#128517;</div>`;
-            $(".wrap-student").append(noStudentHTML);
-          }
-          
-        },
-        error: function(error){
-          console.log('An error occured : ', error)
-          const noStudentHTML = `<div class="no-student">No students found &#128517;</div>`;
-          $(".wrap-student").html(noStudentHTML);
-        }
-      })
+     $('#search').on('keyup', function(){
+       var value = $(this).val().toLowerCase()
+       $('.wrap-student .wrap').filter(function(){
+         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+       })
      })
      
     });

@@ -24,12 +24,10 @@ router.get('/adminDash',authAdmin, refreshToken, LibraryController.adminDash)
 
 router.get('/userBooks',auth, refreshUserToken, LibraryController.userBook)
 router.put('/toggleLike/:bookId', LibraryController.toggleLike);
-router.post('/userSearchBook', LibraryController.userSearchBook)
 
 router.get('/adminBooks',authAdmin, refreshToken, LibraryController.adminBook)
 router.post('/adminBooks',uploadImage.fields([{ name: 'image' },
   { name: 'bookpdf' }]), LibraryController.adminBookPost)
-router.post('/searchAdminBook', LibraryController.searchAdminBook)
 
 router.get('/previewBook/:bookId',auth, refreshUserToken, LibraryController.previewBook)
 
@@ -38,7 +36,6 @@ router.get('/student/:id', LibraryController.studentInfo)
 router.get('/deleteStudent/:userId', LibraryController.findDeleteStudent)
 router.delete('/destroyStudent/:studentCne', LibraryController.destroyStudent)
 router.post('/addnewstudent', upload.single('avatar'), LibraryController.addNewStudent)
-router.post('/searchUser', LibraryController.searchUser)
 
 router.get('/userRule',auth, refreshUserToken, LibraryController.userRule)
 router.get('/sidebar', LibraryController.sidebar)

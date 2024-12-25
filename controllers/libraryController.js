@@ -6,14 +6,7 @@ const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')//is a compact and self-contained way of securely transmitting information between parties as a JSON object.
 // It is widely used for authentication and authorization in web applications.
 const {v4 : uuidv4} = require('uuid')
-// const flash = require('connect-flash')
-// const { render } = require("ejs")
 
-// const temporaryCode = uuidv4().slice(-8);
-// const temporaryPassword = Math.random().toString(36).slice(-8)
-
-// console.log('Temporary Code : ', temporaryCode)
-// console.log('Temporary Password : ',temporaryPassword)
 
 const index = (req,res) => {
   res.render('home')
@@ -260,25 +253,6 @@ const toggleLike = async (req, res) => {
 };
 
 
-const userSearchBook = async (req, res) => {
-  // await Book.createIndexes({bookTitle: "text", category: "text"})
-  const bookTitle = req.body.bookTitle
-  try{
-    const bookSearch = await Book.find({"bookTitle" : {$regex: new RegExp(bookTitle, "i")}})
-    // console.log(bookTitle)
-    if(bookSearch.length > 0){
-      return res.status(200).json(bookSearch)
-    } else {
-      res.status(400).json({message: "Book not found"})
-    }
-  }catch(error){
-    console.log(error)
-    res.status(500).json({message: "An error occurred"})
-  }
-}
-
-
-
 const adminBook =  async (req,res) => {
   const successMessage = req.flash('success');
   const errorMessage = req.flash('error');
@@ -328,28 +302,6 @@ const adminBookPost = async (req, res) => {
     res.redirect('/adminBooks');
   }
 }
-
-const searchAdminBook = async(req,res) => {
-  const pseudo = req.body.pseudo
-
-  if(!pseudo || pseudo.trim() === ""){
-    return res.status(400).json({message: "Pseudo is required"});
-  }
-
-  try{
-    const result = await Book.find({"pseudo": {$regex: new RegExp(pseudo, "i")}})
-
-    if(result.length > 0){
-      return res.status(200).json(result)
-    } else {
-      res.status(400).json({message : 'Book not found'})
-    }
-  }catch(error){
-    console.log(error.message)
-    res.status(500).json({message: 'An error occurred'})
-  }
-}
-
 
 
 const previewBook = async (req,res) => {
@@ -478,29 +430,6 @@ const addNewStudent = async(req,res) => {
     res.status(500).json({message: 'An error occured'})
   }
 }
-
-const searchUser = async (req,res) => {
-  const name = req.body.name
-
-  // Validate name
-  if (!name || name.trim() === "") {
-    return res.status(400).json({message: "Name is required"});
-  }
-  try{
-    const result = await Student.find({"name" : {$regex: new RegExp(name, "i")}})
-    if(result.length > 0){
-      return res.status(200).json(result)
-    } else {
-      res.status(400).json({message: 'Student not found'})
-    }
-  }catch(error){
-    console.log(error.message)
-    res.status(500).json({message: 'An error occured'})
-  }
-}
-
-
-
 
 
 const userRule = (req,res) => {
@@ -792,8 +721,5 @@ module.exports = {
   updateBook,
   adminBorrowBook,
   updateUser,
-  toggleLike,
-  userSearchBook,
-  searchUser,
-  searchAdminBook
+  toggleLike
 }
