@@ -660,8 +660,14 @@ const userRequestBook = async (req,res) => {
   }
 
   try{
+    const findBook = await Book.findOne({"pseudo" : {$regex: new RegExp(req.body.book, "i")}})
+    console.log(req.session.user)
+    console.log('Book result : ', findBook)
+    if(!findBook){
+      return res.status(404).json({message : 'Book not found'})
+    }
     const newRequest = {
-      book: req.body.book,
+      book: findBook._id,
       note: req.body.note
     }
 
@@ -669,7 +675,7 @@ const userRequestBook = async (req,res) => {
     if(!updateStudent){
       return res.status(400).json({message: 'Student not found'})
     }
-    res.status(200).json({message: 'Book requested successfully'});
+    res.status(200).json({updateStudent});
   }catch(error){
     res.status(500).json({message: 'Failed to request Book'})
   }

@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIDEBAR HEADER</title>  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/style/sidebar.css">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/style/previewBook.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
   <header>
@@ -58,7 +57,7 @@
       </div>
       
         <!-- Batman : The Dark Knight  /books/batman.jpeg-->
-      <div class="preview-details">
+      <div class="preview-details" data-book-id="<%= bookDetails._id %>">
          <div class="edition"><em>An edition of <span><%= bookDetails.pseudo %></span> (<span class="bookYear">1982</span>)</em></div>
          <div class="detail-title"><%= bookDetails.bookTitle %></div>
          <div class="detail-author">By <span><%= bookDetails.author %></span></div>
@@ -93,19 +92,26 @@
  </section>
   </main>
   <script>
-    let publishDate = new Date(document.querySelector('.date').innerHTML).getFullYear()
+    $(document).ready(function(){
+      let publishDate = new Date($('.date').text()).getFullYear()
+      //document.querySelector('.date').innerHTML
+      function formatDate(dateString){
+          const date = new Date(dateString)
+          const options = {year: 'numeric', month: 'long', day: 'numeric'}
+          return date.toLocaleDateString('en-US', options)
+      }
 
-    function formatDate(dateString){
-        const date = new Date(dateString)
-        const options = {year: 'numeric', month: 'long', day: 'numeric'}
-        return date.toLocaleDateString('en-US', options)
-    }
+      const formattedDate = formatDate($('.date').text())
+      $('.date').text(formattedDate)
+      $('.bookYear').text(publishDate) 
 
-    const formattedDate = formatDate(document.querySelector('.date').innerHTML)
-    // console.log(formattedDate)
-    document.querySelector('.date').innerHTML = formattedDate
-    // console.log(formattedDate)
-    document.querySelector('.bookYear').innerHTML = publishDate
+      $('.link').on('click', function(){
+          let link = $('.preview-details').data('book-id')
+          // console.log(link)
+          window.location.href = `/userRequest/${link}`;
+      })
+    })
+   
 
   </script>
 </body>

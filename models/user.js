@@ -22,7 +22,7 @@ const StudentSchema = new schema({
     returnDate: {type: Date, default: returnBook}
   }],
   requestedBooks: [{
-    book: {type: mongoose.Schema.Types.ObjectId, ref: "Book"},
+    book: {type: mongoose.Schema.Types.ObjectId, ref: "Book", default: []},
     note: {type: String, required: true},
     date: {type: Date, default: Date.now}
   }]
