@@ -203,7 +203,7 @@ form input{
   text-decoration: none;
   cursor: pointer;
 }
-.issued-form a{
+.issued-form .link{
   text-decoration: none;
   color: white;
   font-weight: 500;

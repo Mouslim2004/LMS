@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/style/sidebar.css">
   <link rel="stylesheet" href="/style/userRequest.css">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
   <header>
@@ -44,10 +44,10 @@
       <div class="request-title">USER REQUEST</div>
       <div class="main-request">
           <div class="main-form">
-              <form action="">
+              <form id="requestBook">
                 <div class="title-input">
                   <label for="book-title">Book Title * </label>
-                  <input type="text" placeholder="Full Book Title" required> <br>
+                  <input type="text" placeholder="Full Book Title" name="book" required> <br>
                 </div>
                 <div class="note-input">
                   <label for="note">Note * </label>
@@ -63,29 +63,25 @@
             <table>
               <tr>
                 <th>Book Title</th>
-                <th>Book Desc</th>
-                <th>Student Name</th>
+                <th>Reason</th>
                 <th>Added On</th>
                 <th>Action</th>
               </tr>
               <tr>
                 <td>Spiderman</td>
                 <td>The small spider of the square come to save his city from Dr Octopus</td>
-                <td>Kevin Jamirez</td>
                 <td>2024-11-18</td>
                 <td><i class="fa-regular fa-trash-can"></i></td>
               </tr>
               <tr>
                 <td>Spiderman</td>
                 <td>The small spider of the square come to save his city from Dr Octopus</td>
-                <td>Kevin Jamirez</td>
                 <td>2024-11-18</td>
                 <td><i class="fa-regular fa-trash-can"></i></td>
               </tr>
               <tr>
                 <td>Spiderman</td>
                 <td>The small spider of the square come to save his city from Dr Octopus</td>
-                <td>Kevin Jamirez</td>
                 <td>2024-11-18</td>
                 <td><i class="fa-regular fa-trash-can"></i></td>
               </tr>
@@ -95,5 +91,28 @@
    </section>
   </main>
   
+<script>
+   $(document).ready(function(){
+      $('#requestBook').on('submit', function(e){
+        e.preventDefault()
+        const formData = new FormData(this)
+        // console.log(formData)
+
+        $.ajax({
+          url: '/requestBook',
+          type: 'POST',
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function(response){
+            console.log(response)
+          },
+          error: function(error){
+            console.log('Error : ', error)
+          }
+        })
+      })
+   })
+</script>
 </body>
 </html>

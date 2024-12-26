@@ -649,8 +649,30 @@ const adminIssue = async (req,res) => {
   res.render('adminIssue', {librarian: librarian})
 }
 
+
 const userRequest = (req,res) => {
   res.render('userRequest')
+}
+
+const userRequestBook = async (req,res) => {
+  if(!req.session.user){
+    return res.status(401).json({message: 'Unauthorized'})
+  }
+
+  try{
+    const newRequest = {
+      book: req.body.book,
+      note: req.body.note
+    }
+
+    const updateStudent = await Student.findByIdAndUpdate(req.session.user.id, {$push : {requestedBooks: newRequest}}, {new: true})
+    if(!updateStudent){
+      return res.status(400).json({message: 'Student not found'})
+    }
+    res.status(200).json({message: 'Book requested successfully'});
+  }catch(error){
+    res.status(500).json({message: 'Failed to request Book'})
+  }
 }
 
 const adminChange = async (req,res) => {
@@ -721,5 +743,6 @@ module.exports = {
   updateBook,
   adminBorrowBook,
   updateUser,
-  toggleLike
+  toggleLike,
+  userRequestBook
 }

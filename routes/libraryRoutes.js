@@ -59,7 +59,10 @@ router.get('/author/:author', LibraryController.findAuthor)
 router.put('/updateAuthor', LibraryController.updateAuthor)
 
 router.get('/adminIssued',authAdmin, refreshToken, LibraryController.adminIssue)
+
 router.get('/userRequest',auth, refreshUserToken, LibraryController.userRequest)
+router.post('/requestBook', LibraryController.userRequestBook)
+
 router.get('/adminChange',authAdmin, refreshToken, LibraryController.adminChange)
 router.get('/adminViewRequest',authAdmin, refreshToken, LibraryController.adminRequest)
 
