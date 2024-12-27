@@ -660,9 +660,10 @@ const userRequestBook = async (req,res) => {
   }
 
   try{
+    const student = await Student.findById(req.session.user.id)
     const findBook = await Book.findOne({"pseudo" : {$regex: new RegExp(req.body.book, "i")}})
-    console.log(req.session.user)
-    console.log('Book result : ', findBook)
+    // console.log(req.session.user)
+    // console.log('Book result : ', findBook)
     if(!findBook){
       return res.status(404).json({message : 'Book not found'})
     }
@@ -670,8 +671,22 @@ const userRequestBook = async (req,res) => {
       book: findBook._id,
       note: req.body.note
     }
-    console.log(newRequest.note);
-    const updateStudent = await Student.findByIdAndUpdate(req.session.user.id, {$push : {requestedBooks: newRequest}}, {new: true})
+    const alreadyRequest = student.requestedBooks.some(
+      (request) => request.book.toString() === findBook._id.toString()
+    )
+
+    if(alreadyRequest){
+      console.log('You have already request this book')
+      return res.status(400).json({message: 'You have already request this book!'})
+    }
+    let updateStudent = "";
+    if(student.requestedBooks.length < 3){
+       updateStudent = await Student.findByIdAndUpdate(req.session.user.id, {$push : {requestedBooks: newRequest}}, {new: true})
+    } else {
+      console.log('You cannot request more than 3 books!')
+      return res.status(500).json({message: 'You cannot request more than 3 books!'})
+    }
+
     if(!updateStudent){
       return res.status(400).json({message: 'Student not found'})
     }
