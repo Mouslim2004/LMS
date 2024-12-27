@@ -51,7 +51,7 @@
                 </div>
                 <div class="note-input">
                   <label for="note">Note * </label>
-                  <textarea name="note" id="note" style="width: 69%;" rows="5" cols="95" placeholder="Why you required this book? A small note is required" required></textarea> <br>  
+                  <textarea id="note" style="width: 69%;" rows="5" cols="95" placeholder="Why you required this book? A small note is required" name="note" required></textarea> <br>  
                 </div>
                 <div class="sbt-request">
                   <input type="submit" value="Submit">
@@ -63,7 +63,7 @@
             <table>
               <tr>
                 <th>Book Title</th>
-                <th>Reason</th>
+                <th>Description</th>
                 <th>Added On</th>
                 <th>Action</th>
               </tr>
@@ -95,15 +95,17 @@
    $(document).ready(function(){
       $('#requestBook').on('submit', function(e){
         e.preventDefault()
-        const formData = new FormData(this)
-        // console.log(formData)
+        const formData = {
+          book: $('[name="book"]').val(),
+          note: $('#note').val()
+        }
+       
 
         $.ajax({
           url: '/requestBook',
           type: 'POST',
-          data: formData,
-          contentType: false,
-          processData: false,
+          data: JSON.stringify(formData),
+          contentType: 'application/json',
           success: function(response){
             console.log(response)
           },
