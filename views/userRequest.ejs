@@ -17,15 +17,15 @@
     </div>
     <div class="right-header">
       <!-- <div><i class="fa-regular fa-bell"></i><span class="notif">0</span></div> -->
-      <img src="/images/boy.png" alt="">
-      <div class="username">Mouslim Ombadi</div>
+      <img src="<%= student.avatar %>" alt="">
+      <div class="username"><%= student.name %></div>
     </div>
   </header>
   <main>
     <div class="sidebar">
       <div class="sidebar-profile">
-        <img src="/images/boy.png" alt="">
-        <div class="username">Mouslim Ombadi</div>
+        <img src="<%= student.avatar %>" alt="">
+        <div class="username"><%= student.name %></div>
       </div>
       <div class="navbar">
          <ul>
@@ -67,7 +67,19 @@
                 <th>Added On</th>
                 <th>Action</th>
               </tr>
-              <tr>
+              
+              <% for(var i = 0; i < student.requestedBooks.length; i++){%>
+                <tr id="container"></tr>
+                  <td><%= student.requestedBooks[i].book.bookTitle %></td>
+                  <td><%= student.requestedBooks[i].book.description %></td>
+                  <td><%= new Date(student.requestedBooks[i].date).toLocaleDateString()  %></td>
+                  <td><i class="fa-regular fa-trash-can"></i></td>
+                </tr>
+              <%}%>
+            
+             
+              
+              <!-- <tr>
                 <td>Spiderman</td>
                 <td>The small spider of the square come to save his city from Dr Octopus</td>
                 <td>2024-11-18</td>
@@ -78,13 +90,7 @@
                 <td>The small spider of the square come to save his city from Dr Octopus</td>
                 <td>2024-11-18</td>
                 <td><i class="fa-regular fa-trash-can"></i></td>
-              </tr>
-              <tr>
-                <td>Spiderman</td>
-                <td>The small spider of the square come to save his city from Dr Octopus</td>
-                <td>2024-11-18</td>
-                <td><i class="fa-regular fa-trash-can"></i></td>
-              </tr>
+              </tr> -->
             </table>
           </div>
       </div>
@@ -107,7 +113,9 @@
           data: JSON.stringify(formData),
           contentType: 'application/json',
           success: function(response){
-            console.log(response)
+            console.log(response.requestBooks)
+            window.location.reload()
+            
           },
           error: function(error){
             console.log('Error : ', error)

@@ -654,7 +654,7 @@ const userRequest = async(req,res) => {
   if(!req.session.user){
     return res.status(401).json({message: 'Unauthorized'})
   }
-  const student = await Student.findById(req.session.user.id)
+  const student = await Student.findById(req.session.user.id).populate("requestedBooks.book")
   // console.log(student)
   res.render('userRequest', {student})
 }
@@ -695,7 +695,7 @@ const userRequestBook = async (req,res) => {
     if(!updateStudent){
       return res.status(400).json({message: 'Student not found'})
     }
-    res.status(200).json({updateStudent});
+    res.status(200).json({requestBooks : updateStudent.requestedBooks});
   }catch(error){
     console.log('Error : ', error.message, error.stack)
     res.status(500).json({message: 'Failed to request Book'})
