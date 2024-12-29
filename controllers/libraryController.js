@@ -650,8 +650,13 @@ const adminIssue = async (req,res) => {
 }
 
 
-const userRequest = (req,res) => {
-  res.render('userRequest')
+const userRequest = async(req,res) => {
+  if(!req.session.user){
+    return res.status(401).json({message: 'Unauthorized'})
+  }
+  const student = await Student.findById(req.session.user.id)
+  // console.log(student)
+  res.render('userRequest', {student})
 }
 
 const userRequestBook = async (req,res) => {
