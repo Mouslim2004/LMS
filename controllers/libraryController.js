@@ -185,8 +185,12 @@ const userChange = (req,res) => {
   res.render('userChange')
 }
 
-const userIssued = (req,res) => {
-  res.render('userIssued')
+const userIssued = async (req,res) => {
+  if(!req.session.user){
+    return res.status(400).json({message: 'Unauthorized'});
+  }
+  const student = await Student.findById(req.session.user.id).populate("requestedBooks.book");
+  res.render('userIssued', {student})
 }
 
 const adminDash = async (req,res) => {
