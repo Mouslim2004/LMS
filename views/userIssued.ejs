@@ -20,15 +20,15 @@
     </div>
     <div class="right-header">
       <!-- <div><i class="fa-regular fa-bell"></i><span class="notif">0</span></div> -->
-      <img src="/images/boy.png" alt="">
-      <div class="username">Mouslim Ombadi</div>
+      <img src="<%= student.avatar %>" alt="">
+      <div class="username"><%= student.name %></div>
     </div>
   </header>
   <main>
     <div class="sidebar">
       <div class="sidebar-profile">
-        <img src="/images/boy.png" alt="">
-        <div class="username">Mouslim Ombadi</div>
+        <img src="<%= student.avatar %>" alt="">
+        <div class="username"><%= student.name %></div>
       </div>
       <div class="navbar">
         <ul>
@@ -57,22 +57,24 @@
         <th>Due Date</th>
         <th>Action</th>
       </tr>
+      <% for(var i = 0; i < student.requestedBooks.length; i++){%>
       <tr>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
+        <td><%= student.requestedBooks[i].book.bookId %></td>
+        <td><%= student.requestedBooks[i].book.bookTitle %></td>
+        <td><%= student.requestedBooks[i].book.author %></td>
+        <td><%= new Date(student.requestedBooks[i].date).toLocaleDateString()  %></td>
+        <td><%= new Date(student.requestedBooks[i].date).toLocaleDateString()  %></td>
         <td><a href="#ex1" class="open-modal btn-open" >Return</a></td>
       </tr>
-      <tr>
+      <%}%>
+      <!-- <tr>
         <td>Centro comercial Moctezuma</td>
         <td>Francisco Chang</td>
         <td>Mexico</td>
         <td>Alfreds Futterkiste</td>
         <td>Maria Anders</td>
         <td><a href="#ex1" class="open-modal btn-open" >Return</a></td>
-      </tr>
+      </tr> -->
     </table>   
     
 
