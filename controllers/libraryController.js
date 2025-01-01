@@ -713,7 +713,8 @@ const adminChange = async (req,res) => {
 
 const adminRequest = async (req,res) => {
   const librarian = await Librarian.find()
-  res.render('adminViewRequest', {librarian})
+  const student = await Student.find().populate("requestedBooks.book")
+  res.render('adminViewRequest', {librarian, student})
 }
 
 const adminBorrowBook = async (req,res) => {
