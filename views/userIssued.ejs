@@ -57,24 +57,15 @@
         <th>Due Date</th>
         <th>Action</th>
       </tr>
-      <% for(var i = 0; i < student.requestedBooks.length; i++){%>
+      
       <tr>
-        <td><%= student.requestedBooks[i].book.bookId %></td>
-        <td><%= student.requestedBooks[i].book.bookTitle %></td>
-        <td><%= student.requestedBooks[i].book.author %></td>
-        <td><%= new Date(student.requestedBooks[i].date).toLocaleDateString()  %></td>
-        <td><%= new Date(student.requestedBooks[i].date).toLocaleDateString()  %></td>
-        <td><a href="#ex1" class="open-modal btn-open" >Return</a></td>
-      </tr>
-      <%}%>
-      <!-- <tr>
         <td>Centro comercial Moctezuma</td>
         <td>Francisco Chang</td>
         <td>Mexico</td>
         <td>Alfreds Futterkiste</td>
         <td>Maria Anders</td>
         <td><a href="#ex1" class="open-modal btn-open" >Return</a></td>
-      </tr> -->
+      </tr>
     </table>   
     
 
