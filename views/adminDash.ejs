@@ -50,7 +50,15 @@
   <div class="main-section">
       <a class="cube" href="/adminBooks">
         <div class="icon" ><i class="fa-solid fa-book-open" style="color: #385170;"></i></div>
-        <div class="number" style="color: #385170;">0</div>
+        <%if(typeof book != undefined && book.length > 0){%>
+            <div class="number" style="color: #385170;">
+              <% var count = 0; %>
+              <%for(var i = 0; i < book.length ; i++){%>
+                <% count += i %>
+              <%}%>
+              <%= count %>
+            </div>
+        <%}%>
         <div class="info" style="color: #385170;">Books</div>
       </a>
      <a class="cube" href="/adminIssued">

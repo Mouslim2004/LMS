@@ -197,7 +197,9 @@ const adminDash = async (req,res) => {
   
   try{
     const librarian = await Librarian.find()
-    res.render('adminDash', {librarian:librarian})
+    const book = await Book.find()
+    console.log(book)
+    res.render('adminDash', {librarian:librarian, book: book})
   }catch(error){
     return res.status(500).json({ message: 'Failed to login', error });
   }
