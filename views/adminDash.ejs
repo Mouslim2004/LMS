@@ -73,7 +73,16 @@
     </a>
     <a class="cube" href="/regStudent">
       <div class="icon"><i class="fa-solid fa-users" style="color: green"></i></div>
-      <div class="number" style="color: green">0</div>
+      <%if(typeof stu != undefined && stu.length > 0){%>
+        <div class="number" style="color: green">
+          <% var countStu = 0; %>
+          <%for(var i = 0; i < stu.length ; i++){%>
+            <% countStu += i %>
+          <%}%>
+          <%= countStu %>
+        </div>
+      <%}%>
+      
       <div class="info" style="color: green">Students</div>
     </a>
     <a class="cube" href="/adminAuthor">
