@@ -55,20 +55,31 @@
             <th>Added on</th>
             <th>Action</th>
           </tr>
-          <% if(typeof student != undefined){%>
-          <% for(var i = 0; i < student.requestedBooks.length; i++){%>
-          <tr>
-            <td><%= student.requestedBooks[i].book.bookTitle %></td>
-            <td><%= student.requestedBooks[i].book.description %></td>
-            <td><%= student.cne %></td>
-            <td><%= student.name %></td>
-            <td><%= new Date(student.requestedBooks[i].date).toLocaleDateString()  %></td>
-            <td><span><i class="fa-solid fa-check"></i></span> <span><i class="fa-solid fa-trash"></i></span></td>
-          </tr>
-          <%}%>
-          <%} else{%>
-              <div>There is no book requested</div>
+          <% if(student && student.length > 0){%>
+            <% student.forEach(function(s){%>
+              <%if(s.requestedBooks && s.requestedBooks.length > 0){%>
+
+              <% for(var i = 0; i < s.requestedBooks.length; i++){%>
+                <tr>
+                  <td><%= s.requestedBooks[i].book.bookTitle %></td>
+                  <td><%= s.requestedBooks[i].book.description %></td>
+                  <td><%= s.cne %></td>
+                  <td><%= s.name %></td>
+                  <td><%= new Date(s.requestedBooks[i].date).toLocaleDateString()  %></td>
+                  <td><span><i class="fa-solid fa-check"></i></span> <span><i class="fa-solid fa-trash"></i></span></td>
+                </tr>
+              <%}%>
+
+                <%} else{%>
+                  <tr>
+                    <td colspan="6">There is no book requested</td> 
+                  </tr>
+                <%}%>
+            <%})%>
+            <%} else {%>
+                <div>No Students Found.</div>
             <%}%>
+          
           <!-- <tr>
             <td>Spiderman</td>
             <td>The coolest friend in your neighborhood come to ensure the safety of the city</td>
