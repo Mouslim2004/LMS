@@ -87,13 +87,29 @@
     </a>
     <a class="cube" href="/adminAuthor">
         <div class="icon"><i class="fa-solid fa-user-pen" style="color: brown;"></i></div>
-        <div class="number" style="color: brown;">0</div>
+        <%if(typeof bookAuthor != undefined && bookAuthor.length > 0){%>
+        <div class="number" style="color: brown;">
+          <% var countStu = 0; %>
+          <%for(var i = 0; i < bookAuthor.length ; i++){%>
+            <% countStu += i %>
+          <%}%>
+          <%= countStu %>
+        </div>
+        <%}%>
         <div class="info" style="color: brown;">Authors</div>
     </a>
    
     <a class="cube" href="/adminCategory">
       <div class="icon"><i class="fa-solid fa-file-zipper" style="color: burlywood;"></i></div>
-      <div class="number" style="color: burlywood;">0</div>
+      <%if(typeof bookCategory != undefined && bookCategory.length > 0){%>
+      <div class="number" style="color: burlywood;">
+        <% var countStu = 0; %>
+          <%for(var i = 0; i < bookCategory.length ; i++){%>
+            <% countStu += i %>
+          <%}%>
+          <%= countStu %>
+      </div>
+      <%}%>
       <div class="info" style="color: burlywood;">Categories</div>
     </a>
   </div>
