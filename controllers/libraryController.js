@@ -722,6 +722,19 @@ const adminRequest = async (req,res) => {
   res.render('adminViewRequest', {librarian:librarian, student: student})
 }
 
+const adminGrantRequest = async (req,res) => {
+  try{
+    const {bookId, cne} = req.params
+
+    const student = await Student.find({cne : cne})
+
+  }catch(error){
+    console.log('Error : ', error.message, error.stack)
+    res.status(500).json({message: 'Failed to grant book'})
+  }
+
+}
+
 const adminBorrowBook = async (req,res) => {
   res.render('adminBorrowBook')
 }

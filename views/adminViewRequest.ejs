@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/style/sidebar.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/style/adminViewRequest.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
   <header>
@@ -60,10 +61,10 @@
               <%if(s.requestedBooks && s.requestedBooks.length > 0){%>
 
               <% for(var i = 0; i < s.requestedBooks.length; i++){%>
-                <tr>
-                  <td><%= s.requestedBooks[i].book.bookTitle %></td>
+                <tr id="request" data-book-id="<%= s.requestedBooks[i].book.bookId %>">
+                  <td class="get-title"><%= s.requestedBooks[i].book.bookTitle %></td>
                   <td><%= s.requestedBooks[i].book.description %></td>
-                  <td><%= s.cne %></td>
+                  <td class="get-cne"><%= s.cne %></td>
                   <td><%= s.name %></td>
                   <td><%= new Date(s.requestedBooks[i].date).toLocaleDateString()  %></td>
                   <td><span><i class="fa-solid fa-check"></i></span> <span><i class="fa-solid fa-trash"></i></span></td>
@@ -91,7 +92,32 @@
       </table>
   </div>
 </section>
-  </main>
+</main>
   
+<script>
+  $(document).ready(function(){
+    $('.fa-check').on('click', function(e){
+      e.preventDefault()
+        var facheck = $(this).closest('#request')
+        var bookId = facheck.data('book-id')
+        var getCne = facheck.find('.get-cne');
+        var read = getCne.text()
+        console.log(bookId);
+        console.log(read)
+
+        $.ajax({
+          url: `/grantrequest/${bookId}/${getCne}`,
+          type: 'POST',
+          success: function(response){
+            console.log('Book ranted')
+            location.reload()
+          },
+          error: function(error){
+            console.error('Error : ', error)
+          }
+        })
+    })
+  })
+</script>
 </body>
 </html>
