@@ -726,7 +726,32 @@ const adminGrantRequest = async (req,res) => {
   try{
     const {bookId, cne} = req.params
 
-    const student = await Student.find({cne : cne})
+    const student = await Student.find({cne : cne}).populate('requestedBooks.book')
+
+    if(!student){
+      throw new Error('Student not found')
+    }
+
+    const requestedBooks = student.requestedBooks.find(
+      (reqBook) => reqBook._id.toString() === bookId
+    )
+
+    if(!requestedBooks){
+      throw new Error('Request book not found')
+    }
+
+    student.requestedBooks = student.requestedBooks.filter(
+      (reqBook) => reqBook._id.toString() === bookId
+    )
+
+    student.borrowedBooks.push({
+      book:requestedBooks.book._id,
+      borrowedDate: new Date()
+    })
+
+    await student.save()
+
+    console.log('Book granted successfully')
 
   }catch(error){
     console.log('Error : ', error.message, error.stack)
@@ -794,5 +819,6 @@ module.exports = {
   adminBorrowBook,
   updateUser,
   toggleLike,
-  userRequestBook
+  userRequestBook,
+  adminGrantRequest
 }
