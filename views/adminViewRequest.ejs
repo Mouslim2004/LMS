@@ -106,7 +106,7 @@
         console.log(read)
 
         $.ajax({
-          url: `/grantrequest/${bookId}/${getCne}`,
+          url: `/grantrequest/${bookId}/${read}`,
           type: 'POST',
           success: function(response){
             console.log('Book ranted')

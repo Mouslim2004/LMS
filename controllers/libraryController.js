@@ -726,13 +726,17 @@ const adminGrantRequest = async (req,res) => {
   try{
     const {bookId, cne} = req.params
 
-    const student = await Student.find({cne : cne}).populate('requestedBooks.book')
+    const student = await Student.find({cne : cne}).lean()
 
     if(!student){
       throw new Error('Student not found')
     }
 
-    const requestedBooks = student.requestedBooks.find(
+    if (!Array.isArray(student.requestedBooks)) {
+      throw new Error('RequestedBooks is not an array');
+    }
+
+    const requestedBooks = student.requestedBooks.some(
       (reqBook) => reqBook._id.toString() === bookId
     )
 

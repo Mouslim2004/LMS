@@ -65,7 +65,9 @@ router.get('/userRequest',auth, refreshUserToken, LibraryController.userRequest)
 router.post('/requestBook', LibraryController.userRequestBook)
 
 router.get('/adminChange',authAdmin, refreshToken, LibraryController.adminChange)
+
 router.get('/adminViewRequest',authAdmin, refreshToken, LibraryController.adminRequest)
+router.post('/grantrequest/:bookId/:read', LibraryController.adminGrantRequest)
 
 router.get('/adminBorrowBook', LibraryController.adminBorrowBook)
 
