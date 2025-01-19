@@ -101,12 +101,12 @@
         var facheck = $(this).closest('#request')
         var bookId = facheck.data('book-id')
         var getCne = facheck.find('.get-cne');
-        var read = getCne.text()
+        var cne = getCne.text()
         console.log(bookId);
-        console.log(read)
+        console.log(cne)
 
         $.ajax({
-          url: `/grantrequest/${bookId}/${read}`,
+          url: `/grantrequest/${bookId}/${cne}`,
           type: 'POST',
           success: function(response){
             console.log('Book ranted')

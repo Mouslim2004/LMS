@@ -726,8 +726,9 @@ const adminGrantRequest = async (req,res) => {
   try{
     const {bookId, cne} = req.params
 
-    const student = await Student.find({ cne : cne }).populate("requestedBooks.book");
-
+    const student = await Student.findOne({ cne }).populate("requestedBooks.book");
+    // console.log("CNE : ", cne)
+    // console.log("Retrieved Student:", JSON.stringify(student, null, 2));
     if(!student){
       throw new Error('Student not found')
     }
@@ -737,7 +738,7 @@ const adminGrantRequest = async (req,res) => {
     }
 
     const requestedBooks = student.requestedBooks.find(
-      (reqBook) => reqBook._id.toString() === bookId
+      (reqBook) => reqBook.book.bookId.toString() === bookId
     )
 
     if(!requestedBooks){
@@ -745,7 +746,7 @@ const adminGrantRequest = async (req,res) => {
     }
 
     student.requestedBooks = student.requestedBooks.filter(
-      (reqBook) => reqBook._id.toString() !== bookId
+      (reqBook) => reqBook.book.bookId.toString() === bookId
     )
 
     student.borrowedBooks.push({
