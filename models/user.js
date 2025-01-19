@@ -21,11 +21,11 @@ const StudentSchema = new schema({
     borrowedDate: {type: Date, default: Date.now},
     returnDate: {type: Date, default: returnBook}
   }],
-  requestedBooks: [{
+  requestedBooks: [{ 
     book: {type: mongoose.Schema.Types.ObjectId, ref: "Book"},
     note: {type: String, required: true},
     date: {type: Date, default: Date.now}
-  }]
+  }],
 })
 
 const Student = mongoose.model('Student', StudentSchema)

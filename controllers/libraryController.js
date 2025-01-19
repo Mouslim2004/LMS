@@ -726,7 +726,7 @@ const adminGrantRequest = async (req,res) => {
   try{
     const {bookId, cne} = req.params
 
-    const student = await Student.find({cne : cne}).lean()
+    const student = await Student.find({ cne : cne }).populate("requestedBooks.book");
 
     if(!student){
       throw new Error('Student not found')
@@ -736,7 +736,7 @@ const adminGrantRequest = async (req,res) => {
       throw new Error('RequestedBooks is not an array');
     }
 
-    const requestedBooks = student.requestedBooks.some(
+    const requestedBooks = student.requestedBooks.find(
       (reqBook) => reqBook._id.toString() === bookId
     )
 
@@ -745,7 +745,7 @@ const adminGrantRequest = async (req,res) => {
     }
 
     student.requestedBooks = student.requestedBooks.filter(
-      (reqBook) => reqBook._id.toString() === bookId
+      (reqBook) => reqBook._id.toString() !== bookId
     )
 
     student.borrowedBooks.push({
@@ -756,6 +756,7 @@ const adminGrantRequest = async (req,res) => {
     await student.save()
 
     console.log('Book granted successfully')
+    res.status(200).json({ message: 'Book granted successfully' });
 
   }catch(error){
     console.log('Error : ', error.message, error.stack)
