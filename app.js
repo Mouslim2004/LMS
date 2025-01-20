@@ -13,6 +13,7 @@ const app = express()
 mongoose.connect('mongodb://localhost:27017/lms')//tells Mongoose to connect to a MongoDB database located 
 //at localhost on port 27017 and use the database named pushdb.
 
+// Your Code : b4e6895a Your Password : 9o54ea1n
 const db = mongoose.connection //This line gets the default connection that Mongoose has established with MongoDB.
 db.on('error', () => {
   console.log('Connection to db failed!')

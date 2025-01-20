@@ -117,6 +117,15 @@
           }
         })
     })
+
+    $('.fa-trash').on('click', function(e){
+      e.preventDefault();
+
+      var facheck = $(this).closest('#request')
+      var getCne = facheck.find('.get-cne');
+      var cne = getCne.text()
+      console.log(cne)
+    })
   })
 </script>
 </body>

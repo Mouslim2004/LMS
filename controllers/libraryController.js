@@ -754,6 +754,14 @@ const adminGrantRequest = async (req,res) => {
       borrowedDate: new Date()
     })
 
+    const newArray = [];
+    student.requestedBooks.forEach((bookItem) => {
+      if(bookItem.book.bookId !== bookId){
+          newArray.push(bookItem)
+      }
+      student.requestedBooks = newArray;
+    })
+
     await student.save()
 
     console.log('Book granted successfully')
