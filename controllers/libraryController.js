@@ -754,13 +754,9 @@ const adminGrantRequest = async (req,res) => {
       borrowedDate: new Date()
     })
 
-    const newArray = [];
-    student.requestedBooks.forEach((bookItem) => {
-      if(bookItem.book.bookId !== bookId){
-          newArray.push(bookItem)
-      }
-      student.requestedBooks = newArray;
-    })
+    student.requestedBooks = student.requestedBooks.filter(
+      (reqBook) => reqBook.book.bookId.toString() !== bookId
+    )
 
     await student.save()
 
