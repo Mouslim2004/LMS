@@ -58,16 +58,30 @@
         <th>Action</th>
       </tr>
       
+     <% if(student.borrowedBooks && student.borrowedBooks.length > 0){%> 
+      <% student.borrowedBooks.forEach((borrowedBook) => { %>
+        <% if(borrowedBook && borrowedBook.book){%> 
       <tr>
-        <td>Centro comercial Moctezuma</td>
-        <td>Francisco Chang</td>
-        <td>Mexico</td>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
+        <td><%= borrowedBook.book.bookId || 'N/A' %></td>
+        <td><%= borrowedBook.book.bookTitle || 'N/A' %></td>
+        <td><%= borrowedBook.book.author || 'N/A' %></td>
+        <td class="borrowDate"><%= borrowedBook.borrowedDate %></td>
+        <td class="returnDate"><%= borrowedBook.returnDate %></td>
         <td><a href="#ex1" class="open-modal btn-open" >Return</a></td>
       </tr>
+     <%} else {%>
+      <tr>
+        <td colspan="6">Book details missing or invalid</td> 
+      </tr>
+
+    <%}})%>
+ <% } else {%>
+  <tr>
+    <td colspan="6">Book details missing or invalid</td> 
+  </tr>
+  <%}%>
     </table>   
-    
+    <pre><%= JSON.stringify(student.borrowedBooks, null, 2) %></pre>
 
     <!-- This is the return user form modal -->
   <div class="modal hidden">
@@ -107,7 +121,19 @@
 
      closeModalBtn.on('click', closeModal)
 
-     
+     let borrowDate = new Date($('.borrowDate').text()).getFullYear()
+     let returnDate = new Date($('.returnDate').text()).getFullYear()
+
+     function formatDate(dateString){
+          const date = new Date(dateString)
+          const options = {year: 'numeric', month: '2-digit', day: '2-digit'}
+          return date.toLocaleDateString('en-US', options)
+      }
+
+      const formattedDate = formatDate($('.borrowDate').text())
+      const returnFormatedDate = formatDate($('.returnDate').text())
+      $('.borrowDate').text(formattedDate)
+      $('.returnDate').text(returnFormatedDate)
     });
  </script>
   
