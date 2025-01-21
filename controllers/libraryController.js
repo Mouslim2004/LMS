@@ -745,18 +745,18 @@ const adminGrantRequest = async (req,res) => {
       throw new Error('Request book not found')
     }
 
-    student.requestedBooks = student.requestedBooks.filter(
-      (reqBook) => reqBook.book.bookId.toString() === bookId
+    student.requestedBooks = student.requestedBooks.filter( // student.requestedBooks
+      (reqBook) => reqBook.book.bookId.toString() !== bookId
     )
 
     student.borrowedBooks.push({
-      book:requestedBooks.book._id,
+      book:requestedBooks.book._id,//requestedBooks.book._id
       borrowedDate: new Date()
     })
 
-    student.requestedBooks = student.requestedBooks.filter(
-      (reqBook) => reqBook.book.bookId.toString() !== bookId
-    )
+    // student.requestedBooks = student.requestedBooks.filter(
+    //   (reqBook) => reqBook.book.bookId.toString() !== bookId
+    // )
 
     await student.save()
 
