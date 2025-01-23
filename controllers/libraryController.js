@@ -189,7 +189,7 @@ const userIssued = async (req,res) => {
   if(!req.session.user){
     return res.status(400).json({message: 'Unauthorized'});
   }
-  const student = await Student.findById(req.session.user.id).populate("requestedBooks.book");
+  const student = await Student.findById(req.session.user.id).populate("borrowedBooks.book");
   res.render('userIssued', {student})
 }
 
