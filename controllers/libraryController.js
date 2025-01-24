@@ -757,8 +757,8 @@ const adminGrantRequest = async (req,res) => {
     await student.save()
 
     const findBook = await Book.findOne({bookId : bookId})
-    await Book.findByIdAndUpdate(findBook._id, { $push: { borrowedBy: student._id} }, {new: true});
-    await Book.findByIdAndUpdate(findBook._id, {isBorrowed: true});
+    await Book.findByIdAndUpdate(findBook._id, { $push: { borrowedBy: student._id} , isBorrowed: true },{new: true});
+    // await Book.findByIdAndUpdate(findBook._id, {isBorrowed: true});
 
     console.log('Book granted successfully')
     res.status(200).json({ message: 'Book granted successfully' });
