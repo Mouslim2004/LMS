@@ -277,6 +277,11 @@
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > - 1)
       })
     })
+
+    const isBorrow = $('.issue-detail').text();
+    isBorrow.forEach(function(){
+      this.text() == "Issued" ? this.css({"background-color":"white"}) : this.css({"background-color":"black"});
+    })
     });
  </script>
 </body>
