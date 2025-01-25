@@ -168,6 +168,19 @@
         url: `/student/${id}`,
         success: function(response){
           if(response.borrowedBooks.length > 0){
+            let borrowedBooksRows = '';
+
+            // Loop through borrowedBooks array and build table rows dynamically
+            response.borrowedBooks.forEach((book) => {
+              borrowedBooksRows += `
+                <tr>
+                  <td>${book.book.bookId || 'N/A'}</td>
+                  <td>${book.book.bookTitle || 'N/A'}</td>
+                  <td>${book.issueDate || 'N/A'}</td>
+                  <td>${book.dueDate || 'N/A'}</td>
+                </tr>
+              `;
+            });
             $('.display-student-info').html(`
             <div class="above-section">
               <div class="student-profile">
@@ -191,24 +204,7 @@
                       <th>Issue Date</th>
                       <th>Due Date</th>
                     </tr>
-                    <tr>
-                      <td>2567pzlk</td>
-                      <td>Batman</td>
-                      <td>31-12-2024</td>
-                      <td>07-01-2025</td>
-                    </tr>
-                    <tr>
-                      <td>2567pzlk</td>
-                      <td>Batman</td>
-                      <td>31-12-2024</td>
-                      <td>07-01-2025</td>
-                    </tr>
-                    <tr>
-                      <td>2567pzlk</td>
-                      <td>Batman</td>
-                      <td>31-12-2024</td>
-                      <td>07-01-2025</td>
-                    </tr>
+                    ${borrowedBooksRows}
                     
                   </table>
               </div>
