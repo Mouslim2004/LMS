@@ -46,8 +46,8 @@
     
 <section id="adminViewBook">
   <div class="admin-title">
-    <div>VIEW BOOK</div>
-    <form class="search-bar" id="searchBook"><input type="text" id="search-bar" placeholder="Search" name="pseudo"></form> 
+      <div>VIEW BOOK</div>
+      <form class="search-bar" id="searchBook"><input type="text" id="search-bar" placeholder="Search" name="pseudo"></form> 
   </div>
   <div class="book-left">
     <div class="subheader-flex">
@@ -278,10 +278,13 @@
       })
     })
 
-    const isBorrow = $('.issue-detail').text();
-    isBorrow.forEach(function(){
-      this.text() == "Issued" ? this.css({"background-color":"white"}) : this.css({"background-color":"black"});
-    })
+    $('.issue-detail').each(function () {
+      if ($(this).text() === "Issued") {
+        $(this).css({ "background-color": "white", "color":"blue", "border":"1px solid blue" });
+      } else {
+        $(this).css({ "background-color": "blue", "color":"white" });
+      }
+   });
     });
  </script>
 </body>
