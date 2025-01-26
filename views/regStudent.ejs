@@ -167,12 +167,13 @@
         type:'GET',
         url: `/student/${id}`,
         success: function(response){
-          if(response.borrowedBooks.length > 0){
+          if(response.borrowedBooks && response.borrowedBooks.length > 0){
             let borrowedBooksRows = '';
 
             // Loop through borrowedBooks array and build table rows dynamically
             response.borrowedBooks.forEach((book) => {
-              borrowedBooksRows += `
+              if(book && book.book){
+                borrowedBooksRows += `
                 <tr>
                   <td>${book.book.bookId || 'N/A'}</td>
                   <td>${book.book.bookTitle || 'N/A'}</td>
@@ -180,8 +181,11 @@
                   <td>${book.dueDate || 'N/A'}</td>
                 </tr>
               `;
+              }
+             
             });
             $('.display-student-info').html(`
+            <pre>${JSON.stringify(response.borrowedBooks, null, 2)}</pre>
             <div class="above-section">
               <div class="student-profile">
                 <img src="${response.avatar}" alt="">
@@ -205,7 +209,6 @@
                       <th>Due Date</th>
                     </tr>
                     ${borrowedBooksRows}
-                    
                   </table>
               </div>
            </div>
