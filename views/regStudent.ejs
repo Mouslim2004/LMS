@@ -143,7 +143,7 @@
 
      openModalBtn.on('click', openModal)
 
-    
+    // <pre>${JSON.stringify(response.borrowedBooks, null, 2)}</pre>
 
      const closeModal = function(){
        modal.addClass('hidden')
@@ -168,24 +168,24 @@
         url: `/student/${id}`,
         success: function(response){
           if(response.borrowedBooks && response.borrowedBooks.length > 0){
-            let borrowedBooksRows = '';
+            let borrowedBooksRows = ``;
 
             // Loop through borrowedBooks array and build table rows dynamically
-            response.borrowedBooks.forEach((book) => {
-              if(book && book.book){
-                borrowedBooksRows += `
-                <tr>
-                  <td>${book.book.bookId || 'N/A'}</td>
-                  <td>${book.book.bookTitle || 'N/A'}</td>
-                  <td>${book.issueDate || 'N/A'}</td>
-                  <td>${book.dueDate || 'N/A'}</td>
+            response.borrowedBooks.forEach((bookEntry) => {
+             if(bookEntry && bookEntry.book){
+              borrowedBooksRows += `
+                <tr style="width:20% ">
+                  <td>${bookEntry.book || 'N/A'}</td>
+                  <td>${bookEntry.book || 'N/A'}</td>
+                  <td>${ new Date(bookEntry.borrowedDate).toLocaleDateString() || 'N/A'}</td>
+                  <td>${ new Date(bookEntry.returnDate).toLocaleDateString()  || 'N/A'}</td>
                 </tr>
               `;
-              }
+            }
              
             });
             $('.display-student-info').html(`
-            <pre>${JSON.stringify(response.borrowedBooks, null, 2)}</pre>
+            
             <div class="above-section">
               <div class="student-profile">
                 <img src="${response.avatar}" alt="">
@@ -202,7 +202,7 @@
               <div class="issue-book">Issue Book</div>
               <div class="table-issue">
                   <table>
-                    <tr>
+                    <tr >
                       <th>Book ID</th>
                       <th>Book Title</th>
                       <th>Issue Date</th>
