@@ -414,8 +414,8 @@ const addNewStudent = async(req,res) => {
     await student.save()
 
     const mailOptions = {
-      from: student.email, // sender address
-      to: 'mouslimombadi@gmail.com', // list of receivers, replace with your email
+      from: 'mouslimombadi@gmail.com' , // sender address
+      to: student.email, // list of receivers, replace with your email
       subject: `Your new credentials`,
       text: `You have a new message from library Management System :
              \n\nYour Code : ${temporaryCode}
