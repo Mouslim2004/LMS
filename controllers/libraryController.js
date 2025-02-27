@@ -6,6 +6,7 @@ const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')//is a compact and self-contained way of securely transmitting information between parties as a JSON object.
 // It is widely used for authentication and authorization in web applications.
 const {v4 : uuidv4} = require('uuid')
+const mongoose = require('mongoose')
 
 
 const index = (req,res) => {
@@ -342,8 +343,17 @@ const regStudent = async (req,res) => {
 
 const studentInfo = async (req, res) => {
   try{
-    const student = await Student.findOne({_id : req.params.id})
+    // if (!req.params.id) {
+    //   return res.status(400).json({ message: "Student ID is required" });
+    // }
+
+    // if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    //   return res.status(400).json({ message: "Invalid student ID format" });
+    // }
+    const student = await Student.findById({_id : req.params.id}).populate("borrowedBooks.book"); //{_id : req.params.id}
+   
     if(student){
+      console.log(student)
       return res.json(student)
     } else {
       res.status(404).json({message: 'Student not found'})
