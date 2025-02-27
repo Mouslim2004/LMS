@@ -64,18 +64,25 @@
              <th>Due Date</th>
              <th>Action</th>
            </tr>
-           <tr>
-             <td>0782</td>
-             <td>Batman</td>
-             <td>2klpg</td>
-             <td>Mouslim Ombadi</td>
-             <td>2024-11-17</td>
-             <td>2024-11-24</td>
-             <td>
-              <span class="btn btn-open">Prevent</span>
-            </td>
-           </tr>
-           <tr>
+          <% if(student && student.length > 0){%>
+              <% student.forEach(function(s){%>
+                <% if(s.borrowedBooks && s.borrowedBooks.length > 0){%>
+                  <% for(var i = 0; i < s.borrowedBooks.length; i++){%>
+                    <tr>
+                      <td><%= s.borrowedBooks[i].book.bookId %></td>
+                      <td><%= s.borrowedBooks[i].book.bookTitle %></td>
+                      <td><%= s.cne %></td>
+                      <td><%= s.name %></td>
+                      <td><%= new Date(s.borrowedBooks[i].borrowedDate).toLocaleDateString() %></td>
+                      <td><%= new Date(s.borrowedBooks[i].returnDate).toLocaleDateString() %></td>
+                      <td>
+                        <span class="btn btn-open">Prevent</span>
+                      </td>
+                    </tr>
+                  <%}%>
+          <%}})}%>
+          
+          <!-- <tr>
             <td>0782</td>
             <td>Batman</td>
             <td>2klpg</td>
@@ -85,18 +92,7 @@
             <td>
              <span class="btn btn-open">Prevent</span>
            </td>
-          </tr>
-          <tr>
-            <td>0782</td>
-            <td>Batman</td>
-            <td>2klpg</td>
-            <td>Mouslim Ombadi</td>
-            <td>2024-11-17</td>
-            <td>2024-11-24</td>
-            <td>
-             <span class="btn btn-open">Prevent</span>
-           </td>
-          </tr>
+          </tr> -->
          </table>
      </div>
   </div>

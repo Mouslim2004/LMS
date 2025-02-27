@@ -665,7 +665,8 @@ const updateAuthor = async (req,res) => {
 
 const adminIssue = async (req,res) => {
   const librarian = await Librarian.find()
-  res.render('adminIssue', {librarian: librarian})
+  const student = await Student.find().populate("borrowedBooks.book")
+  res.render('adminIssue', {librarian: librarian, student: student})
 }
 
 
