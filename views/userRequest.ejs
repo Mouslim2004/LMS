@@ -68,17 +68,20 @@
                 <th>Action</th>
               </tr>
               
-              <% for(var i = 0; i < student.requestedBooks.length; i++){%>
-                <tr id="container"></tr>
-                  <td><%= student.requestedBooks[i].book.bookTitle %></td>
-                  <td><%= student.requestedBooks[i].book.description %></td>
-                  <td><%= new Date(student.requestedBooks[i].date).toLocaleDateString()  %></td>
-                  <td><i class="fa-regular fa-trash-can"></i></td>
+              <% if(student.requestedBooks && student.requestedBooks.length > 0){ %>
+                  <% for(var i = 0; i < student.requestedBooks.length; i++){%>
+                    <tr id="container"></tr>
+                      <td><%= student.requestedBooks[i].book.bookTitle %></td>
+                      <td><%= student.requestedBooks[i].book.description %></td>
+                      <td><%= new Date(student.requestedBooks[i].date).toLocaleDateString()  %></td>
+                      <td><i class="fa-regular fa-trash-can"></i></td>
+                    </tr>
+                  <%}%>
+              <%} else {%>
+                <tr>
+                  <td colspan="6">You haven't requested any book</td>
                 </tr>
               <%}%>
-            
-             
-              
               <!-- <tr>
                 <td>Spiderman</td>
                 <td>The small spider of the square come to save his city from Dr Octopus</td>
