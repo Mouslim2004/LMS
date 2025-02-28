@@ -63,7 +63,7 @@
             <div class="book-like">
               <i class="fa-solid fa-heart heart <%= book[i].like.includes(student._id) ? 'active' : 'inactive' %>" ></i>
               <span class="nb-like" id="like-count"><%= book[i].like ? book[i].like.length : 0 %> </span>
-              <i class="fa-solid fa-circle-info details" data-book-id="<%= book[i]._id %>"></i>
+              <i class="fa-solid fa-circle-info details" data-book-id="<%= book[i]._id %>" title="<%= book[i].isBorrowed ? 'Book borrowed' : 'Available' %>"></i>
             </div>
           </div>
        <% } } else {%>

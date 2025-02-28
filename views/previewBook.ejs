@@ -45,10 +45,10 @@
   <% if(bookDetails && bookDetails.image){%>
     <div class="issued-form">
       <div class="get-image"><img src="/<%= bookDetails.image %>" alt=""></div>
-      <div class="link" >Request</div>
+      <div class="link ">Request</div>
    </div>
   <%}%>
-  <%= console.log(bookDetails.image) %>
+  
    <div class="preview">
       <div class="previewheader">
          <ul>
@@ -86,7 +86,7 @@
               <div class="langage-write">English</div>
             </div>
          </div>
-         <div class="genre">Genre : <span><%= bookDetails.category %></span></div>
+         <div class="genre">Genre : <span><%= bookDetails.category %></span>, Availability : <span style="font-weight: bold;"><%= bookDetails.isBorrowed ? "borrowed" : "Yes" %></span></div>
       </div>
    </div>
  </section>
