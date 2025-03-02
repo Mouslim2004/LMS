@@ -68,7 +68,18 @@
      </a>
     <a class="cube" href=".adminReturn">
       <div class="icon"><i class="fa-solid fa-recycle" style="color: #facf5a;"></i></div>
-      <div class="number" style="color: #facf5a;">0</div>
+      <div class="number" style="color: #facf5a;">
+        <%if(typeof stu != undefined && stu.borrowedBooks){%>
+          <% console.log(stu.borrowedBooks) %>
+          <div class="number" style="color: #facf5a">
+            <% var countStu = 0; %>
+            <%for(var i = 0; i < stu.borrowedBooks.length ; i++){%>
+              <% countStu += i %>
+            <%}%>
+            <%= countStu %>
+          </div>
+        <%}%>
+      </div>
       <div class="info" style="color: #facf5a;">Not return Books</div>
     </a>
     <a class="cube" href="/regStudent">
