@@ -791,6 +791,43 @@ const adminGrantRequest = async (req,res) => {
 
 }
 
+const adminCancelRequest = async (req,res) => {
+    const {bookId, cne} = req.params
+
+    try{ 
+
+    const student = await Student.findOne({ cne }).populate("requestedBooks.book");
+    // console.log("CNE : ", cne)
+    // console.log("Retrieved Student:", JSON.stringify(student, null, 2));
+    if(!student){
+      throw new Error('Student not found')
+    }
+
+    if (!Array.isArray(student.requestedBooks)) {
+      throw new Error('RequestedBooks is not an array');
+    }
+
+    const requestedBookIndex = student.requestedBooks.findIndex(
+      (reqBook) => reqBook.book.bookId.toString() === bookId
+    )
+
+    if(requestedBookIndex === -1){
+      return res.status(404).json({ message: 'Requested book not found' });
+    }
+
+    // Remove the requested book from the array
+    student.requestedBooks.splice(requestedBookIndex, 1);
+
+    // Save the updated student document
+    await student.save();
+
+    res.status(200).json({ message: 'Requested book canceled successfully' });
+  }catch(error){
+    console.error('Error canceling requested book:', error);
+    res.status(500).json({ message: 'Internal server error', error: error.message });
+  }
+}
+
 const adminBorrowBook = async (req,res) => {
   res.render('adminBorrowBook')
 }
@@ -851,5 +888,6 @@ module.exports = {
   updateUser,
   toggleLike,
   userRequestBook,
-  adminGrantRequest
+  adminGrantRequest,
+  adminCancelRequest
 }

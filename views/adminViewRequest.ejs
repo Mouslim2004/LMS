@@ -112,10 +112,10 @@
         console.log(cne)
 
         $.ajax({
-          url: `/grantrequest/${bookId}/${cne}`,
+          url: `/grant-request/${bookId}/${cne}`,
           type: 'POST',
           success: function(response){
-            console.log('Book ranted')
+            console.log('Book granted')
             location.reload()
           },
           error: function(error){
@@ -127,10 +127,23 @@
     $('.fa-trash').on('click', function(e){
       e.preventDefault();
 
-      var facheck = $(this).closest('#request')
-      var getCne = facheck.find('.get-cne');
+      var fatrash = $(this).closest('#request')
+      var bookId = fatrash.data('book-id')
+      var getCne = fatrash.find('.get-cne');
       var cne = getCne.text()
       console.log(cne)
+
+      $.ajax({
+          url: `/cancel-request/${bookId}/${cne}`,
+          type: 'POST',
+          success: function(response){
+            console.log('Book ranted')
+            location.reload()
+          },
+          error: function(error){
+            console.error('Error : ', error)
+          }
+        })
     })
   })
 </script>
