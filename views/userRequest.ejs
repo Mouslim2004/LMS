@@ -82,26 +82,29 @@
                   <td colspan="6">You haven't requested any book</td>
                 </tr>
               <%}%>
-              <!-- <tr>
-                <td>Spiderman</td>
-                <td>The small spider of the square come to save his city from Dr Octopus</td>
-                <td>2024-11-18</td>
-                <td><i class="fa-regular fa-trash-can"></i></td>
-              </tr>
-              <tr>
-                <td>Spiderman</td>
-                <td>The small spider of the square come to save his city from Dr Octopus</td>
-                <td>2024-11-18</td>
-                <td><i class="fa-regular fa-trash-can"></i></td>
-              </tr> -->
+             
             </table>
           </div>
       </div>
    </section>
   </main>
+
+  <!-- This is the delete form modal -->
+<div class="modal2 hidden2">
+  <div class="flex">
+     <h1 style="color: red;">En error occured</h1>
+     <button class="btn-close2">&times;</button>
+  </div>
+  <p style="font-weight: bold;">You can't request this book as you have already borrowed it</p>
+</div>
+<div class="overlay2 hidden2"></div>
   
 <script>
    $(document).ready(function(){
+     const modal2 = $('.modal2')
+     const overlay2 = $('.overlay2')
+     const openModalBtn2 = $('.btn-delete')
+     const closeModalBtn2 = $('.btn-close2')
       $('#requestBook').on('submit', function(e){
         e.preventDefault()
         const formData = {
@@ -121,10 +124,29 @@
             
           },
           error: function(error){
-            console.log('Error : ', error)
+            console.log('Error : ', error.responseJSON.message)
+           
+            function errorOpen(){
+                  modal2.removeClass('hidden2')
+                  overlay2.removeClass('hidden2')
+              }
+
+            if(error){
+              errorOpen()
+              $('[name="book"]').val("");
+              $('#note').val("")
+            }
           }
         })
       })
+
+      const closeModal2 = function(){
+       modal2.addClass('hidden2')
+       overlay2.addClass('hidden2')
+     }
+
+     closeModalBtn2.on('click', closeModal2)
+     overlay2.on('click', closeModal2); 
    })
 </script>
 </body>

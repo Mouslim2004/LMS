@@ -704,6 +704,16 @@ const userRequestBook = async (req,res) => {
       console.log('You have already request this book')
       return res.status(400).json({message: 'You have already request this book!'})
     }
+
+    const alreadyBorrowed = student.borrowedBooks.some(
+      (request) => request.book.toString() === findBook._id.toString()
+    )
+
+    if(alreadyBorrowed){
+      console.log('You have already borrowed this book')
+      return res.status(400).json({message: 'You have already borrowed this book!'})
+    }
+
     let updateStudent = "";
     if(student.requestedBooks.length < 3){
        updateStudent = await Student.findByIdAndUpdate(req.session.user.id, {$push : {requestedBooks: newRequest}}, {new: true})
