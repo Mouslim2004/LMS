@@ -203,7 +203,16 @@ const adminDash = async (req,res) => {
     const bookAuthor = await Book.distinct('author')
     const stu = await Student.find()
     // console.log(book)
-    res.render('adminDash', {librarian:librarian, book: book, bookCategory, bookAuthor, stu})
+
+    // Calculate the number of students
+    const numberOfStudents = stu.length;
+    // console.log(numberOfStudents)
+
+    // Calculate the number of issued books
+    const issuedBooks = book.filter(b => b.isBorrowed).length;
+    // console.log(issuedBooks)
+
+    res.render('adminDash', {librarian:librarian, book: book, bookCategory, bookAuthor, numberOfStudents, issuedBooks})
   }catch(error){
     return res.status(500).json({ message: 'Failed to login', error });
   }

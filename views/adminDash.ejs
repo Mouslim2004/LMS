@@ -63,36 +63,23 @@
       </a>
      <a class="cube" href="/adminIssued">
       <div class="icon"><i class="fa-solid fa-bars" style="color: silver;"></i></div>
-      <div class="number" style="color: silver;">0</div>
+      <div class="number" style="color: silver;"> <%= issuedBooks %> </div>
       <div class="info" style="color: silver;">Issue Books</div>
      </a>
     <a class="cube" href=".adminReturn">
       <div class="icon"><i class="fa-solid fa-recycle" style="color: #facf5a;"></i></div>
       <div class="number" style="color: #facf5a;">
-        <%if(typeof stu != undefined && stu.borrowedBooks){%>
-          <% console.log(stu.borrowedBooks) %>
           <div class="number" style="color: #facf5a">
-            <% var countStu = 0; %>
-            <%for(var i = 0; i < stu.borrowedBooks.length ; i++){%>
-              <% countStu += i %>
-            <%}%>
-            <%= countStu %>
+             <%= issuedBooks %>
           </div>
-        <%}%>
       </div>
       <div class="info" style="color: #facf5a;">Not return Books</div>
     </a>
     <a class="cube" href="/regStudent">
       <div class="icon"><i class="fa-solid fa-users" style="color: green"></i></div>
-      <%if(typeof stu != undefined && stu.length > 0){%>
         <div class="number" style="color: green">
-          <% var countStu = 0; %>
-          <%for(var i = 0; i < stu.length ; i++){%>
-            <% countStu += i %>
-          <%}%>
-          <%= countStu %>
+          <%= numberOfStudents %>
         </div>
-      <%}%>
       
       <div class="info" style="color: green">Students</div>
     </a>
