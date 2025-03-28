@@ -4,6 +4,7 @@ const mongoose = require('mongoose')//Connects to MongoDB and provides a structu
 const morgan = require('morgan')//Middleware for logging HTTP requests for debugging and monitoring purposes.
 const session = require('express-session')////The express-session middleware 
 //allows the creation and storage of the session data used for authentication or user preferences.
+const path = require('path')
 const flash = require('connect-flash')
 const cookieParser = require('cookie-parser')//A cookie is a small piece of data that a web server sends to a user's browser.
 //  The browser stores the cookie and sends it back to the server with subsequent requests to the same server.
@@ -23,6 +24,8 @@ db.once('open', () => {
   console.log('Connection to db success!')
 })
 
+app.use(express.static('public'))//express.static('public') tells the app to look in the public folder for these files,
+//so when a client requests /css/style.css, it will automatically look for it in public/css/style.css.
 app.use(
   session({
     secret: 'mylibrary',
@@ -35,8 +38,7 @@ app.use(flash());// connect-flash is a middleware that allows you to store tempo
 //  in the session, so they’re available only on the next request.
 app.use(cookieParser());//middleware in Node.js is used to parse and manage cookies in HTTP requests.
 app.set('view engine', 'ejs')//EJS is a templating engine that allows you to generate HTML with dynamic data.
-app.use(express.static('public'))//express.static('public') tells the app to look in the public folder for these files,
-//so when a client requests /css/style.css, it will automatically look for it in public/css/style.css.
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(morgan('dev'))//Morgan logs details about incoming HTTP requests to the console,
 // such as the request method (GET, POST), the URL, response status, and response time.
@@ -45,8 +47,22 @@ app.use(bodyParser.urlencoded({extended: false}))//This line tells the app to us
 app.use(bodyParser.json())//This line tells the app to use the body-parser middleware to handle JSON data.
 //If a client sends {"name": "John", "age": 30}, you can access req.body.name and req.body.age.
 
+
+app.get('/',  (req,res) => {
+  res.render('home')
+})
+
+// Admin Routes
 const LibraryRoutes = require('./routes/libraryRoutes')
-app.use('/',LibraryRoutes)
+app.use('/admin',LibraryRoutes)
+
+// User Routes
+const userRoutes = require('./routes/userRoutes')
+app.use('/user', userRoutes)
+
+app.use('*', (req, res) => {
+  res.redirect('/');
+});
 
 const PORT = process.env.PORT || 5000
 

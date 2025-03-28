@@ -8,93 +8,6 @@ const jwt = require('jsonwebtoken')//is a compact and self-contained way of secu
 const {v4 : uuidv4} = require('uuid')
 const mongoose = require('mongoose')
 
-
-const index = (req,res) => {
-  res.render('home')
-}
-
-const userSignup = (req,res) => {
-  const message = req.flash('error')
-  res.render('userSignup', {message:message});
-}
-
-const userSignupPost = async (req,res,next) => {//this represent the register of the user
-  try{
-  const passwordHash = await bcrypt.hash(req.body.password, 10)//This will hash the password for more security by using bcrypt
-
-    let student = new Student({ //This add a new user in the student model
-      name: req.body.name,
-      email: req.body.email,
-      cne: req.body.cne,
-      phone: req.body.phone,
-      address: req.body.address,
-      password: passwordHash,
-      avatar: 'profile/' + req.file.filename
-    })
-
-    await student.save(); //After adding the user, we will store his document in the database using save() method
-
-    //req.flash('error', 'Please fill all the form.');
-    res.redirect('/userLogin')
-  }catch(error){
-    console.log(error.message);
-    req.flash('error', 'Please fill all the form.');
-    res.redirect('/userSignup');
-  }
-  
-}
-
-const userLogin = (req,res) => {
-  const message = req.flash('error')
-  res.render('userLogin', {message: message})
-}
-
-const userLoginPost = async (req, res) => {
-  try{
-  //These lines require the email and password from the body
-  const temporaryCode = req.body.temporaryCode
-  const temporaryPassword = req.body.temporaryPassword
-  if(!temporaryCode || !temporaryPassword){
-    req.flash('error', 'Please fill the form')
-    return res.redirect('/userLogin')
-  }
-
-  const studentData = await Student.findOne({temporaryCode: temporaryCode}) //this verify if the user exist in the db
-
-  if(studentData){ //If true
-    const checkPassword = await bcrypt.compare(temporaryPassword, studentData.temporaryPassword);//then, We will check if the password is similar,
-    //By using compare() method from bcrypt 
-    if(checkPassword){//if password exist
-      //we will store the user information to the session for authentication or user preferences
-      req.session.user = {id: studentData._id.toString(), email: studentData.email}
-
-      //JWT PART
-      // 1. A server generates a JWT after verifying user credentials (e.g., during login).
-      let token = jwt.sign({name: studentData.name},'mylibrary', {expiresIn: '1h'})
-      //payload: An object containing the data you want to encode in the token
-      //secretOrPrivateKey: A secret string or a private key used to sign the token
-      //Option: An object with additional options, such as setting the token's expiration time
-      let refreshToken = jwt.sign({name: studentData.name},'mylibraryToken2025', {expiresIn: '24h'})
-      console.log('Generated Token: ',token);
-      res.cookie('auth_token', token, { httpOnly: true, maxAge: 3600000 }); // Save token in a cookie
-      res.cookie('auth_refresh_token', refreshToken, { httpOnly: true, maxAge: 24 * 3600000 });
-      // 2. The client stores the token (e.g., in cookies) and includes it in the headers for subsequent requests to access protected routes.
-      res.redirect('/userDash')
-    } else {
-      req.flash('error', 'Password is incorrect' )
-      res.redirect('/userLogin')
-    }
-  } else {
-    req.flash('error', 'Code is incorrect')
-    res.redirect('/userLogin')
-  }
-  }catch(error){
-    console.log(error.message);
-    req.flash('error', 'Something went wrong. Please try again!')
-    res.redirect('/userLogin')
-  }
-}
-
 const adminLogin = (req,res) => {
   const message = req.flash('error')
   res.render('adminLogin', {message: message})
@@ -133,7 +46,7 @@ const adminLoginPost = async (req, res, next) => {
     const { email, password } = req.body;
     if (!email || !password) { // Use || to check if either field is empty
       req.flash('error', 'Please fill all the form!');
-      return res.redirect('/adminLogin'); // Stop execution with return
+      return res.redirect('/admin/adminLogin'); // Stop execution with return
     }
 
     // Check if librarian exists
@@ -150,49 +63,22 @@ const adminLoginPost = async (req, res, next) => {
         console.log('Generated refreshToken: ',refreshToken);
         res.cookie('admin_token', token, { httpOnly: true, maxAge: 3600000 });//1 hour
         res.cookie('admin_refresh_token', refreshToken, { httpOnly: true, maxAge: 24 * 3600000 }); // 24 hours
-        return res.redirect('/adminDash');
+        return res.redirect('/admin/adminDash');
       } else {
         req.flash('error', 'Password is incorrect!');
-        return res.redirect('/adminLogin');
+        return res.redirect('/admin/adminLogin');
       }
       
     } else {
       req.flash('error', 'Email is incorrect!');
-      return res.redirect('/adminLogin');
+      return res.redirect('/admin/adminLogin');
     }
   } catch (error) {
     console.error(error.message);
     req.flash('error', 'Something went wrong');
-    res.redirect('/adminLogin');
+    res.redirect('/admin/adminLogin');
   }
 };
-
-
-const userDash = async (req,res) => {
-  if(!req.session.user){
-    return res.redirect('/userLogin')
-  }
-  try{
-    const student = await Student.findById(req.session.user.id);
-    res.render('userDash', {student})
-  }catch(error){
-    console.log(error.message)
-    return res.status(500).json({ message: 'Failed to login', error });
-  }
-  
-}
-
-const userChange = (req,res) => {
-  res.render('userChange')
-}
-
-const userIssued = async (req,res) => {
-  if(!req.session.user){
-    return res.status(400).json({message: 'Unauthorized'});
-  }
-  const student = await Student.findById(req.session.user.id).populate("borrowedBooks.book");
-  res.render('userIssued', {student})
-}
 
 const adminDash = async (req,res) => {
   
@@ -219,57 +105,6 @@ const adminDash = async (req,res) => {
   
 }
 
-const userBook = async (req,res) => {
-  if(!req.session.user){
-    return res.redirect('/userLogin')
-  }
-  try{
-    const book = await Book.find();
-    const student = await Student.findById(req.session.user.id)
-    res.render('userBook', {book: book, student: student})
-  }catch(error){
-    return res.status(500).json({ message: 'Failed to display all the book', error });
-  }
-}
-
-const toggleLike = async (req, res) => {
-  const { bookId } = req.params; // Get the book ID from the route parameters
-  const { studentId } = req.body; // Action can be 'like' or 'unlike'
-
-  try {
-    // Find the book by its bookId
-    const book = await Book.findById(bookId);
-
-    if (!book) {
-      return res.status(404).json({ message: 'Book not found' }); // If the book doesn't exist
-    }
-
-    // Ensure `like` is initialized
-    if (!Array.isArray(book.like)) {
-      book.like = [];
-    }
-
-    // Check if the user has already liked the book
-    const userIndex = book.like.indexOf(studentId);
-
-    if (userIndex === -1) {
-      // User hasn't liked yet, so add their ID to the likes array
-      book.like.push(studentId);
-    } else {
-      // User has liked, so remove their ID from the likes array
-      book.like.splice(userIndex, 1);
-    }
-
-    // Save the updated book document
-    await book.save();
-
-    // Respond with the updated like count and success message
-    return res.status(200).json({ like: book.like.length });
-  } catch (error) {
-    console.error('Error toggling like:', error.message);
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
 
 
 const adminBook =  async (req,res) => {
@@ -286,7 +121,7 @@ const adminBookPost = async (req, res) => {
 
     if (!imageFile || !bookPdfFile) {
       req.flash('error', 'Both image and book PDF files are required.');
-      return res.redirect('/adminBooks');
+      return res.redirect('/admin/adminBooks');
     }
 
     const chars =
@@ -314,29 +149,14 @@ const adminBookPost = async (req, res) => {
 
     await book.save()
     req.flash('success', 'Book added successfully!');
-    res.redirect('/adminBooks')    
+    res.redirect('/admin/adminBooks')    
   }catch(error){
     console.log(error.message)
     req.flash('error', 'Please fill all the form to add a book!');
-    res.redirect('/adminBooks');
+    res.redirect('/admin/adminBooks');
   }
 }
 
-
-const previewBook = async (req,res) => {
-  try{
-    const bookDetails = await Book.findById(req.params.bookId)
-    if(bookDetails){
-      res.render('previewBook', {bookDetails : bookDetails})
-    } else {
-      res.status(404).json({message : 'Book not found'})
-    }
-  }catch(error){
-    console.log(error.message)
-    res.status(500).json({message: 'An error occured'})
-  }
-  
-}
 
 const regStudent = async (req,res) => {
   try{
@@ -459,50 +279,8 @@ const addNewStudent = async(req,res) => {
   }
 }
 
-
-const userRule = (req,res) => {
-  res.render('userRule')
-}
-
 const sidebar = (req,res) => {
   res.render('sidebar-header')
-}
-
-const updateDetail = async (req,res) => {
-  if(!req.session.user){
-    return res.redirect('/userLogin')
-  }
-  try{
-    const student = await Student.findById(req.session.user.id);
-    res.render('userUpdate', {student})
-  }catch(error){
-    console.log(error.message)
-    return res.status(500).json({ message: 'Failed to login', error });
-  }
-  
-}
-
-const updateUser = async (req,res) => {
-  const _id = req.params.studentId
-  try{
-    const {name, email, phone, address, cne} = req.body
-    const update = {
-      name,
-      email,
-      phone,
-      address,
-      cne
-    }
-    const studentUpdate = await Student.findByIdAndUpdate(_id, {$set : update}, {new : true, runValidators: true})
-    if(studentUpdate){
-      return res.json(studentUpdate)
-    } else {
-      res.status(404).json({message: 'Failed to update student'})
-    }
-  }catch(error){
-    console.log(error.message)
-    res.status(500).json({message : 'An error occured'})
-  }
 }
 
 // This part is dedicated for admin view book
@@ -678,69 +456,6 @@ const adminIssue = async (req,res) => {
   res.render('adminIssue', {librarian: librarian, student: student})
 }
 
-
-const userRequest = async(req,res) => {
-  if(!req.session.user){
-    return res.status(401).json({message: 'Unauthorized'})
-  }
-  const student = await Student.findById(req.session.user.id).populate("requestedBooks.book")
-  // console.log(student)
-  res.render('userRequest', {student})
-}
-
-const userRequestBook = async (req,res) => {
-  if(!req.session.user){
-    return res.status(401).json({message: 'Unauthorized'})
-  }
-
-  try{
-    const student = await Student.findById(req.session.user.id)
-    const findBook = await Book.findOne({"pseudo" : {$regex: new RegExp(req.body.book, "i")}})
-    // console.log(req.session.user)
-    // console.log('Book result : ', findBook)
-    if(!findBook){
-      return res.status(404).json({message : 'Book not found'})
-    }
-    const newRequest = {
-      book: findBook._id,
-      note: req.body.note
-    }
-    const alreadyRequest = student.requestedBooks.some(
-      (request) => request.book.toString() === findBook._id.toString()
-    )
-
-    if(alreadyRequest){
-      console.log('You have already request this book')
-      return res.status(400).json({message: 'You have already request this book!'})
-    }
-
-    const alreadyBorrowed = student.borrowedBooks.some(
-      (request) => request.book.toString() === findBook._id.toString()
-    )
-
-    if(alreadyBorrowed){
-      console.log('You have already borrowed this book')
-      return res.status(400).json({message: 'You have already borrowed this book!'})
-    }
-
-    let updateStudent = "";
-    if(student.requestedBooks.length < 3){
-       updateStudent = await Student.findByIdAndUpdate(req.session.user.id, {$push : {requestedBooks: newRequest}}, {new: true})
-    } else {
-      console.log('You cannot request more than 3 books!')
-      return res.status(500).json({message: 'You cannot request more than 3 books!'})
-    }
-
-    if(!updateStudent){
-      return res.status(400).json({message: 'Student not found'})
-    }
-    res.status(200).json({requestBooks : updateStudent.requestedBooks});
-  }catch(error){
-    console.log('Error : ', error.message, error.stack)
-    res.status(500).json({message: 'Failed to request Book'})
-  }
-}
-
 const adminChange = async (req,res) => {
   const librarian = await Librarian.find()
   res.render('adminChange', {librarian})
@@ -853,30 +568,17 @@ const logoutAdmin = (req,res) => {
   res.redirect('/');
 }
 module.exports = {
-  index,
-  userSignup,
-  userLogin,
   adminLogin,
-  userDash,
-  userChange,
-  userIssued,
   adminDash,
-  userBook,
   adminBook,
-  previewBook,
   regStudent,
-  userRule,
   sidebar,
-  updateDetail,
   viewBook,
   adminCategory,
   adminAuthor,
   adminIssue,
-  userRequest,
   adminChange,
   adminRequest,
-  userSignupPost,
-  userLoginPost,
   logout,
   adminLoginPost,
   logoutAdmin,
@@ -894,9 +596,6 @@ module.exports = {
   destroyBook,
   updateBook,
   adminBorrowBook,
-  updateUser,
-  toggleLike,
-  userRequestBook,
   adminGrantRequest,
   adminCancelRequest
 }
