@@ -2,7 +2,13 @@ $(document).ready(function(){
   $('#updateForm').on('submit', function(e){
     e.preventDefault()
 
-    const formData = new FormData(this)
+    const formData = {
+      name: $('input[name="name"]').val(),
+      email: $('input[name="email"]').val(),
+      phone: $('input[name="phone"]').val(),
+      address: $('input[name="address"]').val(),
+      cne: $('input[name="cne"]').val()
+    };
     const studentId = $(this).data('student-id')
     // console.log(studentId)
     $.ajax({
