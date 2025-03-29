@@ -69,30 +69,6 @@
   </main>
   
 
-  <script>
-     $(document).ready(function(){
-        $('#updateForm').on('submit', function(e){
-          e.preventDefault()
-
-          const formData = new FormData(this)
-          const studentId = $(this).data('student-id')
-          console.log(studentId)
-          $.ajax({
-            url: '/updateUser/' + studentId,
-            type: 'PUT',
-            data: JSON.stringify(formData), // Convert form data to JSON string
-            contentType: 'application/json',
-            // processData: false,
-            success: function(response){
-              console.log('Updated successfully : ', response)
-              window.location.reload()
-            },
-            error: function(error){
-              console.log('Error : ', error)
-            }
-          })
-        })
-     })
-  </script>
+  <script src="/script/userUpdate.js"></script>
 </body>
 </html>

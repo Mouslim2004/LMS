@@ -24,7 +24,7 @@ db.once('open', () => {
   console.log('Connection to db success!')
 })
 
-app.use(express.static('public'))//express.static('public') tells the app to look in the public folder for these files,
+app.use(express.static(path.join(__dirname, "public"))) //express.static('public') tells the app to look in the public folder for these files,
 //so when a client requests /css/style.css, it will automatically look for it in public/css/style.css.
 app.use(
   session({
@@ -42,7 +42,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(morgan('dev'))//Morgan logs details about incoming HTTP requests to the console,
 // such as the request method (GET, POST), the URL, response status, and response time.
-app.use(bodyParser.urlencoded({extended: false}))//This line tells the app to use the body-parser middleware to handle URL-encoded data (form submissions).
+app.use(bodyParser.urlencoded({extended: true}))//This line tells the app to use the body-parser middleware to handle URL-encoded data (form submissions).
 //It allows the app to parse data from HTML forms (submitted via POST requests) and access it via req.body.
 app.use(bodyParser.json())//This line tells the app to use the body-parser middleware to handle JSON data.
 //If a client sends {"name": "John", "age": 30}, you can access req.body.name and req.body.age.
